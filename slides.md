@@ -36,7 +36,7 @@ align: c
 
 - [Curs 1. Introducere](3) 
 - [Curs 3. Componente de Baza din React Native](4)
-
+- [Curs 4. Stilizarea în React Native](73)
 </div>
 
 ---
@@ -45,4 +45,8 @@ src: ./presentations/1-Intro/introduction.md
 
 ---
 src: ./presentations/3-core-components/slides.md
+---
+
+---
+src: ./presentations/4-layout-and-styling/slides.md
 ---
