@@ -112,3 +112,7 @@ src: ./presentations/3-core-components/slides.md
 ---
 src: ./presentations/4-layout-and-styling/slides.md
 ---
+
+---
+src: ./presentations/5-navigation/slides.md
+---
