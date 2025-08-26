@@ -68,7 +68,7 @@ align: c
 - [**Curs 7.** Persistența Datelor & Strategii Offline-First](311) 
 - [**Curs 8.** Fișiere și Media pe Dizpozitiv](343)
 - [**Curs 9.** Formulare "Controlate"](359)
-- [**Curs 10.** Gestionarea de State Global]()
+- [**Curs 10.** Gestionarea de State Global](375)
 
 </div>
 
@@ -131,4 +131,8 @@ src: ./presentations/8-file-and-media/slides.md
 
 ---
 src: ./presentations/9-forms/slides.md
+---
+
+---
+src: ./presentations/10-global-state/slides.md
 ---
