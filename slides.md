@@ -64,8 +64,8 @@ align: c
 
 <div class="ns-c-tight">
 
-- [**Curs 6.** Persistența Datelor & Strategii Offline-First]() 
-- [**Curs 7.** Operații Asincrone & Networking]()
+- [**Curs 6.** Operații Asincrone & Networking]()
+- [**Curs 7.** Persistența Datelor & Strategii Offline-First]() 
 - [**Curs 8.** Fișiere și Media pe Dizpozitiv]()
 - [**Curs 9.** Formulare "Controlate"]()
 - [**Curs 10.** Gestionarea de State Global"]()
@@ -115,4 +115,8 @@ src: ./presentations/4-layout-and-styling/slides.md
 
 ---
 src: ./presentations/5-navigation/slides.md
+---
+
+---
+src: ./presentations/6-networking/slides.md
 ---
