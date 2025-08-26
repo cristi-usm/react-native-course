@@ -49,10 +49,10 @@ align: c
 <div class="ns-c-tight">
 
 - [**Curs 1**. Introducere. Recapitulare JS & React](12) 
-- [**Curs 2.** Arhitectura React Native. Ecosistemul Expo]()
-- [**Curs 3.** Componente de Baza din React Native](4)
-- [**Curs 4.** Stilizarea în React Native](73)
-- [**Curs 5.** React Navigation & Expo Router  ]()
+- [**Curs 2.** Arhitectura React Native. Ecosistemul Expo](57)
+- [**Curs 3.** Componente de Baza din React Native](103)
+- [**Curs 4.** Stilizarea în React Native](172)
+- [**Curs 5.** React Navigation & Expo Router](236)
 
 </div>
 </div>

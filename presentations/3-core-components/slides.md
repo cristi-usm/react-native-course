@@ -11,7 +11,7 @@ layout: center
 ---
 
 <Excalidraw
-  drawFilePath="/3-core-components/rn.excalidraw"
+  drawFilePath="./3-core-components/rn.excalidraw"
   class="w-[600px]"
   :darkMode="false"
   :background="false"

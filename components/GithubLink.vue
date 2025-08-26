@@ -10,6 +10,6 @@ const props = defineProps({
 
 <template>
     <a :href="props.repo" target="_blank" rel="noopener noreferrer">
-        <img :src="`/github.svg`" alt="GitHub Repo" />
+        <img :src="`./github.svg`" alt="GitHub Repo" />
     </a>
 </template>
