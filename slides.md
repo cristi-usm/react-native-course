@@ -82,7 +82,7 @@ align: c
 
 <div class="ns-c-tight">
 
-- [**Curs 11.** Permisiuni & Accesarea API-urilor Dispozitivului]() 
+- [**Curs 11.** Permisiuni & Accesarea API-urilor Dispozitivului](395) 
 - [**Curs 12.** Notificări]()
 - [**Curs 13.** Animații Native]()
 - [**Curs 14.** Performanță, Optimizări și Memoizare]()
@@ -135,4 +135,8 @@ src: ./presentations/9-forms/slides.md
 
 ---
 src: ./presentations/10-global-state/slides.md
+---
+
+---
+src: ./presentations/11-permissions-and-native-apis/slides.md
 ---

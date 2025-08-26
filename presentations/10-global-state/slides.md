@@ -61,14 +61,18 @@ Problema principală pe care o rezolvă este **"Prop Drilling"**.
     <h3>❌ Fără Stare Globală</h3>
     <p class="text-sm">
     
-Pentru ca o componentă de la nivel adânc (ex: `Avatar`) să acceseze datele utilizatorului, acestea trebuie pasate prin `props` prin toate componentele intermediare (`App` -> `Layout` -> `Header` -> `Avatar`).</p>
+Pentru ca o componentă de la nivel adânc (ex: `Avatar`) să acceseze datele utilizatorului, acestea trebuie pasate prin `props` prin toate componentele intermediare (`App` -> `Layout` -> `Header` -> `Avatar`).
+
+</p>
   </div>
   <div class="arrow">➡️</div>
   <div class="prop-drilling-card">
     <h3>✅ Cu Stare Globală</h3>
     <p class="text-sm">
     
-Componenta `Avatar` poate accesa direct datele utilizatorului din starea globală, fără ca `Layout` sau `Header` să știe de existența lor. Codul devine mai curat, mai eficient și mai ușor de întreținut.</p>
+Componenta `Avatar` poate accesa direct datele utilizatorului din starea globală, fără ca `Layout` sau `Header` să știe de existența lor. Codul devine mai curat, mai eficient și mai ușor de întreținut.
+
+</p>
   </div>
 </div>
 
@@ -437,19 +441,25 @@ Deși Redux este o soluție robustă și matură, ecosistemul React oferă și a
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">Zustand</h3>
     <p class="text-sm mt-2">
     
-O soluție **minimalistă**, rapidă și scalabilă. Este cunoscută pentru simplitatea sa și lipsa aproape totală de boilerplate. Starea este deținută într-un hook React, făcând integrarea extrem de simplă.</p>
+O soluție **minimalistă**, rapidă și scalabilă. Este cunoscută pentru simplitatea sa și lipsa aproape totală de boilerplate. Starea este deținută într-un hook React, făcând integrarea extrem de simplă.
+
+</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">MobX</h3>
     <p class="text-sm mt-2">
 
-Folosește o paradigmă numită **Programare Reactivă Funcțională Transparentă (TFRP)**. Permite definirea stării ca fiind "observabilă", iar componentele care o folosesc se actualizează automat la modificări, fără a necesita `dispatch`-uri explicite.</p>
+Folosește o paradigmă numită **Programare Reactivă Funcțională Transparentă (TFRP)**. Permite definirea stării ca fiind "observabilă", iar componentele care o folosesc se actualizează automat la modificări, fără a necesita `dispatch`-uri explicite.
+
+</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">Recoil</h3>
     <p class="text-sm mt-2">
 
-O librărie experimentală de la Facebook, care oferă o abordare mai "React-ish". Introduce concepte precum **atomi** (unități de stare) și **selectori** (funcții pure care derivă date din atomi), permițând o gestionare mai granulară și performantă a stării.</p>
+O librărie experimentală de la Facebook, care oferă o abordare mai "React-ish". Introduce concepte precum **atomi** (unități de stare) și **selectori** (funcții pure care derivă date din atomi), permițând o gestionare mai granulară și performantă a stării.
+
+</p>
   </div>
 </div>
 
