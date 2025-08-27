@@ -86,7 +86,7 @@ align: c
 - [**Curs 12.** Notificări](416)
 - [**Curs 13.** Animații Native](436)
 - [**Curs 14.** Performanță, Optimizări și Memoizare](455)
-- [**Curs 15.** Workflow-ul Bare. Build & Deploy cu EAS]()
+- [**Curs 15.** Workflow-ul Bare. Build & Deploy cu EAS](475)
 
 </div>
 </div>
@@ -151,4 +151,8 @@ src: ./presentations/13-animations/slides.md
 
 ---
 src: ./presentations/14-performance/slides.md
+---
+
+---
+src: ./presentations/15-building/slides.md
 ---
