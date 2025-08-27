@@ -144,3 +144,7 @@ src: ./presentations/11-permissions-and-native-apis/slides.md
 ---
 src: ./presentations/12-notifications/slides.md
 ---
+
+---
+src: ./presentations/13-animations/slides.md
+---
