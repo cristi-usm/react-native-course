@@ -91,11 +91,71 @@ const initializeSnack = async () => {
         if (window.ExpoSnack) {
             window.ExpoSnack.initialize();
         }
+
+        setTimeout(() => {
+            applyIframeStyles();
+        }, 500);
     } catch (error) {
         console.error('Failed to initialize Expo Snack:', error);
     } finally {
         scriptLoading.value = false;
     }
+};
+
+const applyIframeStyles = () => {
+    if (!containerRef.value) return;
+
+    const iframes = containerRef.value.querySelectorAll('iframe');
+    iframes.forEach(iframe => {
+        iframe.style.setProperty('image-rendering', '-webkit-optimize-contrast', 'important');
+        iframe.style.setProperty('image-rendering', 'crisp-edges', 'important');
+        iframe.style.setProperty('-ms-interpolation-mode', 'nearest-neighbor', 'important');
+
+        const rect = iframe.getBoundingClientRect();
+        const devicePixelRatio = window.devicePixelRatio || 1;
+
+        if (devicePixelRatio !== 1) {
+            const scale = Math.round(devicePixelRatio);
+            iframe.style.setProperty('transform', `scale(${1 / scale})`, 'important');
+            iframe.style.setProperty('transform-origin', '0 0', 'important');
+            iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
+            iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
+        }
+
+        iframe.style.setProperty('filter', 'contrast(1.01)', 'important');
+        iframe.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+        iframe.style.setProperty('-webkit-perspective', '1000', 'important');
+    });
+
+    const observer = new MutationObserver(() => {
+        const newIframes = containerRef.value.querySelectorAll('iframe');
+        newIframes.forEach(iframe => {
+            if (!iframe.style.imageRendering) {
+                iframe.style.setProperty('image-rendering', '-webkit-optimize-contrast', 'important');
+                iframe.style.setProperty('image-rendering', 'crisp-edges', 'important');
+                iframe.style.setProperty('-ms-interpolation-mode', 'nearest-neighbor', 'important');
+                iframe.style.setProperty('filter', 'contrast(1.01)', 'important');
+                iframe.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+                iframe.style.setProperty('-webkit-perspective', '1000', 'important');
+
+                const rect = iframe.getBoundingClientRect();
+                const devicePixelRatio = window.devicePixelRatio || 1;
+
+                if (devicePixelRatio !== 1) {
+                    const scale = Math.round(devicePixelRatio);
+                    iframe.style.setProperty('transform', `scale(${1 / scale})`, 'important');
+                    iframe.style.setProperty('transform-origin', '0 0', 'important');
+                    iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
+                    iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
+                }
+            }
+        });
+    });
+
+    observer.observe(containerRef.value, {
+        childList: true,
+        subtree: true
+    });
 };
 
 let observer = null;
