@@ -84,8 +84,8 @@ align: c
 
 - [**Curs 11.** Permisiuni & Accesarea API-urilor Dispozitivului](395) 
 - [**Curs 12.** Notificări](416)
-- [**Curs 13.** Animații Native]()
-- [**Curs 14.** Performanță, Optimizări și Memoizare]()
+- [**Curs 13.** Animații Native](436)
+- [**Curs 14.** Performanță, Optimizări și Memoizare](455)
 - [**Curs 15.** Workflow-ul Bare. Build & Deploy cu EAS]()
 
 </div>
@@ -147,4 +147,8 @@ src: ./presentations/12-notifications/slides.md
 
 ---
 src: ./presentations/13-animations/slides.md
+---
+
+---
+src: ./presentations/14-performance/slides.md
 ---
