@@ -127,24 +127,27 @@ color: indigo-light
 <div class="grid grid-cols-3 gap-6 mt-8">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">`Animated.timing()`</h3>
-    <p class="text-sm mt-2">
+<div class="text-sm mt-2">
     
 Animație bazată pe timp. Controlezi valoarea finală (`toValue`), durata (`duration`) și curba de viteză (`easing`). Perfectă pentru efecte de fade, mișcare liniară sau culori.
-    </p>
+
+</div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">`Animated.spring()`</h3>
-    <p class="text-sm mt-2">
+<div class="text-sm mt-2">
 
 Simulează fizica unui arc. Controlezi valoarea finală, frecarea (`friction`) și tensiunea (`tension`). Ideală pentru efecte elastice, "bouncy", care se simt naturale.
-    </p>
+
+</div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">`Animated.decay()`</h3>
-    <p class="text-sm mt-2">
+<div class="text-sm mt-2">
 
 Animație bazată pe o viteză inițială (`velocity`) care decelerează treptat până la oprire. Utilă pentru efecte de aruncare sau scroll inerțial.
-    </p>
+
+</div>
   </div>
 </div>
 
@@ -308,27 +311,28 @@ API-ul `Animated` oferă funcții pentru a compune animații complexe și pentru
 <div class="grid grid-cols-2 gap-8 mt-4 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Combinare</h3>
-    <p class="mt-4 text-left">
+    <div class="mt-4 text-left">
 
 - **`Animated.sequence([...])`**: Rulează un array de animații una după alta.
 - **`Animated.parallel([...])`**: Rulează animațiile simultan.
 - **`Animated.stagger(delay, [...])`**: Rulează animațiile în paralel, dar cu o întârziere între ele.
   
-</p>
+</div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Interpolare</h3>
-    <p class="mt-4 text-left">
+    <div class="mt-4 text-left">
 
 Metoda **`.interpolate()`** este extrem de puternică. Ea permite maparea unei `Animated.Value` de la un interval de intrare (`inputRange`) la un interval de ieșire (`outputRange`).
 
-</p>
-    <p class="mt-4 text-sm text-left"><strong>Exemplu:</strong> 
+</div>
+<div class="mt-4 text-sm text-left"><strong>Exemplu:</strong> 
     
 Pe măsură ce o valoare se mișcă de la 0 la 1, poți face ca o culoare să se schimbe de la 'alb' la 'negru', o opacitate de la 0 la 1 și o rotație de la '0deg' la '360deg', **toate bazate pe aceeași `Animated.Value`**.
-    </p>
-  </div>
+    
 </div>
+  </div>
+</div> 
 
 ---
 layout: cover

@@ -252,20 +252,20 @@ color: indigo-light
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Locație în Prim-Plan (Foreground)</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Permite accesul la locație **doar atunci când aplicația este deschisă și vizibilă** pentru utilizator. Aceasta este cea mai comună și mai puțin invazivă formă de acces.
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Exemplu:</strong> O aplicație de hărți care arată poziția curentă.</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Locație în Fundal (Background)</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Permite accesul la locație **chiar și atunci când aplicația este închisă sau rulează în fundal**. Necesită o permisiune separată și o justificare foarte clară, fiind supusă unor reguli stricte în magazinele de aplicații.
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Exemplu:</strong> O aplicație de fitness care urmărește o alergare.</p>
   </div>
 </div>
@@ -608,20 +608,20 @@ Deși Expo uniformizează multe aspecte, sistemele de permisiuni ale iOS și And
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Android</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Oferă permisiuni mai granulare. De exemplu, pentru media, există permisiuni separate pentru imagini (`READ_MEDIA_IMAGES`), video (`READ_MEDIA_VIDEO`), etc. Refuzul permanent ("Don't ask again") este o opțiune explicită pentru utilizator.
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Cheie:</strong> Flexibilitate, dar necesită gestionarea mai multor cazuri specifice.</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">iOS</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Grupează permisiunile mai larg (ex: o singură permisiune pentru `Photo Library`). Sistemul decide când o permisiune este refuzată permanent (de obicei, după al doilea refuz). Nu există o opțiune vizibilă "Nu mai întreba niciodată".
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Cheie:</strong> Simplitate pentru utilizator, dar mai puține oportunități de a re-solicita permisiunea.</p>
   </div>
 </div>

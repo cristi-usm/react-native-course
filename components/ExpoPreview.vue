@@ -120,6 +120,8 @@ const applyIframeStyles = () => {
             iframe.style.setProperty('transform-origin', '0 0', 'important');
             iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
             iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
+            iframe.style.setProperty('max-width', '100%', 'important');
+            iframe.style.setProperty('max-height', '100%', 'important');
         }
 
         iframe.style.setProperty('filter', 'contrast(1.01)', 'important');
@@ -147,6 +149,8 @@ const applyIframeStyles = () => {
                     iframe.style.setProperty('transform-origin', '0 0', 'important');
                     iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
                     iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
+                    iframe.style.setProperty('max-width', '100%', 'important');
+                    iframe.style.setProperty('max-height', '100%', 'important');
                 }
             }
         });
@@ -213,7 +217,9 @@ onUnmounted(() => {
             borderRadius: '4px',
             height: height,
             width: width,
-            position: 'relative'
+            maxWidth: '100%',
+            position: 'relative',
+            boxSizing: 'border-box'
         }">
 
         <div v-if="scriptLoading && isVisible" :style="{

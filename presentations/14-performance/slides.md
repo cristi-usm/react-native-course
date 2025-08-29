@@ -25,7 +25,8 @@ Performanța nu este un lux, ci o cerință fundamentală. O aplicație lentă s
 <div class="grid grid-cols-3 gap-4 mt-8">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-4 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">Pierderea Cadrelor (Dropped Frames)</h3>
-    <p class="text-sm">Animațiile și tranzițiile sacadate ("janky") creează o senzație de neprofesionalism și fac aplicația să pară defectă. Scopul este de a menține constant 60 de cadre pe secundă (FPS).</p>
+    <p class="text-sm">
+    Animațiile și tranzițiile sacadate ("janky") creează o senzație de neprofesionalism și fac aplicația să pară defectă. Scopul este de a menține constant 60 de cadre pe secundă (FPS).</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-4 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">Pornire Lentă (Slow Startup)</h3>
@@ -642,19 +643,19 @@ Cea mai importantă optimizare pentru API-ul `Animated` este utilizarea driver-u
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">❌ `useNativeDriver: false`</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 La fiecare cadru al animației, firul JS calculează noua valoare, o serializează și o trimite prin bridge către firul de UI. Dacă firul JS este ocupat, animația va sacada.
 
-</p>
+</div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">✅ `useNativeDriver: true`</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Configurația animației este trimisă o singură dată prin bridge. Apoi, firul de UI se ocupă de executarea animației de la început până la sfârșit, fără nicio altă comunicare cu JS. Animația va fi fluidă, chiar dacă firul JS este blocat.
 
-</p>
+</div>
   </div>
 </div>
 

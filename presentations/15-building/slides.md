@@ -23,10 +23,11 @@ React Native oferă două fluxuri de lucru principale: **Managed** (gestionat de
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Workflow Managed</h3>
-    <p class="mt-4">
+<div class="mt-4">
 
 Expo gestionează complexitatea configurării native. Scrieți doar JavaScript/TypeScript. Nu aveți acces direct la directoarele `android` și `ios`.
-    </p>
+
+</div>
     <p class="mt-4 text-sm"><strong>Ideal pentru:</strong> Majoritatea aplicațiilor, prototipare rapidă, echipe fără experiență nativă.</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
@@ -64,9 +65,11 @@ color: indigo-light
 </div>
 <div class="neversink-indigo-light-scheme p-4 rounded-lg bg-[var(--neversink-bg-color)]">
 <h3 class="font-bold text-lg text-[var(--neversink-highlight-color)]">Dependințe Specifice</h3>
-<p class="text-sm">
+<div class="text-sm">
 
-Unele servicii (în special cele care rulează în fundal pe iOS) pot necesita configurări native specifice în `Info.plist` sau capabilități Xcode.</p>
+Unele servicii (în special cele care rulează în fundal pe iOS) pot necesita configurări native specifice în `Info.plist` sau capabilități Xcode.
+
+</div>
 </div>
 </div>
 
@@ -208,9 +211,11 @@ Gândiți-vă la EAS ca la un CI/CD (Continuous Integration/Continuous Deploymen
 <div class="grid grid-cols-3 gap-6 mt-8">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">EAS Build</h3>
-    <p class="text-sm mt-2">
+    <div class="text-sm mt-2">
     
-Compilează aplicația dvs. în cloud, generând fișiere `.aab`/`.apk` pentru Android și `.ipa` pentru iOS. **Nu mai aveți nevoie de un Mac pentru a construi pentru iOS!**</p>
+Compilează aplicația dvs. în cloud, generând fișiere `.aab`/`.apk` pentru Android și `.ipa` pentru iOS. **Nu mai aveți nevoie de un Mac pentru a construi pentru iOS!**
+
+</div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">EAS Submit</h3>

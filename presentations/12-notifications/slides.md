@@ -23,20 +23,20 @@ color: indigo-light
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Notificări Locale</h3>
-    <p class="mt-4">
+    <div class="mt-4">
     
 Sunt programate **direct de pe dispozitivul utilizatorului** de către aplicația însăși. Nu necesită o conexiune la internet sau un server.
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Exemplu:</strong> O aplicație de ceas deșteptător, un memento pentru o sarcină. </p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
     <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">Notificări Push</h3>
-    <p class="mt-4">
+<div class="mt-4">
     
 Sunt trimise de un **server backend** către dispozitive specifice prin intermediul serviciilor native ale platformei (APNs pentru iOS, FCM pentru Android).
 
-</p>
+</div>
     <p class="mt-4 text-sm"><strong>Exemplu:</strong> Un mesaj nou într-o aplicație de chat, o alertă de știri de ultimă oră.</p>
   </div>
 </div>
