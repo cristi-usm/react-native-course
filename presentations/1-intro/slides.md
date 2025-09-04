@@ -112,7 +112,7 @@ Valorile de referință sunt **mutabile**.
 layout: center
 ---
 
-```js
+```js{*|1-5|7-11|*}
 // Primitivă (valoare copiată)
 let a = 10;
 let b = a;
@@ -213,7 +213,7 @@ Arrays-urile în JavaScript vin cu o multitudine de metode extrem de utile, în 
 layout: center
 ---
 
-```js
+```js{*|1-5|1,7-9|1,11-15|1,17-21|*}
 const numere = [1, 2, 3, 4, 5];
 
 // map: Creează un nou array cu valorile dublate
@@ -259,7 +259,7 @@ Proprietățile pot fi accesate în două moduri:
 
 </div>
 
-```js
+```js{*|1,13|2-5|6-8|9-12|*}
 const utilizator = {
   nume: "Ana",
   varsta: 28,
@@ -369,7 +369,7 @@ Trei modele principale sunt folosite pentru a gestiona asincronicitatea:
 layout: center
 ---
 
-```js
+```js{*|1-6|7|9-13|15-24|25|27|*}
 // 1. Callback (exemplu conceptual)
 function fetchData(callback) {
   setTimeout(() => { // Simulăm o cerere de rețea
@@ -485,7 +485,7 @@ Versiunile moderne de JavaScript (începând cu ES6/2015) au adus multe îmbună
 layout: center
 ---
 
-```js
+```js{*|1-4|6-8|10-12|14-15|17-21|23-26|28-29|*}
 // --- Destructurare ---
 const persoana = { nume: 'Elena', varsta: 30 };
 const { nume, varsta } = persoana; // Extrage nume și varsta
@@ -571,7 +571,7 @@ layout: center
 
 <div class="text-sm">
 
-```js
+```js{*|1-23|3-8|9-13|14-22|24-25,3-8|26,20-22|27,10-13|28,15-19|*}
 class Masina {
   // Constructorul este apelat la crearea unei noi instanțe: new Masina(...)
   constructor(marca, model, an) {
@@ -625,7 +625,7 @@ Moștenirea permite unei clase (subclasă sau clasă derivată) să preia propri
 layout: center
 ---
 
-```js
+```js{*|1-9|11-27|12|13-16|14,2-4|18-21,6-8|23-26|*}
 class Vehicul {
   constructor(nume) {
     this.nume = nume;
@@ -699,7 +699,7 @@ Permit definirea unor proprietăți "calculate". Un `getter` este o funcție car
 
 <div class="w-fit mx-auto">
 
-```js
+```js{*|1-5|2|7|*}
 class Calculator {
   static suma(a, b) {
     return a + b;
@@ -719,7 +719,7 @@ console.log(rezultat); // 12
 layout: center
 ---
 
-```js
+```js{*|1-18|2-5,20|21,7-10|23-24,12-17|*}
 class Utilizator {
   constructor(prenume, nume) {
     this.prenume = prenume;
@@ -842,7 +842,7 @@ Aici, dăm instrucțiuni precise:
 
 :: content:: 
 
-```html
+```html{*|1|4|5|7-17|8-11|12-16|*}
 
 <button id="myButton">Apasă-mă</button>
 
@@ -1025,7 +1025,7 @@ Codul JSX este compilat (transpilat) de unelte precum Babel în apeluri de func�
 layout: center
 ---
 
-```js
+```js{*|1-9|11-17|*}
 const nume = "React";
 
 // Acest cod JSX...
@@ -1071,7 +1071,7 @@ Datele curg **unidirecțional** în React, de sus în jos (de la părinte la cop
 layout: center
 ---
 
-```js
+```js{*|1-13|2|2-4|8-10|15-30|17-21|27,4|*}
 // Componenta copil 'CardUtilizator' primește props
 function CardUtilizator(props) {
   // Destructurarea props pentru un cod mai curat
@@ -1124,7 +1124,7 @@ Acesta este extrem de util pentru a crea componente generice de tip "wrapper" sa
 layout: center
 ---
 
-```js
+```js{*|11-27|13-25|15-24|16-18,22-23|3-9|3,6|3,6,16-18,22-23|*}
 // Componenta 'Card' este un wrapper generic.
 // Ea nu știe ce va conține, doar afișează `props.children`.
 function Card(props) {
