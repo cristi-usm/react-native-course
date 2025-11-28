@@ -254,32 +254,77 @@ layout: cover
 
 <script setup>
 const code = `
-import { View, Button, StyleSheet, Alert } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { useEffect } from 'react';
+
 import * as Notifications from 'expo-notifications';
 
 // --- IMPORTANT: Setează handler-ul global pentru notificări ---
 // Acesta decide ce se întâmplă cu o notificare când aplicația este în prim-plan
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
     shouldPlaySound: false,
     shouldSetBadge: false,
   }),
 });
 
-export default function LocalNotificationsExample() {
 
-  // Programează o notificare simplă, o singură dată
+export default function App() {
+  // Cere permisiune pentru notificări când aplicația pornește
+  useEffect(() => {
+    async function requestPermissions() {
+      const { status: existingStatus } = await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+
+      if (existingStatus !== 'granted') {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+
+      if (finalStatus !== 'granted') {
+        Alert.alert('Eroare', 'Trebuie să acorzi permisiune pentru notificări!');
+        return;
+      }
+    }
+
+    requestPermissions();
+  }, []);
+
+  const sendImmediateNotification = async () => {
+    try {
+      await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "✅ Test imediat!",
+          body: 'Aceasta este o notificare imediată.',
+        },
+        trigger: null, // Notificare imediată
+      });
+      console.log('Notificare imediată trimisă!');
+    } catch (error) {
+      console.error('Eroare la notificare:', error);
+      Alert.alert('Eroare', error.message);
+    }
+  };
+
   const scheduleOneTimeNotification = async () => {
-    await Notifications.scheduleNotificationAsync({
-      content: {
-        title: "📬 Ai un e-mail!",
-        body: 'Verifică-ți inbox-ul pentru noutăți.',
-        data: { screen: 'Inbox' },
-      },
-      trigger: { seconds: 5 }, // Se declanșează în 5 secunde
-    });
-    Alert.alert('Notificare programată', 'Vei primi o notificare în 5 secunde.');
+    try {
+      const notificationId = await Notifications.scheduleNotificationAsync({
+        content: {
+          title: "📬 Ai un e-mail!",
+          body: 'Verifică-ți inbox-ul pentru noutăți.',
+          data: { screen: 'Inbox' },
+        },
+        trigger: { seconds: 5 }, // Se declanșează în 5 secunde
+      });
+      console.log('Notificare programată cu ID:', notificationId);
+      Alert.alert('Notificare programată', 'Vei primi o notificare în 5 secunde. Minimizează aplicația!');
+    } catch (error) {
+      console.error('Eroare la programarea notificării:', error);
+      Alert.alert('Eroare', error.message);
+    }
   };
 
   // Programează o notificare repetitivă
@@ -305,6 +350,7 @@ export default function LocalNotificationsExample() {
 
   return (
     <View style={styles.container}>
+      <Button title="🔔 Test Imediat" onPress={sendImmediateNotification} />
       <Button title="Notificare în 5 secunde" onPress={scheduleOneTimeNotification} />
       <Button title="Memento Apă (la 1 min)" onPress={scheduleRepeatingNotification} />
       <Button title="Anulează Toate Notificările" onPress={cancelAllNotifications} color="red" />
@@ -312,16 +358,18 @@ export default function LocalNotificationsExample() {
   );
 }
 
+
 const styles = StyleSheet.create({
-  container: { 
-    flex: 1, 
-    justifyContent: 'center', 
-    alignItems: 'center', 
-    gap: 20 
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
 `
-const dependencies = 'expo-notifications'
+const dependencies = 'expo-notifications,expo-constants,expo-status-bar'
 </script>
 
 <ExpoPreview :code="code" :dependencies="dependencies" name="Exemplu Notificări Locale" />
@@ -431,7 +479,7 @@ Expo oferă o unealtă web simplă pentru a trimite notificări push de test, f�
 - **1. Rulează aplicația**: Rulează codul de pe slide-ul anterior pe un dispozitiv fizic pentru a obține token-ul.
 - **2. Copiază Token-ul**: Copiază token-ul afișat în consolă (arată ca `ExponentPushToken[...]`).
 - **3. Accesează unealta**: Mergi la [Expo Push Notification Tool](https://expo.dev/notifications).
-- **4. Trimite notificarea**: Lipește token-ul în câmpul corespunzător, completează titlul și mesajul, și apasă "Send a Notification".
+- **4. Trimite notificarea**: Introdu token-ul în câmpul corespunzător, completează titlul și mesajul, și apasă "Send a Notification".
 
 </div>
 

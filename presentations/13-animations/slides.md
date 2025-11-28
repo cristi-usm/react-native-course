@@ -588,35 +588,42 @@ color: indigo-light
 npx expo install lottie-react-native
 ```
 ---
-layout: cover
----
-
-<script setup>
-const dependencies = 'lottie-react-native'
-</script>
-
-<ExpoPreview :code="code" :dependencies="dependencies" name="Exemplu Lottie" :assets="assets" />
-
----
 
 <script setup>
 
 const code = `
-import { useRef } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { useRef, useEffect, useState } from 'react';
+import { View, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import LottieView from 'lottie-react-native';
 
 export default function LottieExample() {
   const animation = useRef(null);
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    // Fetch JSON pentru compatibilitate iOS și Android
+    fetch('https://assets-v2.lottiefiles.com/a/91cc0ece-1150-11ee-b7cb-d3afb5c0c001/qXck5SUGOb.json')
+      .then((response) => response.json())
+      .then((data) => setAnimationData(data))
+      .catch((error) => console.error('Eroare la încărcarea animației:', error));
+  }, []);
+
+  if (!animationData) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <LottieView
         autoPlay
+        loop
         ref={animation}
         style={styles.lottie}
-        // Sursă de la LottieFiles: https://lottiefiles.com/animations/react-logo-spinning-360-Rz1t43K1Y1
-        source={{ uri: 'https://lottie.host/81f33f6a-1e66-4c4c-a1d2-04e414164b30/fTq0p4jPEX.json' }}
+        source={animationData}
       />
       <View style={styles.buttonContainer}>
         <Button title="Rulează" onPress={() => animation.current?.play()} />
@@ -648,7 +655,7 @@ const styles = StyleSheet.create({
 });
 `
 const assets = {
-    'assets/react-logo.json': 'https://lottie.host/81f33f6a-1e66-4c4c-a1d2-04e414164b30/fTq0p4jPEX.json'
+    'assets/loading-animation.json': 'https://assets-v2.lottiefiles.com/a/91cc0ece-1150-11ee-b7cb-d3afb5c0c001/qXck5SUGOb.json'
 }
 
 const dependencies="lottie-react-native"
@@ -672,7 +679,7 @@ color: indigo-light
   - **Soluție:** Asigură-te că folosești **`useNativeDriver: true`** ori de câte ori este posibil cu API-ul `Animated`. Pentru animații complexe, în special cele care răspund la gesturi, migrează la **React Native Reanimated**. Evită să declanșezi re-randări (cu `setState`) în timpul unei animații.
 
 - **Problemă: Animațiile intră în conflict cu gesturile utilizatorului**
-  - **Soluție:** Aceasta este o problemă clasică. Soluția standard este combinarea **React Native Reanimated** cu **React Native Gesture Handler**. Aceste două librării sunt concepute să lucreze împreună pentru a crea experiențe fluide și întreruptibile.
+  - **Soluție:** Aceasta este o problemă clasică. Soluția standard este combinarea **React Native Reanimated** cu **React Native Gesture Handler**. Aceste două librării sunt concepute să lucreze împreună pentru a crea experiențe fluide.
 
 - **Problemă: Probleme de configurare a librăriilor (în special Reanimated)**
   - **Soluție:** Urmează **cu strictețe** ghidul oficial de instalare. Cea mai frecventă greșeală este omiterea adăugării plugin-ului `react-native-reanimated/plugin` în `babel.config.js`. După orice modificare a acestui fișier, este necesar să repornești serverul de dezvoltare cu `npx expo start -c` pentru a șterge cache-ul.
