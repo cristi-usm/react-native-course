@@ -277,6 +277,7 @@ Prima dată când rulați comanda de build într-un proiect nou, trebuie să con
 ```bash
 eas build:configure
 ```
+
 Această comandă analizează proiectul și creează un fișier esențial: **`eas.json`**. Acesta conține "profilurile" de build, care definesc cum ar trebui construită aplicația pentru diferite medii (ex: dezvoltare, preview, producție).
 
 ---
@@ -436,25 +437,3 @@ Comanda `eas credentials` vă permite să interacționați cu credențialele sto
 </div>
 
 Când rulați `eas build` pentru prima dată, CLI-ul va detecta dacă lipsesc credențialele și vă va oferi opțiunea de a le genera și încărca automat. Acest lucru elimină necesitatea de a gestiona manual fișiere sensibile pe mașina locală.
-
----
-layout: center
----
-
-# Atelier Practic
-
-**Obiectiv**: Construirea și publicarea unei aplicații "Hello World" pe un canal de testare intern.
-
-**Pași:**
-<div class="ns-c-tight">
-
-1. **Inițializați** un proiect nou cu `npx create-expo-app --template bare-minimum`.
-2. **Configurați EAS** în proiect cu `eas build:configure`.
-3. **Rulați un build** pentru Android folosind profilul `development`: `eas build -p android --profile development`.
-4. **Instalați** build-ul pe un dispozitiv fizic folosind codul QR furnizat (acesta este Dev Client-ul dvs.).
-5. **Pregătiți** un build pentru producție: `eas build -p android --profile production`.
-6. **Creați** o aplicație nouă în Google Play Console și configurați un canal de "Testare Internă".
-7. **Rulați** `eas submit -p android --latest` pentru a trimite build-ul pe canalul de testare.
-8. **Deveniți tester** și instalați aplicația din magazin!
-
-</div>

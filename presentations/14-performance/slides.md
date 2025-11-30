@@ -85,7 +85,11 @@ React oferă trei unelte principale pentru a preveni re-randările inutile:
 `React.memo`
 
 </h3>
-    <p class="text-sm mt-2">O funcție de ordin superior (HOC) care învelește o componentă. Aceasta va preveni re-randarea componentei dacă `props`-urile sale nu s-au schimbat.</p>
+<p class="text-sm mt-2">
+    
+O funcție de ordin superior (HOC) care imbrică o componentă. Aceasta va preveni re-randarea componentei dacă `props`-urile sale nu s-au schimbat.
+
+</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">
@@ -93,7 +97,7 @@ React oferă trei unelte principale pentru a preveni re-randările inutile:
 `useCallback`
 
 </h3>
-    <p class="text-sm mt-2">Un hook care memoizează o funcție. Util pentru a pasa funcții stabile către componentele copil memoizate, prevenind re-randarea lor.</p>
+    <p class="text-sm mt-2">Un hook care memoizează o funcție. Util pentru a transmite funcții stabile către componentele copil memoizate, prevenind re-randarea lor.</p>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-bg-color)] p-5 rounded-lg text-center">
     <h3 class="text-lg font-bold text-[var(--neversink-text-color)]">
@@ -143,11 +147,11 @@ layout: cover
 <script setup>
 const code = `
 import { useState, memo } from 'react';
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
+import { View, Text, Button, StyleSheet, TextInput, ToastAndroid } from 'react-native';
 
 // Componenta copil care primește un prop 'user'
 const UserProfile = memo(({ user }) => {
-  console.log(\`Se randează UserProfile pentru: \${user.name}\`);
+  ToastAndroid.show('Se randează UserProfile...', ToastAndroid.SHORT);
   return (
     <View style={styles.profile}>
       <Text>Nume: {user.name}</Text>
@@ -177,7 +181,7 @@ export default function MemoExample() {
       />
       
       <Text style={styles.info}>
-        Observați consola. 'UserProfile' se re-randează de fiecare dată când contorul sau textul se schimbă, deși prop-ul 'user' este mereu același.
+        Observați mesajele. 'UserProfile' se re-randează de fiecare dată când contorul sau textul se schimbă, deși prop-ul 'user' este mereu același.
       </Text>
       <UserProfile user={user} />
     </View>
@@ -228,14 +232,14 @@ color: indigo-light
 
 :: content ::
 
-O problemă comună apare când pasăm funcții ca `props` către componente memoizate. Deoarece funcțiile sunt recreate la fiecare randare a componentei părinte, referința lor se schimbă, iar `React.memo` consideră că `props`-urile sunt diferite, ducând la o re-randare inutilă.
+O problemă comună apare când transmitem funcții ca `props` către componente memoizate. Deoarece funcțiile sunt recreate la fiecare randare a componentei părinte, referința lor se schimbă, iar `React.memo` consideră că `props`-urile sunt diferite, ducând la o re-randare inutilă.
 
-**`useCallback(fn, dependencies)`** rezolvă asta. Returnează o versiune memoizată a funcției `fn`, care se schimbă doar dacă una dintre `dependențe` se modifică.
+**`useCallback(fn, dependencies)`** rezolvă asta. Returnează o versiune memoizată a funcției `fn`, care se schimbă doar dacă una dintre `dependencies` se modifică.
 
 **Când să-l folosim?**
 <div class="ns-c-tight">
 
-- Când pasăm funcții ca `props` către componente copil optimizate cu `React.memo`.
+- Când transmitem funcții ca `props` către componente copil optimizate cu `React.memo`.
 - Când o funcție este o dependență într-un alt hook (ex: `useEffect`).
 
 </div>
@@ -247,11 +251,11 @@ layout: cover
 <script setup>
 const code = `
 import { useState, useCallback, memo } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, ToastAndroid} from 'react-native';
 
 // Componenta copil este acum memoizată și primește o funcție
 const ChildComponent = memo(({ onIncrement }) => {
-  console.log('Se randează componenta copil...');
+  ToastAndroid.show('Se randează componenta copil...', ToastAndroid.SHORT);
   return <Button title="Incrementează din copil" onPress={onIncrement} />;
 });
 
@@ -309,13 +313,13 @@ color: indigo-light
 
 `useMemo` este similar cu `useCallback`, dar în loc să memoizeze o funcție, el **memoizează rezultatul** unei funcții. Este util pentru a evita recalcularea unor valori costisitoare la fiecare randare.
 
-**`useMemo(createFn, dependencies)`** va rula funcția `createFn` și va memoiza valoarea returnată. Va re-calcula această valoare doar dacă una dintre `dependențe` se schimbă.
+**`useMemo(createFn, dependencies)`** va rula funcția `createFn` și va memoiza valoarea returnată. Va re-calcula această valoare doar dacă una dintre `dependencies` se schimbă.
 
 **Când să-l folosim?**
 <div class="ns-c-tight">
 
 - Când avem calcule complexe (ex: filtrarea sau sortarea unui array mare) care nu trebuie refăcute la fiecare randare.
-- Când pasăm obiecte sau array-uri ca `props` către componente memoizate. Crearea unui obiect nou la fiecare randare (`{ a: 1 } !== { a: 1 }`) ar invalida memoizarea.
+- Când transmitem obiecte sau array-uri ca `props` către componente memoizate. Crearea unui obiect nou la fiecare randare (`{ a: 1 } !== { a: 1 }`) ar invalida memoizarea.
 
 </div>
 
@@ -326,11 +330,12 @@ layout: cover
 <script setup>
 const code = `
 import { useState, useMemo } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, ToastAndroid } from 'react-native';
 
 // O funcție "costisitoare"
 const expensiveCalculation = (num) => {
-  console.log('Se execută calculul costisitor...');
+  ToastAndroid.show('Se execută calculul costisitor...', ToastAndroid.SHORT);
+  
   // Simulam o operațiune lentă
   for (let i = 0; i < 100000000; i++) {}
   return num * 2;
@@ -404,9 +409,9 @@ Componenta `FlatList` este deja optimizată prin virtualizare, dar putem îmbun�
 - **`getItemLayout`**: Dacă elementele listei au o înălțime fixă, furnizarea acestei funcții permite `FlatList`-ului să calculeze direct poziția oricărui element, fără a mai randa elementele intermediare. Acest lucru face derularea la un anumit index (`scrollToIndex`) instantanee.
   `getItemLayout={(data, index) => ({ length: ITEM_HEIGHT, offset: ITEM_HEIGHT * index, index })}`
 
-- **Componente Memoizate**: Înveliți componenta `renderItem` în `React.memo` pentru a preveni re-randarea elementelor care nu s-au schimbat.
+- **Componente Memoizate**: Imbricați componenta `renderItem` în `React.memo` pentru a preveni re-randarea elementelor care nu s-au schimbat.
 
-- **Evitați Funcțiile Inline**: Pasați funcții definite (sau memoizate cu `useCallback`) la `props` precum `onPress`, nu funcții săgeată inline.
+- **Evitați Funcțiile Inline**: Transmiteți funcții definite (sau memoizate cu `useCallback`) la `props` precum `onPress`, nu funcții săgeată inline.
 
 </div>
 
@@ -480,7 +485,7 @@ Spre deosebire de motoarele tradiționale (precum V8), Hermes este proiectat cu 
 
 <AdmonitionType type="tip">
 
-Activarea Hermes este una dintre cele mai simple și mai impactante optimizări de performanță pe care le puteți face. Pentru proiectele existente, urmați ghidul oficial de migrare.
+Activarea Hermes este una dintre cele mai simple și mai semnificative optimizări de performanță pe care le puteți face. Pentru proiectele existente, urmați ghidul oficial de migrare.
 
 </AdmonitionType>
 
@@ -511,6 +516,12 @@ După ce înregistrezi o interacțiune, Profiler-ul generează un **"flamegraph"
 </div>
 
 ---
+layout: image
+image: /14-performance/flame.gif
+backgroundSize: contain
+---
+
+---
 layout: top-title
 align: c
 color: indigo-light
@@ -522,11 +533,11 @@ color: indigo-light
 
 :: content ::
 
-Să combinăm mai multe tehnici pentru a optimiza o `FlatList`. Vom folosi `React.memo` pentru elemente, `useCallback` pentru funcțiile pasate ca `props` și `getItemLayout` pentru o derulare fluidă.
+Să combinăm mai multe tehnici pentru a optimiza o `FlatList`. Vom folosi `React.memo` pentru elemente, `useCallback` pentru funcțiile transmise ca `props` și `getItemLayout` pentru o derulare fluidă.
 
 <div class="ns-c-tight">
 
-1.  **`ListItem`** este învelit în `React.memo`. Se va re-randa doar dacă `item` sau `onPress` se schimbă.
+1.  **`ListItem`** este imbricată în `React.memo`. Se va re-randa doar dacă `item` sau `onPress` se schimbă.
 2.  **`onItemPress`** este memoizată cu `useCallback`. Referința sa nu se va schimba la re-randarea componentei părinte, deci `ListItem` nu se va re-randa inutil.
 3.  **`getItemLayout`** este furnizată, deoarece toate elementele noastre au o înălțime fixă de `50`. Acest lucru elimină calculele de layout în timpul derulării.
 
@@ -540,7 +551,7 @@ layout: cover
 <script setup>
 const code = `
 import { useState, useCallback, memo } from 'react';
-import { SafeAreaView, FlatList, StyleSheet, Text, Pressable, Alert, View } from 'react-native';
+import { SafeAreaView, FlatList, StyleSheet, Text, Pressable, Alert, View, Button, ToastAndroid } from 'react-native';
 
 const ITEM_HEIGHT = 50;
 
@@ -551,7 +562,7 @@ const createData = (count) => Array.from({ length: count }, (_, i) => ({
 
 // 1. Elementul listei este memoizat
 const ListItem = memo(({ item, onPress }) => {
-  console.log(\`Randare element: \${item.text}\`);
+  ToastAndroid.show(\`Se randează \${item.text}\`, ToastAndroid.SHORT);
   return (
     <Pressable onPress={() => onPress(item.id)} style={styles.item}>
       <Text>{item.text}</Text>
@@ -599,7 +610,8 @@ export default function OptimizedList() {
 
 const styles = StyleSheet.create({
   container: { 
-    flex: 1 
+    flex: 1,
+    marginTop:30
   },
   header: { 
     padding: 10,
@@ -642,7 +654,11 @@ Cea mai importantă optimizare pentru API-ul `Animated` este utilizarea driver-u
 
 <div class="grid grid-cols-2 gap-8 mt-8 text-center">
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
-    <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">❌ `useNativeDriver: false`</h3>
+    <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">
+
+❌ `useNativeDriver: false`
+
+</h3>
     <div class="mt-4">
     
 La fiecare cadru al animației, firul JS calculează noua valoare, o serializează și o trimite prin bridge către firul de UI. Dacă firul JS este ocupat, animația va sacada.
@@ -650,7 +666,10 @@ La fiecare cadru al animației, firul JS calculează noua valoare, o serializeaz
 </div>
   </div>
   <div class="neversink-indigo-light-scheme bg-[var(--neversink-admon-bg-color)] p-6 rounded-lg border border-[var(--neversink-admon-border-color)]">
-    <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">✅ `useNativeDriver: true`</h3>
+    <h3 class="text-xl font-bold text-[var(--neversink-text-color)]">
+
+✅ `useNativeDriver: true`
+</h3>
     <div class="mt-4">
     
 Configurația animației este trimisă o singură dată prin bridge. Apoi, firul de UI se ocupă de executarea animației de la început până la sfârșit, fără nicio altă comunicare cu JS. Animația va fi fluidă, chiar dacă firul JS este blocat.
