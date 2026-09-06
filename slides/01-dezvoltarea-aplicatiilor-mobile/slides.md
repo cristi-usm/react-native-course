@@ -36,11 +36,11 @@ color: indigo-light
 
 <div class="flex justify-center">
 
-<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="800px" textAlign="center" borderWidth="2px">
+<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="900px" textAlign="center" borderWidth="2px">
 
 <div class="text-6xl font-bold py-4">
 
-Câte aplicații ați deschis azi?
+Câte ore ați petrecut ieri pe telefon?
 
 </div>
 
@@ -49,12 +49,6 @@ Câte aplicații ați deschis azi?
 </div>
 
 ---
-layout: image
-image: /apps.png
-backgroundSize: contain
----
-
----
 layout: top-title
 color: indigo-light
 align: c
@@ -62,72 +56,25 @@ align: c
 
 :: title ::
 
-# Fiecare Dintre Ele A Fost Scrisă De Două Ori
+# Telefonul A Devenit Calculatorul Principal
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-5xl mx-auto mt-12">
 
-O companie care vrea aplicația pe ambele platforme are nevoie de două echipe, două
-limbaje, două seturi de unelte.
-
-<v-clicks>
-
-- **iOS**: Swift, Xcode, un Mac. Fără Mac nu se compilează.
-- **Android**: Kotlin, Android Studio, orice sistem de operare.
-
-</v-clicks>
-
-<div v-click class="mt-8">
-
-Aceeași funcționalitate, scrisă de două ori, testată de două ori, reparată de două ori.
-Un bug apare pe Android, se repară pe Android, iar peste o lună apare și pe iOS.
-
-</div>
-
-</div>
-
----
-layout: top-title
-color: indigo-light
-align: c
----
-
-:: title ::
-
-# Prima Soluție: Împachetăm Un Site
-
-:: content ::
-
-<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
-
-O aplicație care conține un singur `WebView`, adică un browser fără butoane, care
-încarcă un site.
-
-<div class="mt-6">
-
-<FlowSteps color="indigo-light" :size="1.05" :steps="[
-  { label: 'HTML, CSS, JS', sub: 'o singură bază de cod', kind: 'file' },
-  { label: 'WebView', sub: 'browser fără butoane', emphasis: true },
-  { label: 'aplicație', sub: 'în magazin', kind: 'file', highlight: true },
+<StatRow color="indigo-light" source="StatCounter · Sensor Tower · GSMA, cifre din 2024 și 2025" :stats="[
+  { value: '~64%', label: 'din traficul web vine de pe telefon', note: 'desktop: sub o treime' },
+  { value: '~5 h', label: 'pe telefon, în fiecare zi', note: 'mai mult decât la televizor' },
+  { value: '9 din 10', label: 'minute pe telefon, într-o aplicație', highlight: true, note: 'nu în browser' },
+  { value: '~4,6 mld', label: 'de oameni au un smartphone', note: 'peste jumătate din planetă' },
 ]" />
 
 </div>
 
-<div v-click class="mt-8">
+<div class="max-w-3xl mx-auto mt-12 text-xl">
 
-Funcționează, se scrie o singură dată, iar rezultatul se vede imediat. Problema apare
-când utilizatorul atinge ecranul: derularea are inerția browserului, nu a sistemului,
-tastatura acoperă câmpul în care scrie, iar animațiile se opresc cât timp se încarcă
-ceva.
-
-</div>
-
-<div v-click class="mt-6">
-
-Utilizatorul nu știe ce este un `WebView`. Simte doar că aplicația este *ieftină*.
-
-</div>
+Cifrele sunt rotunjite, iar sursele nu sunt de acord total. Concluzia este însă
+aceeași peste tot: telefonul nu mai este al doilea ecran, ci singurul.
 
 </div>
 
@@ -139,30 +86,458 @@ align: c
 
 :: title ::
 
-# A Doua Soluție: Traducem Interfața
+# Ce S-a Mutat De Pe Calculator
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-5xl mx-auto mt-8">
 
-Scriem tot într-un singur limbaj, dar nu desenăm noi interfața. Îi cerem sistemului să
-o deseneze el, cu componentele lui.
+<div class="grid grid-cols-3 gap-x-8 gap-y-6">
 
-<div class="mt-8">
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-bank-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Banca</div>
+<div class="text-sm opacity-70">filiala este ultima soluție</div>
+</div>
 
-<Definition term="Cross-platform nativ" source="Pe scurt" color="indigo-light" emphasis>
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-ticket-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Biletele</div>
+<div class="text-sm opacity-70">codul QR, nu hârtia</div>
+</div>
 
-O singură bază de cod care <mark>comandă</mark> componentele native ale fiecărei
-platforme, în loc să le imite.
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-identification-card-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Actele</div>
+<div class="text-sm opacity-70">semnătură, autentificare</div>
+</div>
+
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-camera-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Fotografia</div>
+<div class="text-sm opacity-70">aparatul foto a dispărut</div>
+</div>
+
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-shopping-cart-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Cumpărăturile</div>
+<div class="text-sm opacity-70">mâncare, transport, plată</div>
+</div>
+
+<div class="flex flex-col items-center gap-1">
+<span class="i-ph-chats-circle-duotone text-4xl opacity-75" />
+<div class="text-xl font-semibold">Conversația</div>
+<div class="text-sm opacity-70">nu prin email</div>
+</div>
+
+</div>
+
+</div>
+
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Aplicațiile De Azi
+
+:: content ::
+
+<div class="mt-6 flex justify-center">
+
+<AppWall color="indigo-light" :columns="8" :size="62" :apps="[
+  { name: 'Instagram', rn: true },
+  { name: 'WhatsApp' },
+  { name: 'TikTok' },
+  { name: 'Shopify', rn: true },
+  { name: 'YouTube' },
+  { name: 'Discord', rn: true },
+  { name: 'Spotify' },
+  { name: 'Coinbase', rn: true },
+  { name: 'Facebook', rn: true },
+  { name: 'Netflix' },
+  { name: 'Teams', rn: true },
+  { name: 'Google Maps' },
+  { name: 'Pinterest', rn: true },
+  { name: 'Reddit' },
+  { name: 'Tesla', rn: true },
+  { name: 'Telegram' },
+  { name: 'Messenger', rn: true },
+  { name: 'X' },
+  { name: 'Wix', rn: true },
+  { name: 'Airbnb' },
+  { name: 'Skype', rn: true },
+  { name: 'LinkedIn' },
+  { name: 'WordPress', rn: true },
+  { name: 'Zoom' },
+]" />
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-6 text-lg">
+
+Fiecare are o versiune pentru iOS și una pentru Android. Întrebarea lecției de azi este
+câte dintre ele au fost scrise de două ori.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Două Sisteme, Nu Unul
+
+:: content ::
+
+<div class="flex justify-center gap-16 mt-2">
+
+<DeviceFrame platform="ios" caption="iOS · ~28%" color="indigo-light" :width="190" :height="250">
+
+<div class="h-full flex flex-col justify-center items-center text-center gap-4">
+
+<Chip icon="apple" color="indigo-light" emphasis>Swift</Chip>
+
+Xcode, doar pe Mac
+
+App Store
+
+</div>
+
+</DeviceFrame>
+
+<DeviceFrame platform="android" caption="Android · ~72%" color="indigo-light" :width="190" :height="250">
+
+<div class="h-full flex flex-col justify-center items-center text-center gap-4">
+
+<Chip icon="kotlin" color="indigo-light" emphasis>Kotlin</Chip>
+
+Android Studio, orice OS
+
+Google Play
+
+</div>
+
+</DeviceFrame>
+
+</div>
+
+<div class="max-w-3xl mx-auto mt-6 text-xl">
+
+Împreună acoperă peste 99% din piață. Separat, nu au nimic în comun: nici limbajul, nici
+uneltele, nici componentele de interfață, nici regulile magazinului.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Duopolul Nu Este O Lege A Naturii
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6">
+
+<Discontinued color="indigo-light" :columns="3" :items="[
+  { label: 'Symbian', span: 'Nokia · 1998-2013', note: 'Peste jumătate din piața mondială în 2007, anul iPhone-ului.' },
+  { label: 'BlackBerry OS', span: 'RIM · 1999-2013', note: 'Obligatoriu în corporații. Tastatura fizică a pierdut în fața ecranului tactil.' },
+  { label: 'Windows Phone', span: 'Microsoft · 2010-2019', note: 'Interfață admirată, prea puține aplicații. A cumpărat Nokia și tot a renunțat.' },
+  { label: 'webOS', span: 'Palm, apoi HP · 2009-2011', note: 'A inventat cardurile de comutare între aplicații, folosite azi de iOS și Android.' },
+  { label: 'Firefox OS', span: 'Mozilla · 2013-2016', note: 'Fiecare aplicație era o pagină web. Pariul pe care lecția de azi îl reia.' },
+  { label: 'Ubuntu Touch', span: 'Canonical · 2013-2017', note: 'Un desktop Linux în buzunar. A rămas un proiect de comunitate.' },
+]" />
+
+</div>
+
+<div class="max-w-3xl mx-auto mt-10 text-2xl font-semibold">
+
+Nu tehnologia a fost problema, ci lipsa aplicațiilor.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Fiecare Aplicație A Fost Scrisă De Două Ori
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4">
+
+<CompareGrid
+  color="indigo-light"
+  :options="[
+    { label: 'Swift', icon: 'swift' },
+    { label: 'Kotlin', icon: 'kotlin' },
+  ]"
+  :rows="[
+    { label: 'Interfața', cells: [{ text: 'SwiftUI sau UIKit' }, { text: 'Compose sau XML' }] },
+    { label: 'O listă cu scroll', cells: [{ text: 'List, UITableView' }, { text: 'LazyColumn, RecyclerView' }] },
+    { label: 'Un buton apăsat', cells: [{ text: 'Button(action:)' }, { text: 'Button(onClick =)' }] },
+    { label: 'Salvare pe telefon', cells: [{ text: 'UserDefaults' }, { text: 'SharedPreferences' }] },
+    { label: 'Cerere către server', cells: [{ text: 'URLSession' }, { text: 'Retrofit, OkHttp' }] },
+    { label: 'Uneltele', cells: [{ text: 'Xcode, doar pe Mac' }, { text: 'Android Studio, orice OS' }] },
+  ]"
+  caption="Aceleași șase probleme, două vocabulare fără nimic în comun."
+/>
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-5 text-lg">
+
+Nu este doar altă sintaxă pentru același lucru. Sunt biblioteci diferite, cu erori
+diferite, documentație diferită și oameni diferiți care le știu.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Același Ecran, De Două Ori
+
+:: content ::
+
+<div class="grid grid-cols-2 gap-6 mt-6 text-left">
+
+<div>
+
+<div class="text-sm font-bold uppercase tracking-widest opacity-60 mb-2">iOS · SwiftUI</div>
+
+```swift
+struct Salut: View {
+  var body: some View {
+    VStack {
+      Text("Bună ziua!")
+        .font(.system(size: 28,
+                      weight: .semibold))
+    }
+    .frame(maxWidth: .infinity,
+           maxHeight: .infinity)
+  }
+}
+```
+
+</div>
+
+<div>
+
+<div class="text-sm font-bold uppercase tracking-widest opacity-60 mb-2">Android · Compose</div>
+
+```kotlin
+@Composable
+fun Salut() {
+  Column(
+    modifier = Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    Text("Bună ziua!", fontSize = 28.sp,
+         fontWeight = FontWeight.SemiBold)
+  }
+}
+```
+
+</div>
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-6 text-lg">
+
+Un text centrat pe ecran. Două fișiere, două limbaje, două echipe. Iar dacă mâine textul
+devine "Bună seara!", se schimbă în două locuri.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Costul Real
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+<div class="grid grid-cols-2">
+
+<div class="px-8 py-8 border-b border-r border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-user-plus-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-3 leading-tight">Doi oameni, nu unul</div>
+<div class="mt-1 text-lg opacity-70">Coordonarea devine traducere.</div>
+</div>
+
+<div class="px-8 py-8 border-b border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-copy-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-3 leading-tight">Fiecare cerință, de două ori</div>
+<div class="mt-1 text-lg opacity-70">Diferențele apar la testare.</div>
+</div>
+
+<div class="px-8 py-8 border-r border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-hourglass-medium-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-3 leading-tight">O platformă rămâne în urmă</div>
+<div class="mt-1 text-lg opacity-70">Cea cu mai puțini utilizatori.</div>
+</div>
+
+<div class="px-8 py-8">
+<span class="i-ph-rocket-launch-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-3 leading-tight">Un startup nu are două echipe</div>
+<div class="mt-1 text-lg opacity-70">Alege între o aplicație și niciuna.</div>
+</div>
+
+
+</div>
+
+</div>
+
+---
+layout: center
+color: indigo-light
+---
+
+<div class="flex justify-center">
+
+<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="900px" textAlign="center" borderWidth="2px">
+
+<div class="text-6xl font-bold py-4">
+
+Cum am putea scri aplicația o singură dată?
+
+</div>
+
+</SpeechBubble>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Prima Idee: Împachetăm Un Site
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-4">
+
+<Definition term="WebView" source="Pe scurt" color="indigo-light">
+
+Motorul de browser al sistemului, pus într-o componentă nativă obișnuită: fără bară de
+adresă și fără taburi.
 
 </Definition>
 
 </div>
 
-<div v-click class="mt-8">
+<div class="max-w-5xl mx-auto mt-6">
 
-Butonul de pe iOS este un buton iOS adevărat. Pe Android este un buton Android
-adevărat. Codul care le cere să existe este același.
+<FlowSteps color="indigo-light" :size="1.05" :steps="[
+  { label: 'HTML, CSS, JS', sub: 'un singur cod', kind: 'file' },
+  { label: 'WebView', sub: 'browser fără butoane', emphasis: true, via: 'împachetare' },
+  { label: 'aplicație', sub: 'în magazin', kind: 'file', highlight: true, via: 'build' },
+]" />
+
+</div>
+
+<div class="max-w-5xl mx-auto mt-8">
+
+<Timeline color="indigo-light" :items="[
+  { year: '2009', label: 'PhoneGap', note: 'scris la un hackathon' },
+  { year: '2011', label: 'Adobe cumpără firma', note: 'codul ajunge la Apache' },
+  { year: '2012', label: 'Cordova', note: 'numele de azi al motorului' },
+  { year: '2020', label: 'PhoneGap se închide', note: 'ideea rămâne' },
+  { year: 'azi', label: 'Ionic · Capacitor', note: 'aplicații interne de firmă' },
+]" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# De Ce Se Simte Ieftin
+
+:: content ::
+
+<div class="flex justify-center gap-14 mt-2 items-center">
+
+<DeviceFrame platform="ios" caption="ce vede utilizatorul" color="indigo-light" :width="195" :height="330">
+
+<div class="h-full flex flex-col gap-3 justify-center text-[0.72rem] leading-snug">
+
+<div class="flex items-center gap-2 p-2 rounded-lg border border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-hand-swipe-right-duotone text-lg opacity-60 shrink-0" />
+<span>Derularea se oprește brusc</span>
+</div>
+
+<div class="flex items-center gap-2 p-2 rounded-lg border border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-keyboard-duotone text-lg opacity-60 shrink-0" />
+<span>Tastatura acoperă câmpul</span>
+</div>
+
+<div class="flex items-center gap-2 p-2 rounded-lg border border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-arrow-u-up-left-duotone text-lg opacity-60 shrink-0" />
+<span>Butonul "înapoi" nu face nimic</span>
+</div>
+
+<div class="flex items-center gap-2 p-2 rounded-lg border border-[var(--neversink-admon-border-color)]">
+<span class="i-ph-spinner-duotone text-lg opacity-60 shrink-0" />
+<span>Animația se blochează</span>
+</div>
+
+</div>
+
+</DeviceFrame>
+
+<div class="max-w-sm text-left">
+
+<div class="flex items-start gap-4">
+<span class="i-ph-bug-duotone text-4xl text-[var(--neversink-fg-color)] shrink-0" />
+<div>
+<div class="text-2xl font-bold leading-tight">Niciuna nu este un bug</div>
+<div class="mt-1 text-lg opacity-75">Un browser și un sistem de operare se comportă diferit. Codul este corect.</div>
+</div>
+</div>
+
+<div class="flex items-start gap-4 mt-10">
+<span class="i-ph-user-duotone text-4xl text-[var(--neversink-fg-color)] shrink-0" />
+<div>
+<div class="text-2xl font-bold leading-tight">Utilizatorului nu îi pasă</div>
+<div class="mt-1 text-lg opacity-75">Nu știe ce este un WebView. Simte doar că aplicația este "ieftină" și pleacă la concurență.</div>
+</div>
+</div>
 
 </div>
 
@@ -176,11 +551,167 @@ align: c
 
 :: title ::
 
-# Cine Face Asta
+# A Doua Idee: Desenăm Noi Totul
 
 :: content ::
 
-<div class="mt-6">
+<div class="max-w-4xl mx-auto mt-8">
+
+<Definition term="Interfață desenată de framework" source="Pe scurt" color="indigo-light">
+
+Aplicația nu cere sistemului componente. Cere un dreptunghi gol și pictează în el,
+la fel pe iOS și pe Android.
+
+</Definition>
+
+</div>
+
+<div class="max-w-5xl mx-auto mt-10 text-left">
+
+<div class="grid grid-cols-2 gap-6 text-xl">
+
+<div class="flex items-start gap-3">
+<span class="i-ph-thumbs-up-duotone text-3xl opacity-75 shrink-0" />
+<div>Identic pe ambele platforme, și rapid.</div>
+</div>
+
+<div class="flex items-start gap-3">
+<span class="i-ph-thumbs-down-duotone text-3xl opacity-75 shrink-0" />
+<div>"Identic" înseamnă că nu seamănă cu niciuna dintre ele.</div>
+</div>
+
+</div>
+
+<div class="mt-10 flex justify-center items-center gap-4 text-lg opacity-85">
+
+<Chip icon="flutter" color="indigo-light" emphasis>Flutter</Chip>
+<Chip icon="dart" color="indigo-light">Dart</Chip>
+<div>Google, din 2015. Google Pay, BMW, eBay Motors.</div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# A Treia Idee: Folosim Componentele Sistemului
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-6">
+
+<Definition term="Cross-platform nativ" source="Pe scurt" color="indigo-light" emphasis>
+
+Un singur cod, care <mark>cere sistemului</mark> să deseneze componentele lui native,
+în loc să le deseneze singur.
+
+</Definition>
+
+</div>
+
+<div class="max-w-5xl mx-auto mt-8 flex items-center justify-center gap-4">
+
+<div class="flex-1 p-3 rounded-xl border border-[var(--neversink-admon-border-color)] text-center">
+<div class="font-mono text-lg">UIButton</div>
+<div class="text-xs opacity-65 mt-1">buton iOS adevărat</div>
+</div>
+
+<div class="flex flex-col items-center shrink-0">
+<div class="text-xs uppercase tracking-widest opacity-55 font-semibold">devine</div>
+<div class="i-ph-arrow-left-duotone text-2xl opacity-50" />
+</div>
+
+<div class="px-4 py-3 rounded-xl border-2 border-[var(--neversink-border-color)] bg-[var(--neversink-admon-bg-color)] text-center shrink-0">
+<div class="font-mono text-lg font-bold">&lt;Pressable&gt;</div>
+<div class="text-xs opacity-65 mt-1">codul vostru, o dată</div>
+</div>
+
+<div class="flex flex-col items-center shrink-0">
+<div class="text-xs uppercase tracking-widest opacity-55 font-semibold">devine</div>
+<div class="i-ph-arrow-right-duotone text-2xl opacity-50" />
+</div>
+
+<div class="flex-1 p-3 rounded-xl border border-[var(--neversink-admon-border-color)] text-center">
+<div class="font-mono text-lg">android.widget.Button</div>
+<div class="text-xs opacity-65 mt-1">buton Android adevărat</div>
+</div>
+
+</div>
+
+<div class="flex justify-center items-center gap-3 mt-8">
+
+<Chip icon="c#" color="indigo-light">.NET MAUI</Chip>
+<Chip icon="react" color="indigo-light" emphasis>React Native</Chip>
+<Chip icon="kotlin" color="indigo-light">Kotlin Multiplatform</Chip>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cele Trei Idei, Una Lângă Alta
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4">
+
+<CompareGrid
+  color="indigo-light"
+  :options="[
+    { label: 'WebView', icon: 'ionic' },
+    { label: 'Flutter', icon: 'flutter' },
+    { label: 'React Native', icon: 'react', highlight: true },
+  ]"
+  :rows="[
+    { label: 'Cine desenează butonul', cells: [
+      { verdict: 'bad', text: 'browserul' },
+      { verdict: 'mixed', text: 'framework-ul' },
+      { verdict: 'good', text: 'sistemul' },
+    ] },
+    { label: 'Se simte nativ', cells: [
+      { verdict: 'bad' }, { verdict: 'mixed' }, { verdict: 'good' },
+    ] },
+    { label: 'Limbaj', cells: [
+      { verdict: 'good', text: 'JavaScript' },
+      { verdict: 'bad', text: 'Dart, nou' },
+      { verdict: 'good', text: 'JavaScript' },
+    ] },
+    { label: 'Urmează stilul sistemului', cells: [
+      { verdict: 'bad' }, { verdict: 'bad', text: 'îl imită' }, { verdict: 'good' },
+    ] },
+    { label: 'Control asupra pixelilor', cells: [
+      { verdict: 'mixed' }, { verdict: 'good' }, { verdict: 'mixed' },
+    ] },
+  ]"
+  caption="Cerc plin: punctul tare al abordării. Cerc gol: prețul ei."
+/>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Harta Compromisului
+
+:: content ::
+
+<div class="mt-4">
 
 <AxisMap
   color="indigo-light"
@@ -192,21 +723,15 @@ align: c
     'desenată de framework · limbaj cunoscut',
     'desenată de framework · limbaj nou',
   ]"
-  :height="360"
+  :height="340"
   :items="[
-    { x: 27, y: 68, label: 'Kotlin Multiplatform' },
-    { x: 73, y: 70, label: 'React Native', highlight: true },
-    { x: 29, y: 32, label: 'Flutter' },
-    { x: 74, y: 30, label: 'Ionic' },
+    { x: 28, y: 80, label: 'Kotlin Multiplatform', icon: 'kotlin' },
+    { x: 74, y: 72, label: 'React Native', highlight: true },
+    { x: 22, y: 56, label: '.NET MAUI', icon: 'c#' },
+    { x: 29, y: 26, label: 'Flutter' },
+    { x: 76, y: 28, label: 'Ionic · Capacitor', icon: 'ionic' },
   ]"
 />
-
-</div>
-
-<div class="mt-4 text-lg opacity-80">
-
-Poziționarea este editorială, nu măsurată. Rolul ei este să arate că există un
-compromis, nu să dea un clasament.
 
 </div>
 
@@ -227,17 +752,124 @@ align: c
 <Definition term="React Native" source="Pe scurt" color="indigo-light" emphasis>
 
 Un framework open-source, făcut de Meta, care construiește aplicații
-<mark>native</mark> pentru iOS și Android dintr-o singură bază de cod scrisă în
-JavaScript și React.
+<mark>native</mark> pentru iOS și Android dintr-un singur cod, scris în JavaScript
+și React.
 
 </Definition>
 
-<div v-click class="mt-8">
+<div class="mt-8">
 
-Un `<View>` scris de voi devine un `UIView` pe iOS și un `android.view.View` pe
-Android. Aplicația nu *arată* nativ. Este nativă.
+Un `<View>` scris de voi devine un `UIView` pe iOS și un `android.view.View` pe Android.
+Aplicația nu *arată* nativ. Este nativă.
 
 </div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Unde Stă Codul Vostru
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-6">
+
+<LayerStack color="indigo-light" :size="1.05" :layers="[
+  { label: 'Codul vostru', sub: 'componente, hooks, stiluri', side: 'îl scrieți în TypeScript/Javascript' },
+  { label: 'React', sub: 'decide ce s-a schimbat pe ecran', side: 'aceeași bibliotecă ca pe web' },
+  { label: 'React Native', sub: 'traduce deciziile în comenzi', kind: 'bridge', emphasis: true, side: 'stratul pe care îl studiem' },
+  { label: 'UIView · android.view.View', sub: 'componentele sistemului', kind: 'native', side: 'nu sunt în proiectul vostru' },
+  { label: 'iOS · Android', sub: 'sistemul de operare', kind: 'native' },
+]" />
+
+</div>
+
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# De Unde Vine
+
+:: content ::
+
+<div class="mt-10">
+
+<Timeline color="indigo-light" :items="[
+  { year: '2011', label: 'Facebook trece pe HTML5', note: 'aplicația era lentă' },
+  { year: '2012', label: 'Zuckerberg: a fost o greșeală', note: 'revin la nativ' },
+  { year: '2013', label: 'Un hackathon intern', note: 'React, dar pentru iOS' },
+  { year: '2015', label: 'React Native, open-source', note: 'întâi iOS, apoi Android' },
+  { year: '2018', label: 'Expo devine calea recomandată', note: 'proiect pornit în minute' },
+  { year: '2024', label: 'Arhitectura nouă, implicită', note: 'Fabric și JSI' },
+]" />
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-10 text-xl">
+
+React Native nu s-a născut dintr-o idee de laborator. S-a născut din eșecul unei aplicații
+scrise cu HTML5 și din refuzul de a scrie totul de două ori.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cine Îl Folosește
+
+:: content ::
+
+<div class="mt-6 flex justify-center">
+
+<AppWall color="indigo-light" mark-rn :columns="8" :size="62" :apps="[
+  { name: 'Instagram', rn: true },
+  { name: 'WhatsApp' },
+  { name: 'TikTok' },
+  { name: 'Shopify', rn: true },
+  { name: 'YouTube' },
+  { name: 'Discord', rn: true },
+  { name: 'Spotify' },
+  { name: 'Coinbase', rn: true },
+  { name: 'Facebook', rn: true },
+  { name: 'Netflix' },
+  { name: 'Teams', rn: true },
+  { name: 'Google Maps' },
+  { name: 'Pinterest', rn: true },
+  { name: 'Reddit' },
+  { name: 'Tesla', rn: true },
+  { name: 'Telegram' },
+  { name: 'Messenger', rn: true },
+  { name: 'X' },
+  { name: 'Wix', rn: true },
+  { name: 'Airbnb' },
+  { name: 'Skype', rn: true },
+  { name: 'LinkedIn' },
+  { name: 'WordPress', rn: true },
+  { name: 'Zoom' },
+]" />
+
+</div>
+
+<div class="max-w-4xl mx-auto mt-6 text-base">
+
+În multe dintre ele nu este toată aplicația construită în React Native, ci
+câteva ecrane dintr-una nativă: se poate adopta pe bucăți, nu doar de la zero.
 
 </div>
 
@@ -253,41 +885,28 @@ align: c
 
 :: content ::
 
-<div class="max-w-5xl mx-auto mt-8 text-left">
+<div class="max-w-5xl mx-auto mt-10 text-left">
 
 <div class="grid grid-cols-2 gap-5">
 
-<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
-
-### O singură echipă
-
-Aceeași bază de cod pentru ambele platforme. Un bug se repară o dată.
-
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex items-start gap-4">
+<span class="i-ph-users-three-duotone text-4xl opacity-75 shrink-0" />
+<div><strong class="text-xl">O singură echipă</strong><div class="mt-1 opacity-80">Un bug se repară o dată, nu de două ori.</div></div>
 </div>
 
-<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
-
-### Modificările se văd imediat
-
-Salvați fișierul și ecranul telefonului se actualizează în mai puțin de o secundă,
-fără recompilare.
-
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex items-start gap-4">
+<span class="i-ph-lightning-duotone text-4xl opacity-75 shrink-0" />
+<div><strong class="text-xl">Modificările se văd imediat</strong><div class="mt-1 opacity-80">Salvați fișierul, telefonul se actualizează sub o secundă.</div></div>
 </div>
 
-<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
-
-### Ecosistemul React
-
-Componente, hooks, state management. Tot ce se știe din React se transferă direct.
-
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex items-start gap-4">
+<span class="i-ph-atom-duotone text-4xl opacity-75 shrink-0" />
+<div><strong class="text-xl">Ecosistemul React</strong><div class="mt-1 opacity-80">Componente, hooks, state management, la fel.</div></div>
 </div>
 
-<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
-
-### Ieșire spre nativ
-
-Când JavaScript nu ajunge, se scrie un modul în Swift sau Kotlin și se apelează din JS.
-
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex items-start gap-4">
+<span class="i-ph-door-open-duotone text-4xl opacity-75 shrink-0" />
+<div><strong class="text-xl">Ieșire spre nativ</strong><div class="mt-1 opacity-80">Când JavaScript nu ajunge: un modul Swift sau Kotlin.</div></div>
 </div>
 
 </div>
@@ -306,24 +925,125 @@ align: c
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-5xl mx-auto mt-5 text-left">
 
-React Native nu este magie și nu este întotdeauna alegerea corectă.
+<div class="grid grid-cols-2 gap-3">
 
-<v-clicks>
+<div class="p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-start gap-3">
+<span class="i-ph-desktop-tower-duotone text-3xl opacity-70 shrink-0" />
+<div><strong>Tot vă trebuie un Mac</strong><div class="text-base opacity-75 mt-1">Codul este comun. Magazinul, nu.</div></div>
+</div>
 
-- **Tot aveți nevoie de un Mac** pentru a publica pe iOS. Codul este comun, magazinul nu.
-- **Diferențele dintre platforme rămân**. Tastatura, notificările și permisiunile se
-  comportă altfel, iar codul trebuie să știe asta.
-- **Bibliotecile native sunt de calitate inegală**. Un pachet abandonat de doi ani
-  poate bloca o actualizare de versiune.
-- **Pentru jocuri sau prelucrare video** scrieți tot nativ. React Native nu este acolo.
+<div class="p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-start gap-3">
+<span class="i-ph-arrows-split-duotone text-3xl opacity-70 shrink-0" />
+<div><strong>Platformele rămân diferite</strong><div class="text-base opacity-75 mt-1">Tastatură, notificări, permisiuni.</div></div>
+</div>
 
-</v-clicks>
+<div class="p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-start gap-3">
+<span class="i-ph-package-duotone text-3xl opacity-70 shrink-0" />
+<div><strong>Pachete de calitate inegală</strong><div class="text-base opacity-75 mt-1">Unul abandonat blochează o versiune.</div></div>
+</div>
 
-<div v-click class="mt-8">
+<div class="p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-start gap-3">
+<span class="i-ph-game-controller-duotone text-3xl opacity-70 shrink-0" />
+<div><strong>Jocuri și video: nativ</strong><div class="text-base opacity-75 mt-1">React Native nu este acolo.</div></div>
+</div>
 
-Cursul acesta arată și unde se rupe, nu doar unde merge.
+</div>
+
+<div class="mt-4 p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-start gap-3">
+<span class="i-ph-arrow-u-up-left-duotone text-3xl opacity-70 shrink-0" />
+<div class="w-full">
+
+<strong>Se poate și da înapoi</strong>
+
+<div class="flex items-center gap-3 mt-2 text-base">
+<span class="font-mono font-bold">2016</span>
+<span>Airbnb rescrie o parte din aplicație în React Native</span>
+<span class="i-ph-arrow-right-duotone text-xl opacity-50 shrink-0" />
+<span class="font-mono font-bold">2018</span>
+<span>revine complet la nativ</span>
+</div>
+
+<div class="text-base opacity-75 mt-2">Doar câteva ecrane erau în React Native, iar echipa întreținea totuși trei lucruri în loc de două: iOS, Android și stratul dintre ele. Era arhitectura veche, la scara Airbnb.</div>
+
+</div>
+</div>
+
+<div class="mt-5 text-xl text-center">
+
+Cursul vorbește deschis despre dezavantajele React Native, nu doar despre avantaje.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cum Alegeți În Practică
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+<div class="grid grid-cols-3 gap-5 items-stretch">
+
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] flex flex-col">
+<span class="i-ph-cpu-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-2">nativ</div>
+
+<div class="mt-3 text-base leading-relaxed">
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Jocuri 3D</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Editare video</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Realitate augmentată</span></div>
+</div>
+
+<div class="mt-auto pt-4 text-sm opacity-70">Când fiecare milisecundă contează.</div>
+</div>
+
+<div class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)] flex flex-col">
+<span class="i-ph-browser-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-2">web</div>
+
+<div class="mt-3 text-base leading-relaxed">
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Conținut care se schimbă zilnic</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Fără cameră</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Fără funcționare offline</span></div>
+</div>
+
+<div class="mt-auto pt-4 text-sm opacity-70">Un site bun este des răspunsul corect.</div>
+</div>
+
+<div class="p-5 rounded-xl border-2 border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex flex-col">
+<span class="i-ph-device-mobile-duotone text-5xl text-[var(--neversink-fg-color)]" />
+<div class="text-2xl font-bold mt-2">React Native</div>
+
+<div class="mt-3 text-base leading-relaxed">
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Liste și formulare</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Cont și autentificare</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Cereri către server</span></div>
+<div class="flex items-baseline gap-2"><span class="i-ph-dot-outline-duotone text-lg text-[var(--neversink-fg-color)] shrink-0" /><span>Notificări</span></div>
+</div>
+
+<div class="mt-auto pt-4 text-sm opacity-70">Adică majoritatea aplicațiilor care se scriu.</div>
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<AdmonitionType type="tip" color="indigo-light">
+
+Întrebarea corectă nu este "care tehnologie este cea mai bună", ci "ce fel de aplicație
+scriu și cu cine".
+
+</AdmonitionType>
 
 </div>
 
@@ -341,28 +1061,20 @@ align: c
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
-
-React Native gol înseamnă Xcode, Android Studio, SDK-uri și o zi bună de configurare
-înainte de primul ecran.
-
-<div class="mt-8">
+<div class="max-w-4xl mx-auto mt-14">
 
 <Definition term="Expo" source="Pe scurt" color="indigo-light" emphasis>
 
-Un strat de unelte peste React Native: creează proiectul, îl rulează, îi dă acces la
-cameră și la notificări, și îl compilează <mark>în cloud</mark>.
+Un strat de unelte peste React Native: pornește proiectul, îl rulează pe telefonul
+vostru și îl compilează <mark>în cloud</mark>.
 
 </Definition>
 
 </div>
 
-<div v-click class="mt-8">
+<div class="max-w-3xl mx-auto mt-10 text-xl">
 
-Cursul folosește Expo peste tot. Nu pentru că React Native gol ar fi greșit, ci pentru
-că nu vreau să pierdem primele două săptămâni instalând SDK-uri.
-
-</div>
+Cursul îl folosește peste tot, ca să nu pierdem primele două săptămâni instalând SDK-uri.
 
 </div>
 
@@ -374,33 +1086,100 @@ align: c
 
 :: title ::
 
-# Primul Proiect
+# Ce Rezolvă Expo
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-8 text-left">
+<div class="max-w-5xl mx-auto mt-6">
 
-```bash
-npx create-expo-app@latest prima-aplicatie
-cd prima-aplicatie
-npx expo start
-```
-
-<div v-click class="mt-6 text-xl">
-
-În terminal apare un cod QR. Îl scanați cu aplicația **Expo Go** de pe telefon, iar
-aplicația voastră pornește acolo, pe dispozitivul real, în câteva secunde.
+<CompareGrid
+  color="indigo-light"
+  :options="[
+    { label: 'React Native', icon: 'react' },
+    { label: 'Expo', highlight: true },
+  ]"
+  :rows="[
+    { label: 'Primul ecran pornit', cells: [
+      { verdict: 'bad', text: 'ore de configurare' },
+      { verdict: 'good', text: 'o comandă' },
+    ] },
+    { label: 'Build pentru iOS', cells: [
+      { verdict: 'bad', text: 'obligatoriu pe un Mac' },
+      { verdict: 'good', text: 'în cloud, de pe orice OS' },
+    ] },
+    { label: 'Cameră, notificări, locație', cells: [
+      { verdict: 'mixed', text: 'pachete separate' },
+      { verdict: 'good', text: 'incluse și versionate împreună' },
+    ] },
+    { label: 'Testare pe telefon', cells: [
+      { verdict: 'mixed', text: 'cablu și build' },
+      { verdict: 'good', text: 'un cod QR' },
+    ] },
+    { label: 'Control total asupra proiectului nativ', cells: [
+      { verdict: 'good' },
+      { verdict: 'mixed', text: 'după prebuild' },
+    ] },
+  ]"
+/>
 
 </div>
 
-<div v-click class="mt-6">
+---
+layout: top-title
+color: indigo-light
+align: c
+---
 
-<AdmonitionType type="tip" color="indigo-light">
+:: title ::
 
-Telefonul și calculatorul trebuie să fie în aceeași rețea. Dacă rețeaua facultății
-blochează conexiunea, `npx expo start --tunnel` ocolește problema.
+# Default Sau Blank
 
-</AdmonitionType>
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="p-4 rounded-xl border-2 border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)]">
+
+<div class="text-xl font-bold">blank</div>
+<div class="text-sm opacity-70 mb-2"><code>--template blank</code></div>
+
+```text
+App.js               un singur ecran
+assets/
+app.json
+package.json
+```
+
+<div class="mt-2 text-sm opacity-75">Un fișier, un ecran, nimic în plus.</div>
+
+</div>
+
+<div class="p-4 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+<div class="text-xl font-bold">default</div>
+<div class="text-sm opacity-70 mb-2">fără niciun flag</div>
+
+```text
+app/
+├── (tabs)/          tab-uri gata făcute
+│   ├── index.tsx
+│   └── explore.tsx
+└── _layout.tsx
+components/          componente de exemplu
+constants/  hooks/
+```
+
+<div class="mt-2 text-sm opacity-75">Vine cu expo-router și o aplicație demo completă.</div>
+
+</div>
+
+</div>
+
+<div class="mt-5 text-lg">
+
+Începem cu **blank**: un singur fișier de citit și nimic de șters.
 
 </div>
 
@@ -418,24 +1197,42 @@ align: c
 
 :: content ::
 
-<div class="max-w-3xl mx-auto mt-8 text-left">
+<div class="max-w-4xl mx-auto mt-6 text-left">
 
-```text
-prima-aplicatie/
-├── app/                 ecranele aplicației, câte un fișier pe ecran
-│   ├── _layout.tsx      ce le înconjoară pe toate
-│   └── index.tsx        primul ecran
-├── assets/              imagini și fonturi
-├── app.json             numele, iconița, permisiunile
-├── package.json         dependențele
-└── tsconfig.json        configurarea TypeScript
-```
+<div class="flex flex-col gap-3">
 
-<div v-click class="mt-8 text-xl">
+<div class="p-3 rounded-xl border-2 border-[var(--neversink-admon-border-color)] bg-[var(--neversink-admon-bg-color)] flex items-center gap-4">
+<span class="i-ph-file-js-duotone text-3xl text-[var(--neversink-fg-color)] shrink-0" />
+<div class="font-mono text-lg font-bold w-40 shrink-0">App.js</div>
+<div class="text-base opacity-80">Tot ecranul, într-un singur fișier. Singurul pe care îl editați azi.</div>
+</div>
 
-Un fișier în `app/` înseamnă un ecran. Structura folderelor *este* navigarea, iar
-lecția 9 arată exact cum.
+<div class="p-3 rounded-xl border border-[var(--neversink-admon-border-color)] flex items-center gap-4">
+<span class="i-ph-image-duotone text-3xl text-[var(--neversink-fg-color)] shrink-0" />
+<div class="font-mono text-lg font-bold w-40 shrink-0">assets/</div>
+<div class="text-base opacity-80">Imagini și fonturi.</div>
+</div>
 
+<div class="p-3 rounded-xl border border-[var(--neversink-admon-border-color)] flex items-center gap-4">
+<span class="i-ph-gear-duotone text-3xl text-[var(--neversink-fg-color)] shrink-0" />
+<div class="font-mono text-lg font-bold w-40 shrink-0">app.json</div>
+<div class="text-base opacity-80">Numele aplicației, iconița, permisiunile.</div>
+</div>
+
+<div class="p-3 rounded-xl border border-[var(--neversink-admon-border-color)] flex items-center gap-4">
+<span class="i-ph-package-duotone text-3xl text-[var(--neversink-fg-color)] shrink-0" />
+<div class="font-mono text-lg font-bold w-40 shrink-0">package.json</div>
+<div class="text-base opacity-80">Dependențele.</div>
+</div>
+
+</div>
+
+<div class="mt-6 p-4 rounded-xl border border-dashed border-[var(--neversink-admon-border-color)] flex items-center gap-4">
+<span class="i-ph-prohibit-duotone text-3xl text-[var(--neversink-fg-color)] shrink-0" />
+<div>
+<div class="font-mono text-lg font-bold">ios/ · android/</div>
+<div class="text-base opacity-80">Nu există. Expo le generează la build, când are nevoie de ele.</div>
+</div>
 </div>
 
 </div>
@@ -454,10 +1251,11 @@ align: c
 
 <div class="max-w-4xl mx-auto mt-6 text-left">
 
-```tsx
+```jsx
+// App.js
 import { StyleSheet, Text, View } from 'react-native'
 
-export default function Index() {
+export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.titlu}>Bună ziua!</Text>
@@ -485,24 +1283,14 @@ align: c
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
 
-<v-clicks>
-
-- **Nu există `<div>` și nu există `<p>`.** Există `<View>` și `<Text>`. Orice text
-  trebuie să stea într-un `<Text>`, altfel aplicația se oprește cu eroare.
+- **Nu există `<div>` și nu există `<p>`.** Există `<View>` și `<Text>`. Orice text trebuie
+  să stea într-un `<Text>`, altfel aplicația se oprește cu eroare.
 - **Stilurile sunt un obiect JavaScript**, nu un fișier CSS. Fără cascadă și fără
-  selectoare.
-- **`flex: 1` umple ecranul.** În React Native totul este flexbox, iar direcția
-  implicită este `column`, nu `row`.
-
-</v-clicks>
-
-<div v-click class="mt-8">
-
-Lecțiile 3 și 5 se ocupă de fiecare dintre ele pe rând.
-
-</div>
+  selectoare, deci un stil nu se poate scurge dintr-o componentă în alta.
+- **`flex: 1` umple ecranul.** În React Native totul este flexbox, iar direcția implicită
+  este `column`, nu `row`.
 
 </div>
 
@@ -514,26 +1302,90 @@ align: c
 
 :: title ::
 
-# Ce Urmează
+# Traducerea Din Web
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-4xl mx-auto mt-10 text-left">
 
-Astăzi am văzut *ce* face React Native. Lecția următoare arată *cum*: ce se întâmplă
-între `<View>`-ul scris de voi și pixelii de pe ecran, de ce există un bundler numit
-Metro și ce s-a schimbat în arhitectura nouă.
+<div class="grid grid-cols-[auto_auto_auto_1fr] gap-x-6 gap-y-4 items-center">
 
-<div class="mt-10">
+<div class="text-xs uppercase tracking-widest opacity-50 font-semibold">pe web</div>
+<div></div>
+<div class="text-xs uppercase tracking-widest opacity-50 font-semibold">în React Native</div>
+<div></div>
 
-<AdmonitionType type="note" color="indigo-light">
+<div class="font-mono text-lg opacity-55">&lt;div&gt;</div>
+<div class="i-ph-arrow-right-duotone text-xl text-[var(--neversink-fg-color)] opacity-60" />
+<div class="font-mono text-lg font-bold">&lt;View&gt;</div>
+<div class="text-base opacity-70">container de layout</div>
 
-Până atunci: instalați **Expo Go** pe telefon și porniți proiectul de mai sus. Dacă
-vedeți "Bună ziua!" pe ecranul telefonului, sunteți pregătiți pentru lecția 2.
+<div class="font-mono text-lg opacity-55">&lt;p&gt;</div>
+<div class="i-ph-arrow-right-duotone text-xl text-[var(--neversink-fg-color)] opacity-60" />
+<div class="font-mono text-lg font-bold">&lt;Text&gt;</div>
+<div class="text-base opacity-70">orice text, obligatoriu</div>
 
-</AdmonitionType>
+<div class="font-mono text-lg opacity-55">&lt;img src&gt;</div>
+<div class="i-ph-arrow-right-duotone text-xl text-[var(--neversink-fg-color)] opacity-60" />
+<div class="font-mono text-lg font-bold">&lt;Image source&gt;</div>
+<div class="text-base opacity-70">src devine source</div>
+
+<div class="font-mono text-lg opacity-55">&lt;button onClick&gt;</div>
+<div class="i-ph-arrow-right-duotone text-xl text-[var(--neversink-fg-color)] opacity-60" />
+<div class="font-mono text-lg font-bold">&lt;Pressable onPress&gt;</div>
+<div class="text-base opacity-70">un deget apasă, nu face click</div>
+
+<div class="font-mono text-lg opacity-55">&lt;ul&gt;</div>
+<div class="i-ph-arrow-right-duotone text-xl text-[var(--neversink-fg-color)] opacity-60" />
+<div class="font-mono text-lg font-bold">&lt;FlatList data&gt;</div>
+<div class="text-base opacity-70">randează doar ce se vede</div>
 
 </div>
+
+</div>
+
+<div class="max-w-3xl mx-auto mt-10 text-lg opacity-80">
+
+Nu este o simplă redenumire: `<Text>` este singurul care știe să deseneze litere, iar
+`<FlatList>` randează doar rândurile vizibile, nu toată lista.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Rulăm Codul
+
+:: content ::
+
+<script setup>
+const code = `import { StyleSheet, Text, View } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titlu}>Bună ziua!</Text>
+      <Text style={styles.sub}>Primul ecran din cursul acesta.</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  titlu: { fontSize: 28, fontWeight: '600' },
+  sub: { marginTop: 8, fontSize: 15, opacity: 0.6 },
+});
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="430px" name="Primul%20ecran" />
 
 </div>
 

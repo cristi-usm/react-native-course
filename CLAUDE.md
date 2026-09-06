@@ -296,7 +296,17 @@ In `common/components/`, auto-imported in every deck — **no import needed** in
 | `<Chip>React Native</Chip>` | A pill with an auto-resolved language/tool logo |
 | `<AxisMap :items :zones … />` | A 2D map: two axes crossing, four named zones |
 | `<LogoWall :names />` | A collage of logos from `common/public/icons/` |
+| `<AppWall :apps [mark-rn] />` | A wall of app tiles; `mark-rn` marks the React Native ones |
+| `<StatRow :stats :source />` | A row of large figures, each on its own rule |
+| `<Discontinued :items />` | Things that existed and no longer do, struck through |
 | `<FlowSteps :steps />` | A left-to-right pipeline of named stages |
+| `<LayerStack :layers />` | A top-to-bottom stack: your code above, the platform below |
+| `<ThreadLanes :lanes :boundaries />` | Threads side by side, and the seam between them |
+| `<ArchMap variant="bridge\|jsi" />` | The React Native architecture map, old or new |
+| `<RuntimeMap title engine :parts :panels />` | A JS runtime: the engine, and what the host adds |
+| `<CallTrace :lanes :steps />` | Calls between threads, in the order they happen |
+| `<CompareGrid :options :rows />` | A comparison matrix with a verdict mark per cell |
+| `<DeviceFrame [platform]>…</DeviceFrame>` | A phone drawn around a piece of the slide |
 | `<Timeline :items />` | A dated sequence of events |
 
 Props, the slide patterns each one belongs in, and how to write a new one: the
@@ -321,9 +331,13 @@ Deck-local components go in `slides/<deck>/components/`. Neversink components
 
 ## 8. Code in slides
 
-**TypeScript + JSX by default** — fence React Native components as `tsx`, never as `ts`
-(which loses the JSX highlighting) and never as `jsx` unless the example deliberately has
-no types.
+**JavaScript + JSX by default** — the course starts from `create-expo-app --template
+blank`, which is a plain JavaScript project (`App.js`), so React Native components are
+fenced as `jsx`, never as `js` (which loses the JSX highlighting).
+
+`ts` and `tsx` are still correct where the example really is TypeScript and would not
+compile without it — a TurboModule spec in lesson 2 is the case that exists today. Do not
+add types to an ordinary component example just to reach for `tsx`.
 
 ⚠️ `common/setup/shiki.ts` **replaces** Slidev's auto-detected `langs` list rather than
 extending it. Every language used in any deck must be listed there by hand, or its blocks
@@ -393,6 +407,12 @@ its `v-click` reveals (§4).
 
 > **Node**: on Node 25 the global `localStorage` breaks a transitive Slidev dependency at
 > import time; `scripts/node-compat.mjs` applies the workaround to every spawned process.
+
+### Never open a browser preview
+
+Do not start a browser preview, a dev server or any browser automation to "verify" a slide.
+The user runs the decks themselves and looks at them. Make the change, explain what it does,
+and stop there.
 
 ### Build & deploy
 

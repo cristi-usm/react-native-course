@@ -95,6 +95,7 @@ withDefaults(
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
   animation: ns-flow-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -108,7 +109,9 @@ withDefaults(
   color: var(--neversink-text-color);
   min-height: 1.3em;
   line-height: 1.3;
-  white-space: nowrap;
+  max-width: 11em;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .ns-flow__sub { margin-bottom: 0.3rem; }
@@ -121,7 +124,9 @@ withDefaults(
   background: #fff;
   color: inherit;
   text-align: center;
-  white-space: nowrap;
+  max-width: 11em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
   line-height: 1.25;
   box-shadow: 0 6px 16px -12px #000;
 }
@@ -163,7 +168,7 @@ withDefaults(
   align-items: center;
   justify-content: center;
   flex: 1 1 auto;
-  min-width: 1.3rem;
+  min-width: min-content;
   padding: 0 0.1rem;
   animation: ns-flow-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -183,7 +188,10 @@ withDefaults(
   color: var(--neversink-text-color);
   font-size: calc(var(--ns-flow-size) * 0.82);
   font-weight: 700;
-  white-space: nowrap;
+  max-width: 9em;
+  text-align: center;
+  text-wrap: balance;
+  line-height: 1.25;
   box-shadow: 0 6px 14px -10px var(--neversink-fg-color);
 }
 

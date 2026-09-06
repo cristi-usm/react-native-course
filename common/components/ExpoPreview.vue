@@ -1,4 +1,23 @@
 <script setup>
+/**
+ * A live Expo Snack embedded in a slide: the code compiles on Expo's servers
+ * and renders in the frame.
+ *
+ * `platform` picks which tab the embed OPENS on; all four stay available and
+ * the viewer can switch at any time.
+ *
+ * ⚠️ `android` and `ios` are Appetize.io streaming a real emulator as VIDEO.
+ * On a weak connection, and especially in Firefox on Linux (long-standing
+ * black-screen/flicker bugs with hardware accelerated video, plus an open
+ * webcompat report against Appetize itself), that preview flashes black and
+ * can look broken to the room. Nothing in this component can fix it — the
+ * flicker happens upstream of our iframe.
+ *
+ * If it misbehaves during a lecture, click the `Web` tab: that path is
+ * react-native-web in an ordinary iframe, with no video stream to drop.
+ *
+ * `deviceFrame` draws a phone outline around the preview.
+ */
 import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 
 const props = defineProps({
@@ -25,7 +44,20 @@ const props = defineProps({
     platform: {
         type: String,
         default: "android",
-        validator: (value) => ['ios', 'android', 'web'].includes(value)
+        validator: (value) => ['ios', 'android', 'web', 'mydevice'].includes(value)
+    },
+    /**
+     * Which platform tabs the embed offers. All four by default; narrow it
+     * only when a slide has a reason to.
+     */
+    supportedPlatforms: {
+        type: String,
+        default: "ios,android,web,mydevice"
+    },
+    /** Draw a phone outline around the preview. */
+    deviceFrame: {
+        type: Boolean,
+        default: true
     },
     height: {
         type: String,
@@ -102,61 +134,27 @@ const initializeSnack = async () => {
     }
 };
 
+const styleIframe = (iframe) => {
+    if (iframe.dataset.snackStyled) return;
+    iframe.dataset.snackStyled = 'true';
+    iframe.style.setProperty('width', '100%', 'important');
+    iframe.style.setProperty('height', '100%', 'important');
+    iframe.style.setProperty('border', '0', 'important');
+    iframe.style.setProperty('display', 'block', 'important');
+};
+
+let iframeObserver = null;
+
 const applyIframeStyles = () => {
     if (!containerRef.value) return;
 
-    const iframes = containerRef.value.querySelectorAll('iframe');
-    iframes.forEach(iframe => {
-        iframe.style.setProperty('image-rendering', '-webkit-optimize-contrast', 'important');
-        iframe.style.setProperty('image-rendering', 'crisp-edges', 'important');
-        iframe.style.setProperty('-ms-interpolation-mode', 'nearest-neighbor', 'important');
+    containerRef.value.querySelectorAll('iframe').forEach(styleIframe);
 
-        const rect = iframe.getBoundingClientRect();
-        const devicePixelRatio = window.devicePixelRatio || 1;
-
-        if (devicePixelRatio !== 1) {
-            const scale = Math.round(devicePixelRatio);
-            iframe.style.setProperty('transform', `scale(${1 / scale})`, 'important');
-            iframe.style.setProperty('transform-origin', '0 0', 'important');
-            iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
-            iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
-            iframe.style.setProperty('max-width', '100%', 'important');
-            iframe.style.setProperty('max-height', '100%', 'important');
-        }
-
-        iframe.style.setProperty('filter', 'contrast(1.01)', 'important');
-        iframe.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
-        iframe.style.setProperty('-webkit-perspective', '1000', 'important');
+    iframeObserver = new MutationObserver(() => {
+        containerRef.value?.querySelectorAll('iframe').forEach(styleIframe);
     });
 
-    const observer = new MutationObserver(() => {
-        const newIframes = containerRef.value.querySelectorAll('iframe');
-        newIframes.forEach(iframe => {
-            if (!iframe.style.imageRendering) {
-                iframe.style.setProperty('image-rendering', '-webkit-optimize-contrast', 'important');
-                iframe.style.setProperty('image-rendering', 'crisp-edges', 'important');
-                iframe.style.setProperty('-ms-interpolation-mode', 'nearest-neighbor', 'important');
-                iframe.style.setProperty('filter', 'contrast(1.01)', 'important');
-                iframe.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
-                iframe.style.setProperty('-webkit-perspective', '1000', 'important');
-
-                const rect = iframe.getBoundingClientRect();
-                const devicePixelRatio = window.devicePixelRatio || 1;
-
-                if (devicePixelRatio !== 1) {
-                    const scale = Math.round(devicePixelRatio);
-                    iframe.style.setProperty('transform', `scale(${1 / scale})`, 'important');
-                    iframe.style.setProperty('transform-origin', '0 0', 'important');
-                    iframe.style.setProperty('width', `${rect.width * scale}px`, 'important');
-                    iframe.style.setProperty('height', `${rect.height * scale}px`, 'important');
-                    iframe.style.setProperty('max-width', '100%', 'important');
-                    iframe.style.setProperty('max-height', '100%', 'important');
-                }
-            }
-        });
-    });
-
-    observer.observe(containerRef.value, {
+    iframeObserver.observe(containerRef.value, {
         childList: true,
         subtree: true
     });
@@ -191,6 +189,11 @@ onMounted(() => {
 onUnmounted(() => {
     componentCount--;
 
+    if (iframeObserver) {
+        iframeObserver.disconnect();
+        iframeObserver = null;
+    }
+
     if (observer && containerRef.value) {
         observer.unobserve(containerRef.value);
     }
@@ -210,6 +213,7 @@ onUnmounted(() => {
 <template>
     <div ref="containerRef" :data-snack-code="code" :data-snack-dependencies="dependencies" :data-snack-name="name"
         :data-snack-description="description" :data-snack-preview="preview" :data-snack-platform="platform"
+        :data-snack-supportedplatforms="supportedPlatforms" :data-snack-device-frame="deviceFrame"
         :data-snack-id="snackId || undefined" :style="{
             overflow: 'hidden',
             background: '#f7f7f7',

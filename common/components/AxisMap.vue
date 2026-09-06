@@ -122,8 +122,11 @@ withDefaults(
   inset: 0;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
+  border: 1px solid var(--neversink-admon-border-color);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.4),
+    0 14px 34px -26px rgb(0 0 0 / 0.7);
 }
 
 .ns-axismap__zone {
@@ -143,17 +146,19 @@ withDefaults(
   opacity: 0.22;
 }
 
-/* Each caption hugs the corner furthest from the crossing point. */
+/* Each caption hugs the corner furthest from the crossing point. Zone tints
+   are deliberately faint, so the label carries its own contrast rather than
+   inheriting the wash it sits on. */
 .ns-axismap__zone-label {
   position: absolute;
-  max-width: 42%;
-  font-size: 0.68rem;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.12em;
+  max-width: 44%;
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--neversink-text-color);
-  opacity: 0.45;
+  opacity: 0.6;
 }
 
 .ns-axismap__zone--0 .ns-axismap__zone-label {
@@ -178,30 +183,34 @@ withDefaults(
   text-align: right;
 }
 
+/* Dashed, not solid: these axes are a frame of reference, not a measured
+   series, and a solid rule through the middle invites reading values off it. */
 .ns-axismap__axis {
   position: absolute;
-  background: var(--neversink-border-color);
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 .ns-axismap__axis--x {
   left: 0;
   right: 0;
   top: 50%;
-  height: 2px;
+  height: 0;
+  border-top: 2px dashed var(--neversink-border-color);
 }
 
 .ns-axismap__axis--y {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 2px;
+  width: 0;
+  border-left: 2px dashed var(--neversink-border-color);
 }
 
 /* Axis names: the loudest part of the frame, since they carry the meaning. */
 .ns-axismap__axis-name {
   position: absolute;
-  padding: 0.15em 0.75em;
+  padding: 0.2em 0.85em;
+  box-shadow: 0 6px 16px -10px #000;
   border-radius: 999px;
   background: var(--neversink-border-color);
   color: #fff;
@@ -228,7 +237,7 @@ withDefaults(
    readable — a rotated "jos ↓" is a puzzle, not a label. */
 .ns-axismap__end {
   position: absolute;
-  padding: 0.15em 0.7em;
+  padding: 0.18em 0.75em;
   border: 1px solid var(--neversink-admon-border-color);
   border-radius: 999px;
   background: #fff;

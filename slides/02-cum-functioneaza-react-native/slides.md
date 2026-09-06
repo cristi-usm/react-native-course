@@ -56,29 +56,25 @@ align: c
 
 :: title ::
 
-# Trei Lucruri Care Rulează În Același Timp
+# Ce Este React Native
 
 :: content ::
 
-<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
 
-O aplicație React Native nu este un singur program. Sunt trei fire de execuție, fiecare
-cu treaba lui.
+<Definition term="React Native" source="Pe scurt" color="indigo-light" emphasis>
 
-<v-clicks>
+Un framework open source, făcut de Meta, în care scrieți o singură dată în JavaScript și
+obțineți <mark>componente native reale</mark> pe iOS și pe Android.
 
-- **JS thread**: rulează codul vostru. Componentele, state-ul, event handlers.
-- **UI thread**: desenează pe ecran și primește atingerile. Este singurul care are voie
-  să atingă interfața.
-- **Shadow thread**: calculează layout-ul, adică unde ajunge fiecare element.
-
-</v-clicks>
+</Definition>
 
 <div v-click class="mt-8">
 
-Dacă JS thread se blochează cu un calcul lung, UI thread continuă să deseneze. De
-aceea aplicația rămâne fluidă chiar dacă codul vostru este ocupat, dar nu răspunde la
-atingeri.
+Cuvântul important este "reale". Aplicația nu este un site împachetat într-un
+`WebView`. Nu există o pagină, nu există un DOM și nu există CSS. Componentele voastre
+devin exact obiectele pe care le-ar folosi un dezvoltator care scrie în Swift sau în
+Kotlin.
 
 </div>
 
@@ -92,11 +88,143 @@ align: c
 
 :: title ::
 
-# Firele De Execuție
+# Ce Devine Un `<View>`
 
 :: content ::
 
-<img src="/allthreads.png" class="h-90 mx-auto mt-4 rounded-lg" alt="JS thread, shadow thread și UI thread rulând în paralel" />
+<div class="max-w-3xl mx-auto mt-6 text-left">
+
+<LayerStack color="indigo-light" :size="1.05" :layers="[
+  { label: '<View>', sub: 'ce scrieți în componentă', kind: 'js', side: 'îl scrieți voi' },
+  { label: 'React Native', sub: 'traduce cererea', kind: 'bridge', emphasis: true },
+  { label: 'UIView', sub: 'pe iOS', kind: 'native', side: 'Swift, Objective-C' },
+  { label: 'android.view.View', sub: 'pe Android', kind: 'native', side: 'Kotlin, Java' },
+]" />
+
+<div v-click class="mt-6 text-xl">
+
+Un singur element din codul vostru are două rezultate diferite, câte unul pe platformă.
+Voi nu alegeți între ele și nici nu le scrieți separat.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Nu Este O Metaforă
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+Fiecare componentă are un nume nativ concret. Nu "ceva care arată ca un switch", ci
+chiar clasa pe care o folosește sistemul.
+
+<div class="mt-6 text-lg">
+
+| Ce scrieți | Ce se creează pe iOS | Ce se creează pe Android |
+|---|---|---|
+| `<Text>` | `UILabel` | `TextView` |
+| `<View>` | `UIView` | `android.view.View` |
+| `<Image>` | `UIImageView` | `ImageView` |
+| `<Switch>` | `UISwitch` | `AppCompatCheckBox` |
+| `<FlatList>` | `UIScrollView` | `RecyclerView` |
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Motorul Și Mediul Din Jurul Lui
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+JavaScript nu vine niciodată singur. Vine un **JS engine**, care înțelege limbajul, plus
+un **runtime**, adică tot ce îi pune gazda la dispoziție.
+
+<div class="grid grid-cols-2 gap-5 mt-5">
+
+<div>
+
+<RuntimeMap color="indigo-light" :size="0.95" stacked title="În browser" engine="V8, JSC, SpiderMonkey" :parts="['call stack', 'heap', 'interpreter']" :panels="[
+  { title: 'API-uri de la gazdă', items: ['document', 'window', 'fetch'] },
+  { title: 'cozi de sarcini' },
+  { title: 'event loop' },
+]" />
+
+</div>
+
+<div v-click>
+
+<RuntimeMap color="indigo-light" :size="0.95" stacked title="În aplicație" engine="Hermes" :parts="['call stack', 'heap', 'interpreter']" :panels="[
+  { title: 'API-uri de la gazdă', items: ['native modules', 'Camera, GPS', 'fetch'] },
+  { title: 'cozi de sarcini' },
+  { title: 'event loop' },
+]" emphasis />
+
+</div>
+
+</div>
+
+<div v-click class="mt-5 text-xl">
+
+Cutia de sus este identică: `Promise`, `async`, `class`, `map` se comportă la fel.
+Diferă rândul de jos. `document` nu există pe telefon, iar în locul lui aveți module
+native.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# De Ce Contează Distincția
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- Erorile de tip "`document is not defined`" nu sunt un bug al vostru. Este o
+  bibliotecă scrisă pentru browser, pusă într-un runtime care nu are DOM.
+- `localStorage` lipsește din același motiv. În lecția 12 îi luăm locul cu
+  `AsyncStorage`.
+- `fetch` **există**, pentru că React Native îl oferă el, peste rețeaua sistemului.
+- `setTimeout` există, dar este implementat de React Native, nu de browser.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Regula practică: dacă un pachet din npm atinge DOM-ul, nu funcționează aici, oricât de
+popular ar fi.
+
+</div>
+
+</div>
 
 ---
 layout: top-title
@@ -118,7 +246,7 @@ execută codul vostru.
 <div class="mt-6">
 
 <FlowSteps color="indigo-light" :size="1.05" :steps="[
-  { label: 'index.tsx', sub: 'codul vostru', kind: 'file' },
+  { label: 'App.js', sub: 'codul vostru', kind: 'file' },
   { label: 'Metro', sub: 'bundler', via: 'transformă' },
   { label: 'bundle.js', sub: 'un singur fișier', kind: 'file' },
   { label: 'Hermes', sub: 'JS engine', emphasis: true, via: 'execută' },
@@ -150,6 +278,58 @@ align: c
 
 :: title ::
 
+# Bytecode, Nu Text
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+Până în 2019 aplicațiile foloseau **JSC**, motorul din Safari. El primea bundle-ul ca
+text și îl analiza la fiecare pornire a aplicației.
+
+<div class="mt-6">
+
+<CompareGrid color="indigo-light" :options="[
+  { label: 'JSC', icon: false },
+  { label: 'Hermes', icon: false, highlight: true },
+]" :rows="[
+  { label: 'Ce primește aplicația', cells: [
+    { verdict: 'bad', text: 'bundle ca text' },
+    { verdict: 'good', text: 'bytecode' },
+  ] },
+  { label: 'Când se analizează codul', cells: [
+    { verdict: 'bad', text: 'la fiecare pornire' },
+    { verdict: 'good', text: 'o dată, la build' },
+  ] },
+  { label: 'Pornirea aplicației', cells: [
+    { verdict: 'bad', text: 'mai lentă' },
+    { verdict: 'good', text: 'mai rapidă' },
+  ] },
+  { label: 'Memorie folosită', cells: [
+    { verdict: 'mixed', text: 'mai multă' },
+    { verdict: 'good', text: 'mai puțină' },
+  ] },
+]" caption="Cerc plin: varianta care câștigă pe criteriul acela." />
+
+</div>
+
+<div v-click class="mt-6 text-xl">
+
+De aceea `console.log` din codul vostru ajunge în bundle, dar motorul nu mai citește
+niciodată sursa voastră pe telefon. Ceea ce rulează acolo este bytecode.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
 # Ce Face Metro
 
 :: content ::
@@ -169,6 +349,87 @@ align: c
 
 Ultimul punct este **Fast Refresh** și este motivul pentru care lucrul cu React Native
 nu doare. Salvați, iar ecranul telefonului se schimbă, păstrând state-ul.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Trei Lucruri Care Rulează În Același Timp
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+O aplicație React Native nu este un singur program. Sunt trei fire de execuție, fiecare
+cu treaba lui.
+
+<v-clicks>
+
+- **JS thread**: rulează codul vostru. Componentele, state-ul, event handlers.
+- **UI thread**: desenează pe ecran și primește atingerile. Este singurul care are voie
+  să atingă interfața. Se numește și main thread.
+- **Shadow thread**: calculează layout-ul, adică unde ajunge fiecare element.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Dacă JS thread se blochează cu un calcul lung, UI thread continuă să deseneze. De
+aceea aplicația rămâne fluidă chiar dacă codul vostru este ocupat, dar nu răspunde la
+atingeri.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Aceeași Interfață, Ținută De Trei Ori
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+<ThreadLanes color="indigo-light" :size="0.98" :lanes="[
+  { title: 'UI thread', note: 'iOS și Android', frame: 'phone', nodes: [
+    { label: 'Titlu', tone: 'a' },
+    { label: 'Paragraf', tone: 'b' },
+    { label: 'Paragraf', tone: 'b' },
+  ] },
+  { title: 'Shadow tree', note: 'în C++', tree: true, nodes: [
+    { label: 'Titlu', tone: 'a' },
+    { label: 'Paragraf', tone: 'b', depth: 1 },
+    { label: 'Paragraf', tone: 'b', depth: 1 },
+  ] },
+  { title: 'JS thread', note: 'Hermes', tree: true, nodes: [
+    { label: '<Text>', tone: 'a' },
+    { label: '<Text>', tone: 'b', depth: 1 },
+    { label: '<Text>', tone: 'b', depth: 1 },
+  ] },
+]" :boundaries="[
+  { name: 'montare', label: 'view.appendChild(...)', mode: 'direct' },
+  { name: 'randare', label: 'createNode(...)', mode: 'direct' },
+]" caption="Trei reprezentări ale aceluiași ecran, câte una pe fir de execuție." />
+
+<div v-click class="mt-5 text-xl">
+
+Interfața există de trei ori în același timp: ca elemente în codul vostru, ca arbore de
+noduri în C++ și ca obiecte native pe ecran. Treaba framework-ului este să le țină
+sincronizate.
 
 </div>
 
@@ -214,14 +475,43 @@ align: c
 
 <div class="max-w-5xl mx-auto mt-4 text-left">
 
-<img src="/bridge.png" class="h-58 mx-auto rounded-lg" alt="Bridge-ul dintre JavaScript și partea nativă" />
+<ThreadLanes color="indigo-light" :size="0.98" :lanes="[
+  { title: 'UI thread', note: 'iOS și Android', frame: 'phone', nodes: [
+    { label: 'Titlu', tone: 'a' },
+    { label: 'Paragraf', tone: 'b' },
+  ] },
+  { title: 'JS thread', note: 'JSC', tree: true, nodes: [
+    { label: '<Text>', tone: 'a' },
+    { label: '<Text>', tone: 'b', depth: 1 },
+  ] },
+]" :boundaries="[
+  { name: 'Bridge', label: '[... createView(id, RCTView, ...)]', mode: 'queue' },
+]" />
 
-<div class="mt-6 text-xl">
+<div class="mt-5 text-xl">
 
-Fiecare mesaj era **serializat în JSON**, trimis pe o coadă și deserializat de partea
+Fiecare mesaj era **serializat în JSON**, pus la coadă și deserializat de partea
 cealaltă. Complet asincron: JavaScript cerea ceva și nu putea afla răspunsul imediat.
 
 </div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Arhitectura Veche, Toată
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-14">
+
+<ArchMap color="indigo-light" variant="bridge" :size="1.15" caption="Tot ce trece prin mijloc este text JSON, pe o coadă asincronă." />
 
 </div>
 
@@ -247,8 +537,43 @@ align: c
   întrebare și așteptai răspunsul într-un callback.
 - **Interfața se putea desincroniza.** Elementul se mișca, dar eticheta lui ajungea un
   cadru mai târziu.
+- **Serializarea costa singură.** Un obiect mare devenea text, apoi iar obiect, de
+  fiecare dată.
+- **Toate modulele native porneau odată cu aplicația**, chiar cele pe care
+  utilizatorul nu le atingea niciodată.
 
 </v-clicks>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Costul Unei Derulări
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-4 text-left">
+
+<CallTrace color="indigo-light" :size="1.05" :lanes="['UI thread', 'Shadow tree', 'JS thread']" :steps="[
+  { phase: 'Utilizatorul trage cu degetul', from: 0, to: 2, label: 'onScroll', note: 'peste bridge' },
+  { from: 2, to: 2, label: 'setState({ ... })', note: 'codul vostru decide ce se schimbă' },
+  { from: 2, to: 1, label: 'createNode()' },
+  { from: 1, to: 1, label: 'layout', note: 'Yoga calculează pozițiile' },
+  { from: 1, to: 0, label: 'appendChild()', emphasis: true },
+]" caption="Cinci pași, pentru un singur cadru de derulare. La 60 de cadre pe secundă, de 60 de ori." />
+
+<div v-click class="mt-6 text-xl">
+
+Numărați traversările. Fiecare trecere peste bridge înseamnă serializare, o coadă și o
+așteptare. De aici venea senzația de derulare care "se agață".
+
+</div>
 
 </div>
 
@@ -264,13 +589,20 @@ align: c
 
 :: content ::
 
-<div class="grid grid-cols-2 gap-10 max-w-4xl mx-auto mt-4">
+<div class="max-w-3xl mx-auto mt-2 text-xl text-center">
+
+Poziția etichetei se calcula **după** ce elementul urmărit se desenase deja. Un cadru de
+întârziere, la fiecare cadru.
+
+</div>
+
+<div class="grid grid-cols-2 gap-10 max-w-3xl mx-auto mt-4">
 
 <div class="text-center">
 
 ### Bridge
 
-<img src="/old-tooltip.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Eticheta rămâne în urma elementului" />
+<img src="/old-tooltip.gif" class="mt-2 mx-auto rounded-lg h-56 w-auto" alt="Eticheta rămâne în urma elementului" />
 
 Eticheta rămâne în urmă.
 
@@ -280,7 +612,7 @@ Eticheta rămâne în urmă.
 
 ### JSI
 
-<img src="/new-tooltip.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Eticheta se mișcă odată cu elementul" />
+<img src="/new-tooltip.gif" class="mt-2 mx-auto rounded-lg h-56 w-auto" alt="Eticheta se mișcă odată cu elementul" />
 
 Se mișcă împreună.
 
@@ -315,6 +647,63 @@ Un obiect nativ poate fi ținut în JavaScript ca orice alt obiect. Apelul este 
 când trebuie să fie sincron, iar mesajul nu mai trece prin serializare.
 
 </div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Obiecte Host
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+Mecanismul are un nume: un **HostObject** este o clasă C++ care se prezintă lui
+JavaScript ca un obiect obișnuit.
+
+<div class="mt-6">
+
+```js
+// Nu este un obiect JavaScript. Este C++, cu o mască.
+const db = NativeSQLite.open("notite.db")
+
+// Apelul intră direct în C++, fără JSON și fără coadă.
+const rows = db.query("SELECT * FROM notite")
+```
+
+</div>
+
+<div v-click class="mt-6">
+
+JavaScript păstrează o referință și apelează metode pe ea. Nimic nu se copiază, nimic
+nu se transformă în text. De aceea `react-native-reanimated` sau bazele de date rapide
+au devenit posibile abia acum.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Aceeași Poză, Mijlocul Schimbat
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-14">
+
+<ArchMap color="indigo-light" variant="jsi" :size="1.15" caption="Aceleași fire de execuție. Bridge-ul a fost înlocuit de JSI, cu Fabric și TurboModules deasupra lui." />
 
 </div>
 
@@ -371,17 +760,130 @@ align: c
 
 :: title ::
 
+# Ce Aduce Fabric
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- **Randare sincronă când este nevoie.** O măsurătoare de layout poate fi citită în
+  același cadru, deci nu mai apar sărituri de un cadru.
+- **Randare întreruptibilă.** Arborele se construiește în pași mici, iar un pas poate
+  fi abandonat dacă apare ceva mai urgent.
+- **Un singur core în C++.** Logica de randare nu mai este scrisă de două ori, o dată
+  pentru iOS și o dată pentru Android, deci aceleași reguli dau aceleași rezultate.
+- **Mai multe versiuni de interfață în paralel.** React poate pregăti următorul ecran
+  fără să îl arate încă.
+
+</v-clicks>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Aduc TurboModules
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- **Încărcare la cerere.** Modulul camerei intră în memorie când deschideți camera, nu
+  când porniți aplicația.
+- **Tipizare verificată.** Interfața modulului se descrie în TypeScript, iar din acea
+  descriere se generează codul nativ.
+- **Apeluri sincrone.** Ce înainte cerea obligatoriu un `Promise` sau un callback poate
+  acum returna direct o valoare.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Al doilea punct este cel subtil: greșelile de potrivire între JavaScript și nativ se
+văd la build, nu ca o eroare ciudată pe telefonul unui utilizator.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Codegen: Tipurile Devin Cod
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+Scrieți o descriere în TypeScript. Din ea se generează, la build, interfețele native
+pentru ambele platforme.
+
+<div class="mt-6">
+
+<FlowSteps color="indigo-light" :size="0.98" :steps="[
+  { label: 'NativeBaterie.ts', sub: 'descrierea, în TypeScript', kind: 'file' },
+  { label: 'codegen', sub: 'la build', emphasis: true, via: 'citește' },
+  { label: 'interfețe native', sub: 'Kotlin și Objective-C', kind: 'file', highlight: true, via: 'generează' },
+]" />
+
+</div>
+
+<div v-click class="mt-6">
+
+```ts
+// NativeBaterie.ts, singurul fișier scris de mână pe partea de JS
+import type { TurboModule } from "react-native"
+
+export interface Spec extends TurboModule {
+  getNivel(): number          // sincron, pentru că poate fi
+  seIncarca(): Promise<boolean>
+}
+```
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
 # Interfața Nu Se Mai Blochează
 
 :: content ::
 
-<div class="grid grid-cols-2 gap-10 max-w-4xl mx-auto mt-4">
+<div class="max-w-3xl mx-auto mt-2 text-xl text-center">
+
+Fabric aduce funcțiile concurente din React 18: o actualizare lungă poate fi întreruptă
+de una urgentă, cum este o atingere.
+
+</div>
+
+<div class="grid grid-cols-2 gap-10 max-w-3xl mx-auto mt-3">
 
 <div class="text-center">
 
 ### Arhitectura veche
 
-<img src="/old-concurent.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Interfața se blochează în timpul unei actualizări mari" />
+<img src="/old-concurent.gif" class="mt-2 mx-auto rounded-lg h-52 w-auto" alt="Interfața se blochează în timpul unei actualizări mari" />
 
 O actualizare mare blochează tot.
 
@@ -391,7 +893,7 @@ O actualizare mare blochează tot.
 
 ### Arhitectura nouă
 
-<img src="/new-concurent.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Interfața rămâne fluidă în timpul aceleiași actualizări" />
+<img src="/new-concurent.gif" class="mt-2 mx-auto rounded-lg h-52 w-auto" alt="Interfața rămâne fluidă în timpul aceleiași actualizări" />
 
 Randarea poate fi întreruptă.
 
@@ -399,10 +901,92 @@ Randarea poate fi întreruptă.
 
 </div>
 
-<div v-click class="mt-6 text-xl max-w-3xl mx-auto">
+---
+layout: top-title
+color: indigo-light
+align: c
+---
 
-Fabric aduce funcțiile concurente din React 18: o actualizare lungă poate fi
-întreruptă de una urgentă, cum este o atingere.
+:: title ::
+
+# Urgent Și Neurgent
+
+:: content ::
+
+<div class="max-w-3xl mx-auto mt-2 text-xl text-center">
+
+O actualizare învelită în `startTransition(() => ...)` este marcată drept neurgentă,
+deci React o poate întrerupe pentru un caracter tastat.
+
+</div>
+
+<div class="grid grid-cols-2 gap-10 max-w-3xl mx-auto mt-3">
+
+<div class="text-center">
+
+### Fără tranziții
+
+<img src="/old-transition.gif" class="mt-2 mx-auto rounded-lg h-56 w-auto" alt="Fiecare caracter tastat blochează interfața" />
+
+Fiecare caracter refiltrează lista, iar tastatura se blochează.
+
+</div>
+
+<div class="text-center">
+
+### Cu `startTransition`
+
+<img src="/new-transition.gif" class="mt-2 mx-auto rounded-lg h-56 w-auto" alt="Câmpul rămâne fluid, lista se actualizează în urmă" />
+
+Câmpul răspunde imediat, iar lista se actualizează când se poate.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cele Două Arhitecturi, Una Lângă Alta
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+<CompareGrid color="indigo-light" :options="[
+  { label: 'Bridge', icon: false },
+  { label: 'JSI', icon: false, highlight: true },
+]" :rows="[
+  { label: 'Cum trece un mesaj', cells: [
+    { verdict: 'bad', text: 'serializat în JSON' },
+    { verdict: 'good', text: 'apel direct în C++' },
+  ] },
+  { label: 'Apeluri sincrone', cells: [
+    { verdict: 'bad', text: 'imposibile' },
+    { verdict: 'good', text: 'posibile' },
+  ] },
+  { label: 'Măsurarea layout-ului', cells: [
+    { verdict: 'bad', text: 'prin callback' },
+    { verdict: 'good', text: 'în același cadru' },
+  ] },
+  { label: 'Modulele native', cells: [
+    { verdict: 'bad', text: 'toate, la pornire' },
+    { verdict: 'good', text: 'la prima folosire' },
+  ] },
+  { label: 'Randarea', cells: [
+    { verdict: 'bad', text: 'nu se întrerupe' },
+    { verdict: 'good', text: 'întreruptibilă' },
+  ] },
+  { label: 'Logica de randare', cells: [
+    { verdict: 'bad', text: 'o dată pe platformă' },
+    { verdict: 'good', text: 'un core în C++' },
+  ] },
+]" caption="Bridge-ul a existat până la versiunea 0.68. JSI este implicit din 0.76." />
 
 </div>
 
@@ -446,6 +1030,58 @@ align: c
 
 :: title ::
 
+# Un Ecran, Pas Cu Pas
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-2 text-left">
+
+<CallTrace color="indigo-light" :size="1" :lanes="['UI thread', 'Shadow tree', 'JS thread']" :steps="[
+  { phase: 'La pornirea aplicației', from: 0, to: 2, label: 'runApplication()' },
+  { from: 2, to: 1, label: 'createNode()', note: 'câte unul pe element' },
+  { from: 1, to: 0, label: 'Android View', note: 'obiectele native apar' },
+  { phase: 'Când răspunde serverul', from: 0, to: 2, label: 'onNetworkDone' },
+  { from: 2, to: 2, label: 'setState({ ... })' },
+  { from: 2, to: 1, label: 'createNode()' },
+  { from: 1, to: 0, label: 'Android View', emphasis: true, note: 'doar ce s-a schimbat' },
+]" />
+
+<div v-click class="mt-4 text-lg">
+
+Ultimul pas este cheia: nu se reconstruiește ecranul, ci se aplică diferența. React
+compară arborele nou cu cel vechi și trimite mai departe doar ce s-a schimbat.
+
+</div>
+
+</div>
+
+---
+layout: center
+color: indigo-light
+---
+
+<div class="flex justify-center">
+
+<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="800px" textAlign="center" borderWidth="2px">
+
+<div class="text-6xl font-bold py-4">
+
+Dacă React Native face tot asta, atunci ce face Expo?
+
+</div>
+
+</SpeechBubble>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
 # Expo Nu Este Un Framework Diferit
 
 :: content ::
@@ -459,10 +1095,54 @@ Expo nu înlocuiește React Native. Este React Native, plus uneltele din jur.
 - **Expo SDK**: pachete pentru cameră, locație, notificări, fișiere. Toate versionate
   împreună, deci compatibile între ele.
 - **Expo Go**: aplicația în care rulează proiectul vostru fără compilare proprie.
-- **EAS Build**: compilează pentru iOS și Android în cloud, deci fără Mac local.
+- **EAS**: servicii în cloud pentru build, publicare și actualizări.
 - **Expo Router**: navigarea pe bază de fișiere, din lecția 9.
 
 </v-clicks>
+
+<div v-click class="mt-8">
+
+Nimic din lista asta nu schimbă arhitectura de mai sus. Fabric, JSI și Yoga sunt
+aceleași, cu sau fără Expo.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Ați Fi Instalat Fără Expo
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+Un proiect creat cu React Native CLI cere mediul nativ complet, pe calculatorul
+vostru.
+
+<v-clicks>
+
+- **Node.js** și un package manager. Ăsta îl aveți oricum.
+- **JDK**, ca să se compileze partea de Android.
+- **Android Studio**, pentru SDK, emulator și unelte de build, plus variabila de mediu
+  `ANDROID_HOME`.
+- **Xcode**, doar pe macOS, pentru simulatorul și build-ul de iOS.
+- **CocoaPods**, managerul de dependențe al proiectelor Xcode.
+
+</v-clicks>
+
+<div v-click class="mt-6">
+
+Pentru iOS ultima linie este definitivă: fără un Mac, nu compilați local. Expo mută
+pasul acela în cloud, iar de aceea cursul îl folosește.
+
+</div>
 
 </div>
 
@@ -484,14 +1164,14 @@ align: c
 
 <div>
 
-<img src="/expo-go.png" class="rounded-lg w-full" alt="Aplicația Expo Go" />
+<img src="/expo-go.png" class="rounded-lg h-72 w-auto mx-auto" alt="Aplicația Expo Go" />
 
 </div>
 
 <div class="text-xl">
 
 Expo Go conține deja compilate toate pachetele din SDK. De aceea proiectul pornește în
-câteva secunde.
+câteva secunde, pe un telefon real, fără Xcode și fără Android Studio.
 
 <div v-click class="mt-6">
 
@@ -502,6 +1182,56 @@ construiți un *development build*, adică propriul vostru Expo Go, cu pachetele
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cele Trei Feluri De A Rula Proiectul
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+<CompareGrid color="indigo-light" :options="[
+  { label: 'Expo Go', icon: false, highlight: true },
+  { label: 'Development build', icon: false },
+  { label: 'Build de producție', icon: false },
+]" :rows="[
+  { label: 'Cât durează prima pornire', cells: [
+    { verdict: 'good', text: 'secunde' },
+    { verdict: 'mixed', text: 'minute' },
+    { verdict: 'mixed', text: 'minute' },
+  ] },
+  { label: 'Biblioteci native proprii', cells: [
+    { verdict: 'bad', text: 'doar cele din SDK' },
+    { verdict: 'good', text: 'oricare' },
+    { verdict: 'good', text: 'oricare' },
+  ] },
+  { label: 'Fast Refresh', cells: [
+    { verdict: 'good', text: 'da' },
+    { verdict: 'good', text: 'da' },
+    { verdict: 'bad', text: 'nu' },
+  ] },
+  { label: 'Cum ajunge la altcineva', cells: [
+    { verdict: 'good', text: 'cod QR' },
+    { verdict: 'mixed', text: 'link de instalare' },
+    { verdict: 'mixed', text: 'prin magazin' },
+  ] },
+]" />
+
+<div v-click class="mt-6 text-xl">
+
+Lecțiile 1 până la 12 se fac în Expo Go. Development build apare în lecția 13, când
+avem nevoie de cameră și de permisiuni reale.
 
 </div>
 
@@ -562,16 +1292,57 @@ align: c
 
 :: title ::
 
-# Ce Rămâne De Reținut
+# Ce Face EAS
 
 :: content ::
 
 <div class="max-w-4xl mx-auto mt-10 text-left text-xl">
 
+**Expo Application Services** preia ce urmează după ce codul funcționează.
+
 <v-clicks>
 
-- Codul vostru rulează în **Hermes**, un JS engine din aplicație, nu într-un browser.
+- **EAS Build**: compilează în cloud și scoate `.aab` pentru Android și `.ipa` pentru
+  iOS. Fără Mac local.
+- **EAS Submit**: încarcă build-ul în Google Play și în App Store Connect, din
+  terminal.
+- **EAS Update**: trimite o versiune nouă de JavaScript direct în aplicațiile
+  instalate, fără să treacă prin revizuirea magazinelor.
+- **EAS Metadata**: ține descrierile și capturile de ecran din magazin în proiect, ca
+  orice alt fișier.
+
+</v-clicks>
+
+<div v-click class="mt-6">
+
+Al treilea punct are o limită importantă: se actualizează doar JavaScript. Dacă ați
+adăugat cod nativ, trebuie un build nou. Detaliile sunt în lecția 15.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Rămâne De Reținut
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+<v-clicks>
+
+- Un `<View>` devine `UIView` sau `android.view.View`. Nu există pagină și nu există DOM.
+- Codul vostru rulează în **Hermes**, un JS engine din aplicație. Limbajul este același
+  ca pe web, mediul din jurul lui nu.
 - **Metro** adună fișierele într-un bundle și trimite modificările la salvare.
+- Trei fire de execuție: **JS**, **shadow** și **UI**. Interfața există de trei ori.
 - **JSI** a înlocuit bridge-ul: apeluri directe, fără JSON, sincrone când trebuie.
 - **Fabric** randează, **Yoga** calculează layout-ul, **TurboModules** încarcă nativul
   la cerere.
@@ -579,7 +1350,7 @@ align: c
 
 </v-clicks>
 
-<div v-click class="mt-8">
+<div v-click class="mt-6">
 
 Lecția următoare intră în cod: componente, JSX și props.
 

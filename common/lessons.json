@@ -48,7 +48,7 @@
       "icon": "i-ph-cpu-duotone",
       "title": "Lecția 2: Cum funcționează React Native",
       "description": "New Architecture, JSI, Fabric, TurboModules, Metro și ecosistemul Expo.",
-      "published": true,
+      "published": false,
       "status": "ready"
     },
     {
