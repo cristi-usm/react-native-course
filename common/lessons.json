@@ -5,7 +5,7 @@
     {
       "id": 1,
       "icon": "i-ph-compass-duotone",
-      "title": "De la web la mobil"
+      "title": "Fundamente"
     },
     {
       "id": 2,
@@ -14,18 +14,18 @@
     },
     {
       "id": 3,
-      "icon": "i-ph-database-duotone",
-      "title": "Date și stare"
+      "icon": "i-ph-app-window-duotone",
+      "title": "Aplicații reale"
     },
     {
       "id": 4,
-      "icon": "i-ph-device-mobile-camera-duotone",
-      "title": "Capabilități native"
+      "icon": "i-ph-database-duotone",
+      "title": "Date"
     },
     {
       "id": 5,
-      "icon": "i-ph-rocket-launch-duotone",
-      "title": "Finisare și livrare"
+      "icon": "i-ph-paper-plane-tilt-duotone",
+      "title": "Nativ și livrare"
     }
   ],
   "lessons": [
@@ -36,18 +36,18 @@
       "module": 1,
       "icon": "i-ph-device-mobile-duotone",
       "title": "Lecția 1: Dezvoltarea aplicațiilor mobile",
-      "description": "Native, web și cross-platform. De ce React Native și ce promite.",
-      "published": true,
-      "status": "draft"
+      "description": "Native, web și cross-platform. De ce React Native, Expo și primul app pe telefon.",
+      "status": "draft",
+      "published": true
     },
     {
       "num": 2,
-      "slug": "02-recapitulare-js-si-react",
+      "slug": "02-javascript-si-typescript",
       "port": 3032,
       "module": 1,
       "icon": "i-ph-brackets-curly-duotone",
-      "title": "Lecția 2: Recapitulare JavaScript și React",
-      "description": "TypeScript, module, async și modelul de componente cu hooks.",
+      "title": "Lecția 2: JavaScript și TypeScript pentru React Native",
+      "description": "ES6+, module, async/await și tipurile care fac codul previzibil.",
       "published": false
     },
     {
@@ -57,17 +57,17 @@
       "module": 1,
       "icon": "i-ph-cpu-duotone",
       "title": "Lecția 3: Cum funcționează React Native",
-      "description": "New Architecture, JSI, Fabric, Metro și ecosistemul Expo.",
+      "description": "New Architecture, JSI, Fabric, TurboModules, Metro și ecosistemul Expo.",
       "published": false
     },
     {
       "num": 4,
-      "slug": "04-componente-de-baza",
+      "slug": "04-componente-jsx-si-props",
       "port": 3034,
       "module": 2,
       "icon": "i-ph-squares-four-duotone",
-      "title": "Lecția 4: Componente de bază",
-      "description": "View, Text, Image, Pressable și listele performante.",
+      "title": "Lecția 4: Componente, JSX și props",
+      "description": "Declarativ vs imperativ, View, Text, Image, props, children și randare condiționată.",
       "published": false
     },
     {
@@ -77,107 +77,107 @@
       "module": 2,
       "icon": "i-ph-paint-brush-duotone",
       "title": "Lecția 5: Stilizare și layout",
-      "description": "StyleSheet, flexbox, ecrane de dimensiuni diferite, safe area.",
+      "description": "StyleSheet, flexbox, safe area, diferențe între platforme și teme.",
       "published": false
     },
     {
       "num": 6,
-      "slug": "06-navigare",
+      "slug": "06-liste-si-interactiune",
       "port": 3036,
       "module": 2,
-      "icon": "i-ph-signpost-duotone",
-      "title": "Lecția 6: Navigare",
-      "description": "Expo Router, stack, tabs, parametri și deep linking.",
+      "icon": "i-ph-hand-tap-duotone",
+      "title": "Lecția 6: Liste și interacțiune",
+      "description": "FlatList și virtualizarea, Pressable, sistemul de atingeri și memoizarea.",
       "published": false
     },
     {
       "num": 7,
-      "slug": "07-formulare-si-tastatura",
+      "slug": "07-state",
       "port": 3037,
       "module": 2,
-      "icon": "i-ph-textbox-duotone",
-      "title": "Lecția 7: Formulare și tastatură",
-      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
+      "icon": "i-ph-toggle-left-duotone",
+      "title": "Lecția 7: State",
+      "description": "useState, render și commit, snapshot, batching, lifting state up.",
       "published": false
     },
     {
       "num": 8,
-      "slug": "08-cereri-catre-server",
+      "slug": "08-formulare-si-tastatura",
       "port": 3038,
       "module": 3,
-      "icon": "i-ph-cloud-arrow-down-duotone",
-      "title": "Lecția 8: Cereri către server",
-      "description": "fetch, stări de încărcare și eroare, cache cu TanStack Query.",
+      "icon": "i-ph-textbox-duotone",
+      "title": "Lecția 8: Formulare și tastatură",
+      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
       "published": false
     },
     {
       "num": 9,
-      "slug": "09-salvarea-datelor",
+      "slug": "09-efecte-si-refs",
       "port": 3039,
       "module": 3,
-      "icon": "i-ph-floppy-disk-duotone",
-      "title": "Lecția 9: Salvarea datelor pe dispozitiv",
-      "description": "AsyncStorage, SecureStore, SQLite și strategii offline-first.",
+      "icon": "i-ph-anchor-duotone",
+      "title": "Lecția 9: Efecte și refs",
+      "description": "useEffect și cleanup, useRef, refs pe componente native, AppState.",
       "published": false
     },
     {
       "num": 10,
-      "slug": "10-stare-globala-si-auth",
+      "slug": "10-navigare",
       "port": 3040,
       "module": 3,
-      "icon": "i-ph-users-three-duotone",
-      "title": "Lecția 10: Stare globală și autentificare",
-      "description": "Context, Zustand și un flux de login complet.",
+      "icon": "i-ph-signpost-duotone",
+      "title": "Lecția 10: Navigare",
+      "description": "Expo Router, stack, tabs, modale, parametri și deep linking.",
       "published": false
     },
     {
       "num": 11,
-      "slug": "11-camera-si-fisiere",
+      "slug": "11-stare-globala-si-auth",
       "port": 3041,
-      "module": 4,
-      "icon": "i-ph-camera-duotone",
-      "title": "Lecția 11: Camera și fișiere",
-      "description": "Permisiuni, camera, galeria și sistemul de fișiere.",
+      "module": 3,
+      "icon": "i-ph-users-three-duotone",
+      "title": "Lecția 11: Stare globală și autentificare",
+      "description": "useReducer, Context, Zustand, flux de login și rute protejate.",
       "published": false
     },
     {
       "num": 12,
-      "slug": "12-locatia",
+      "slug": "12-cereri-catre-server",
       "port": 3042,
       "module": 4,
-      "icon": "i-ph-map-pin-duotone",
-      "title": "Lecția 12: Locația și hărțile",
-      "description": "GPS, permisiuni de locație, hărți și geocodare.",
+      "icon": "i-ph-cloud-arrow-down-duotone",
+      "title": "Lecția 12: Cereri către server",
+      "description": "HTTP, fetch, de ce nu există CORS aici, stări de încărcare și TanStack Query.",
       "published": false
     },
     {
       "num": 13,
-      "slug": "13-notificari",
+      "slug": "13-date-locale-si-offline",
       "port": 3043,
       "module": 4,
-      "icon": "i-ph-bell-ringing-duotone",
-      "title": "Lecția 13: Notificări",
-      "description": "Notificări locale și push, tokenuri și tratarea lor.",
+      "icon": "i-ph-floppy-disk-duotone",
+      "title": "Lecția 13: Date locale și offline",
+      "description": "AsyncStorage, SecureStore, SQLite și strategii offline-first.",
       "published": false
     },
     {
       "num": 14,
-      "slug": "14-animatii-si-gesturi",
+      "slug": "14-capabilitati-native",
       "port": 3044,
       "module": 5,
-      "icon": "i-ph-sparkle-duotone",
-      "title": "Lecția 14: Animații și gesturi",
-      "description": "Reanimated, Gesture Handler și performanța percepută.",
+      "icon": "i-ph-device-mobile-camera-duotone",
+      "title": "Lecția 14: Capabilități native",
+      "description": "Permisiuni, camera, fișiere, locație și notificări.",
       "published": false
     },
     {
       "num": 15,
-      "slug": "15-build-si-distribuire",
+      "slug": "15-animatii-si-livrare",
       "port": 3045,
       "module": 5,
-      "icon": "i-ph-package-duotone",
-      "title": "Lecția 15: Build și distribuire",
-      "description": "EAS Build, semnare, magazinele de aplicații și OTA updates.",
+      "icon": "i-ph-rocket-launch-duotone",
+      "title": "Lecția 15: Animații, gesturi și livrare",
+      "description": "Reanimated, Gesture Handler, thread-uri, EAS Build, magazine și OTA updates.",
       "published": false
     }
   ]

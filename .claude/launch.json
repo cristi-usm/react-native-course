@@ -18,10 +18,10 @@
       "port": 3031
     },
     {
-      "name": "02-recapitulare-js-si-react",
+      "name": "02-javascript-si-typescript",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
-        "dev:02-recapitulare-js-si-react"
+        "dev:02-javascript-si-typescript"
       ],
       "port": 3032
     },
