@@ -1,0 +1,184 @@
+{
+  "$comment": "Single source of truth for the lesson structure. Read at build time by scripts/*.mjs and at runtime by common/lessons.ts. Adding an entry here makes the lesson appear on the hub grid and gives it a dev port.",
+  "repo": "https://github.com/cristi-usm/react-native-course",
+  "modules": [
+    {
+      "id": 1,
+      "icon": "i-ph-compass-duotone",
+      "title": "De la web la mobil"
+    },
+    {
+      "id": 2,
+      "icon": "i-ph-layout-duotone",
+      "title": "Interfața aplicației"
+    },
+    {
+      "id": 3,
+      "icon": "i-ph-database-duotone",
+      "title": "Date și stare"
+    },
+    {
+      "id": 4,
+      "icon": "i-ph-device-mobile-camera-duotone",
+      "title": "Capabilități native"
+    },
+    {
+      "id": 5,
+      "icon": "i-ph-rocket-launch-duotone",
+      "title": "Finisare și livrare"
+    }
+  ],
+  "lessons": [
+    {
+      "num": 1,
+      "slug": "01-dezvoltarea-aplicatiilor-mobile",
+      "port": 3031,
+      "module": 1,
+      "icon": "i-ph-device-mobile-duotone",
+      "title": "Lecția 1: Dezvoltarea aplicațiilor mobile",
+      "description": "Native, web și cross-platform. De ce React Native și ce promite.",
+      "published": true,
+      "status": "draft"
+    },
+    {
+      "num": 2,
+      "slug": "02-recapitulare-js-si-react",
+      "port": 3032,
+      "module": 1,
+      "icon": "i-ph-brackets-curly-duotone",
+      "title": "Lecția 2: Recapitulare JavaScript și React",
+      "description": "TypeScript, module, async și modelul de componente cu hooks.",
+      "published": false
+    },
+    {
+      "num": 3,
+      "slug": "03-cum-functioneaza-react-native",
+      "port": 3033,
+      "module": 1,
+      "icon": "i-ph-cpu-duotone",
+      "title": "Lecția 3: Cum funcționează React Native",
+      "description": "New Architecture, JSI, Fabric, Metro și ecosistemul Expo.",
+      "published": false
+    },
+    {
+      "num": 4,
+      "slug": "04-componente-de-baza",
+      "port": 3034,
+      "module": 2,
+      "icon": "i-ph-squares-four-duotone",
+      "title": "Lecția 4: Componente de bază",
+      "description": "View, Text, Image, Pressable și listele performante.",
+      "published": false
+    },
+    {
+      "num": 5,
+      "slug": "05-stilizare-si-layout",
+      "port": 3035,
+      "module": 2,
+      "icon": "i-ph-paint-brush-duotone",
+      "title": "Lecția 5: Stilizare și layout",
+      "description": "StyleSheet, flexbox, ecrane de dimensiuni diferite, safe area.",
+      "published": false
+    },
+    {
+      "num": 6,
+      "slug": "06-navigare",
+      "port": 3036,
+      "module": 2,
+      "icon": "i-ph-signpost-duotone",
+      "title": "Lecția 6: Navigare",
+      "description": "Expo Router, stack, tabs, parametri și deep linking.",
+      "published": false
+    },
+    {
+      "num": 7,
+      "slug": "07-formulare-si-tastatura",
+      "port": 3037,
+      "module": 2,
+      "icon": "i-ph-textbox-duotone",
+      "title": "Lecția 7: Formulare și tastatură",
+      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
+      "published": false
+    },
+    {
+      "num": 8,
+      "slug": "08-cereri-catre-server",
+      "port": 3038,
+      "module": 3,
+      "icon": "i-ph-cloud-arrow-down-duotone",
+      "title": "Lecția 8: Cereri către server",
+      "description": "fetch, stări de încărcare și eroare, cache cu TanStack Query.",
+      "published": false
+    },
+    {
+      "num": 9,
+      "slug": "09-salvarea-datelor",
+      "port": 3039,
+      "module": 3,
+      "icon": "i-ph-floppy-disk-duotone",
+      "title": "Lecția 9: Salvarea datelor pe dispozitiv",
+      "description": "AsyncStorage, SecureStore, SQLite și strategii offline-first.",
+      "published": false
+    },
+    {
+      "num": 10,
+      "slug": "10-stare-globala-si-auth",
+      "port": 3040,
+      "module": 3,
+      "icon": "i-ph-users-three-duotone",
+      "title": "Lecția 10: Stare globală și autentificare",
+      "description": "Context, Zustand și un flux de login complet.",
+      "published": false
+    },
+    {
+      "num": 11,
+      "slug": "11-camera-si-fisiere",
+      "port": 3041,
+      "module": 4,
+      "icon": "i-ph-camera-duotone",
+      "title": "Lecția 11: Camera și fișiere",
+      "description": "Permisiuni, camera, galeria și sistemul de fișiere.",
+      "published": false
+    },
+    {
+      "num": 12,
+      "slug": "12-locatia",
+      "port": 3042,
+      "module": 4,
+      "icon": "i-ph-map-pin-duotone",
+      "title": "Lecția 12: Locația și hărțile",
+      "description": "GPS, permisiuni de locație, hărți și geocodare.",
+      "published": false
+    },
+    {
+      "num": 13,
+      "slug": "13-notificari",
+      "port": 3043,
+      "module": 4,
+      "icon": "i-ph-bell-ringing-duotone",
+      "title": "Lecția 13: Notificări",
+      "description": "Notificări locale și push, tokenuri și tratarea lor.",
+      "published": false
+    },
+    {
+      "num": 14,
+      "slug": "14-animatii-si-gesturi",
+      "port": 3044,
+      "module": 5,
+      "icon": "i-ph-sparkle-duotone",
+      "title": "Lecția 14: Animații și gesturi",
+      "description": "Reanimated, Gesture Handler și performanța percepută.",
+      "published": false
+    },
+    {
+      "num": 15,
+      "slug": "15-build-si-distribuire",
+      "port": 3045,
+      "module": 5,
+      "icon": "i-ph-package-duotone",
+      "title": "Lecția 15: Build și distribuire",
+      "description": "EAS Build, semnare, magazinele de aplicații și OTA updates.",
+      "published": false
+    }
+  ]
+}

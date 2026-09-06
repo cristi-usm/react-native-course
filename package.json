@@ -1,18 +1,35 @@
 {
   "name": "react-native-course",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@11.20.0",
   "scripts": {
-    "build": "slidev build",
-    "dev": "slidev --open",
-    "export": "slidev export"
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:hub": "node scripts/dev.mjs hub",
+    "dev:01-dezvoltarea-aplicatiilor-mobile": "node scripts/dev.mjs 01-dezvoltarea-aplicatiilor-mobile",
+    "dev:02-recapitulare-js-si-react": "node scripts/dev.mjs 02-recapitulare-js-si-react",
+    "dev:03-cum-functioneaza-react-native": "node scripts/dev.mjs 03-cum-functioneaza-react-native",
+    "dev:04-componente-de-baza": "node scripts/dev.mjs 04-componente-de-baza",
+    "dev:05-stilizare-si-layout": "node scripts/dev.mjs 05-stilizare-si-layout",
+    "dev:06-navigare": "node scripts/dev.mjs 06-navigare",
+    "dev:07-formulare-si-tastatura": "node scripts/dev.mjs 07-formulare-si-tastatura",
+    "dev:08-cereri-catre-server": "node scripts/dev.mjs 08-cereri-catre-server",
+    "dev:09-salvarea-datelor": "node scripts/dev.mjs 09-salvarea-datelor",
+    "dev:10-stare-globala-si-auth": "node scripts/dev.mjs 10-stare-globala-si-auth",
+    "dev:11-camera-si-fisiere": "node scripts/dev.mjs 11-camera-si-fisiere",
+    "dev:12-locatia": "node scripts/dev.mjs 12-locatia",
+    "dev:13-notificari": "node scripts/dev.mjs 13-notificari",
+    "dev:14-animatii-si-gesturi": "node scripts/dev.mjs 14-animatii-si-gesturi",
+    "dev:15-build-si-distribuire": "node scripts/dev.mjs 15-build-si-distribuire",
+    "preview": "npx serve dist",
+    "sync-headmatter": "node scripts/sync-headmatter.mjs"
   },
   "dependencies": {
-    "@slidev/cli": "^52.1.0",
-    "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "latest",
+    "@slidev/cli": "^52.19.1",
     "slidev-addon-excalidraw": "^1.0.4",
-    "slidev-theme-neversink": "^0.3.6",
-    "vue": "^3.5.18"
+    "slidev-theme-neversink": "^0.4.1",
+    "vue": "^3.5.42"
   }
 }

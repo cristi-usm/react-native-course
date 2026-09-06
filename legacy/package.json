@@ -1,0 +1,18 @@
+{
+  "name": "react-native-course",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.1.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "slidev-addon-excalidraw": "^1.0.4",
+    "slidev-theme-neversink": "^0.3.6",
+    "vue": "^3.5.18"
+  }
+}

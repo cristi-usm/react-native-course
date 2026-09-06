@@ -1,0 +1,14 @@
+{
+  "name": "@react-native-course/common",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./lessons": "./lessons.ts",
+    "./lessons.json": "./lessons.json",
+    "./components/*": "./components/*",
+    "./setup/*": "./setup/*",
+    "./theme/*": "./theme/*",
+    "./vite/*": "./vite/*"
+  }
+}

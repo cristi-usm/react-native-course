@@ -1,17 +1,44 @@
-# Curs React Native
+# Dezvoltarea Aplicațiilor Mobile cu React Native
 
-Acesta este un curs complet de React Native construit cu [Slidev](https://github.com/slidevjs/slidev).
+Suportul de curs, construit cu [Slidev](https://sli.dev/). Fiecare lecție este o
+prezentare independentă, cu propriul server de dezvoltare.
 
-## Cum să începi
+## Pornire rapidă
 
-Pentru a porni prezentarea:
+```bash
+pnpm install
+pnpm dev            # toate prezentările
+pnpm dev:hub        # doar pagina principală, pe http://localhost:3030
+```
 
-- `pnpm install`
-- `pnpm dev`
-- vizitează <http://localhost:3030>
+Porturi: `3030` pentru hub, `3030 + numărul lecției` pentru fiecare lecție.
+Legăturile dintre prezentări duc la `localhost:<port>`, deci prezentarea spre care
+navigați trebuie să ruleze.
 
-Editează fișierul [slides.md](./slides.md) pentru a vedea modificările.
+## Structura
+
+| Cale | Conținut |
+|---|---|
+| `slides/00-hub/` | Pagina principală cu grila de lecții |
+| `slides/NN-.../` | Câte o prezentare pentru fiecare lecție |
+| `common/lessons.json` | Lista lecțiilor: numere, titluri, porturi, module |
+| `common/components/` | Componente Vue folosite în toate prezentările |
+| `scripts/` | Pornirea serverelor, build-ul și sincronizarea headmatter-ului |
+| `legacy/` | Versiunea veche a cursului, păstrată doar ca arhivă |
+
+Structura cursului se modifică într-un singur loc, `common/lessons.json`. Grila de pe
+pagina principală, navigarea dintre lecții și titlurile prezentărilor se generează din el.
+
+## Build
+
+```bash
+pnpm build          # totul în dist/
+pnpm preview
+```
+
+Site-ul se publică automat pe GitHub Pages la fiecare push pe `main`.
 
 ## Contribuții
 
-Dacă descoperi erori sau ai idei de îmbunătățire, contribuțiile sunt încurajate! Poți trimite pull request-uri cu modificările sugerate.
+Dacă descoperiți erori sau aveți idei de îmbunătățire, contribuțiile sunt încurajate.
+Puteți trimite pull request-uri cu modificările sugerate.

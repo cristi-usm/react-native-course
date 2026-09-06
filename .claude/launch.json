@@ -1,0 +1,48 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hub",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev:hub"
+      ],
+      "port": 3030
+    },
+    {
+      "name": "01-dezvoltarea-aplicatiilor-mobile",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev:01-dezvoltarea-aplicatiilor-mobile"
+      ],
+      "port": 3031
+    },
+    {
+      "name": "02-recapitulare-js-si-react",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev:02-recapitulare-js-si-react"
+      ],
+      "port": 3032
+    },
+    {
+      "name": "03-cum-functioneaza-react-native",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "dev:03-cum-functioneaza-react-native"
+      ],
+      "port": 3033
+    },
+    {
+      "name": "dist-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "serve",
+        "dist",
+        "-l",
+        "4173"
+      ],
+      "port": 4173
+    }
+  ]
+}
