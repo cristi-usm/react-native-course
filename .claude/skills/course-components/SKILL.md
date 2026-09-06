@@ -16,6 +16,7 @@ components are in the `slide-components` skill.
 | `<AxisMap :items :zones x-label y-label … />` | 2D map: two axes crossing, four named zones |
 | `<LogoWall :names [dir] [size] [dim] />` | Collage of logos from `public/icons/` |
 | `<ExpoPreview :code [platform] [height] />` | A live Expo Snack embed of a React Native example |
+| `<DinReact [label] />` | Aside for students who already took the React course |
 | `<FlowSteps :steps [caption] [size] />` | Horizontal pipeline: labelled nodes + animated arrows |
 | `<LessonGrid />` | Grid of all lessons, grouped by module (used by the hub) |
 | `<LessonCard slug="08-arrays" />` | A single card in that grid |
@@ -23,6 +24,34 @@ components are in the `slide-components` skill.
 | `<HomeButton />` | 🏠 back to the hub; rendered on every slide via `global-bottom.vue` |
 | `<GithubLink />` | Repository link icon (repo URL comes from `lessons.json`) |
 | `<SlideBottom />` | Page counter footer; rendered via each deck's `slide-bottom.vue` |
+
+---
+
+## `<DinReact>`
+
+Half the room took the React course and half did not. Every React notion is taught from
+scratch, in React Native; the delta from the web goes in this aside. Newcomers read the
+slide and skip the box, returning students read the box and skip the slide.
+
+```markdown
+<DinReact>
+
+`key` devine `keyExtractor`, iar `FlatList` nu randează toate elementele.
+
+</DinReact>
+
+<DinReact label="Din React Router">…</DinReact>
+```
+
+- ✅ **One or two sentences.** It is a margin note, not a second explanation
+- ✅ Say what *changes*, not what stays the same. "La fel ca pe web" is not worth a box
+- ✅ Blank lines inside the tags, or the markdown arrives as literal text
+- ❌ Content the newcomers also need — anything load-bearing goes on the slide
+- ❌ More than one per slide; two asides means the slide is really two slides
+
+The rail is cyan, deliberately **not** the deck's indigo. The aside has to read as a
+different voice from the slide around it; tinting it with the same hue as every heading
+makes it look like part of the argument rather than an interruption of it.
 
 ---
 

@@ -37,7 +37,7 @@
       "icon": "i-ph-device-mobile-duotone",
       "title": "Lecția 1: Dezvoltarea aplicațiilor mobile",
       "description": "Native, web și cross-platform. De ce React Native, Expo și primul app pe telefon.",
-      "status": "draft",
+      "status": "ready",
       "published": true
     },
     {
@@ -48,7 +48,8 @@
       "icon": "i-ph-cpu-duotone",
       "title": "Lecția 2: Cum funcționează React Native",
       "description": "New Architecture, JSI, Fabric, TurboModules, Metro și ecosistemul Expo.",
-      "published": false
+      "published": true,
+      "status": "ready"
     },
     {
       "num": 3,

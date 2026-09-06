@@ -19,13 +19,71 @@ draw:
 favicon: './react.svg'
 ---
 
-# Dezvoltarea aplicațiilor mobile
+# Dezvoltarea Aplicațiilor Mobile
 
-Native, web și cross-platform. De ce React Native, Expo și primul app pe telefon.
+Native, web și cross-platform. De unde vine React Native și ce promite.
 
 <div class="absolute top-2 right-2 w-8 h-8">
 
 <GithubLink />
+
+</div>
+
+---
+layout: center
+color: indigo-light
+---
+
+<div class="flex justify-center">
+
+<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="800px" textAlign="center" borderWidth="2px">
+
+<div class="text-6xl font-bold py-4">
+
+Câte aplicații ați deschis azi?
+
+</div>
+
+</SpeechBubble>
+
+</div>
+
+---
+layout: image
+image: /apps.png
+backgroundSize: contain
+---
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Fiecare Dintre Ele A Fost Scrisă De Două Ori
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+O companie care vrea aplicația pe ambele platforme are nevoie de două echipe, două
+limbaje, două seturi de unelte.
+
+<v-clicks>
+
+- **iOS**: Swift, Xcode, un Mac. Fără Mac nu se compilează.
+- **Android**: Kotlin, Android Studio, orice sistem de operare.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Aceeași funcționalitate, scrisă de două ori, testată de două ori, reparată de două ori.
+Un bug apare pe Android, se repară pe Android, iar peste o lună apare și pe iOS.
+
+</div>
 
 </div>
 
@@ -37,11 +95,447 @@ align: c
 
 :: title ::
 
-# Cuprins
+# Prima Soluție: Împachetăm Un Site
 
 :: content ::
 
-Deck-ul nu este încă scris.
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+O aplicație care conține un singur `WebView`, adică un browser fără butoane, care
+încarcă un site.
+
+<div class="mt-6">
+
+<FlowSteps color="indigo-light" :size="1.05" :steps="[
+  { label: 'HTML, CSS, JS', sub: 'o singură bază de cod', kind: 'file' },
+  { label: 'WebView', sub: 'browser fără butoane', emphasis: true },
+  { label: 'aplicație', sub: 'în magazin', kind: 'file', highlight: true },
+]" />
+
+</div>
+
+<div v-click class="mt-8">
+
+Funcționează, se scrie o singură dată, iar rezultatul se vede imediat. Problema apare
+când utilizatorul atinge ecranul: derularea are inerția browserului, nu a sistemului,
+tastatura acoperă câmpul în care scrie, iar animațiile se opresc cât timp se încarcă
+ceva.
+
+</div>
+
+<div v-click class="mt-6">
+
+Utilizatorul nu știe ce este un `WebView`. Simte doar că aplicația este *ieftină*.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# A Doua Soluție: Traducem Interfața
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+Scriem tot într-un singur limbaj, dar nu desenăm noi interfața. Îi cerem sistemului să
+o deseneze el, cu componentele lui.
+
+<div class="mt-8">
+
+<Definition term="Cross-platform nativ" source="Pe scurt" color="indigo-light" emphasis>
+
+O singură bază de cod care <mark>comandă</mark> componentele native ale fiecărei
+platforme, în loc să le imite.
+
+</Definition>
+
+</div>
+
+<div v-click class="mt-8">
+
+Butonul de pe iOS este un buton iOS adevărat. Pe Android este un buton Android
+adevărat. Codul care le cere să existe este același.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Cine Face Asta
+
+:: content ::
+
+<div class="mt-6">
+
+<AxisMap
+  color="indigo-light"
+  y-label="Interfața" y-min="framework" y-max="nativă"
+  x-label="Limbajul" x-min="nou" x-max="cunoscut"
+  :zones="[
+    'componente native · limbaj nou',
+    'componente native · limbaj cunoscut',
+    'desenată de framework · limbaj cunoscut',
+    'desenată de framework · limbaj nou',
+  ]"
+  :height="360"
+  :items="[
+    { x: 27, y: 68, label: 'Kotlin Multiplatform' },
+    { x: 73, y: 70, label: 'React Native', highlight: true },
+    { x: 29, y: 32, label: 'Flutter' },
+    { x: 74, y: 30, label: 'Ionic' },
+  ]"
+/>
+
+</div>
+
+<div class="mt-4 text-lg opacity-80">
+
+Poziționarea este editorială, nu măsurată. Rolul ei este să arate că există un
+compromis, nu să dea un clasament.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# React Native
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<Definition term="React Native" source="Pe scurt" color="indigo-light" emphasis>
+
+Un framework open-source, făcut de Meta, care construiește aplicații
+<mark>native</mark> pentru iOS și Android dintr-o singură bază de cod scrisă în
+JavaScript și React.
+
+</Definition>
+
+<div v-click class="mt-8">
+
+Un `<View>` scris de voi devine un `UIView` pe iOS și un `android.view.View` pe
+Android. Aplicația nu *arată* nativ. Este nativă.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Câștigați
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-8 text-left">
+
+<div class="grid grid-cols-2 gap-5">
+
+<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### O singură echipă
+
+Aceeași bază de cod pentru ambele platforme. Un bug se repară o dată.
+
+</div>
+
+<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Modificările se văd imediat
+
+Salvați fișierul și ecranul telefonului se actualizează în mai puțin de o secundă,
+fără recompilare.
+
+</div>
+
+<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Ecosistemul React
+
+Componente, hooks, state management. Tot ce se știe din React se transferă direct.
+
+</div>
+
+<div v-click class="p-5 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Ieșire spre nativ
+
+Când JavaScript nu ajunge, se scrie un modul în Swift sau Kotlin și se apelează din JS.
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Nu Câștigați
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+React Native nu este magie și nu este întotdeauna alegerea corectă.
+
+<v-clicks>
+
+- **Tot aveți nevoie de un Mac** pentru a publica pe iOS. Codul este comun, magazinul nu.
+- **Diferențele dintre platforme rămân**. Tastatura, notificările și permisiunile se
+  comportă altfel, iar codul trebuie să știe asta.
+- **Bibliotecile native sunt de calitate inegală**. Un pachet abandonat de doi ani
+  poate bloca o actualizare de versiune.
+- **Pentru jocuri sau prelucrare video** scrieți tot nativ. React Native nu este acolo.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Cursul acesta arată și unde se rupe, nu doar unde merge.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Expo
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+React Native gol înseamnă Xcode, Android Studio, SDK-uri și o zi bună de configurare
+înainte de primul ecran.
+
+<div class="mt-8">
+
+<Definition term="Expo" source="Pe scurt" color="indigo-light" emphasis>
+
+Un strat de unelte peste React Native: creează proiectul, îl rulează, îi dă acces la
+cameră și la notificări, și îl compilează <mark>în cloud</mark>.
+
+</Definition>
+
+</div>
+
+<div v-click class="mt-8">
+
+Cursul folosește Expo peste tot. Nu pentru că React Native gol ar fi greșit, ci pentru
+că nu vreau să pierdem primele două săptămâni instalând SDK-uri.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Primul Proiect
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left">
+
+```bash
+npx create-expo-app@latest prima-aplicatie
+cd prima-aplicatie
+npx expo start
+```
+
+<div v-click class="mt-6 text-xl">
+
+În terminal apare un cod QR. Îl scanați cu aplicația **Expo Go** de pe telefon, iar
+aplicația voastră pornește acolo, pe dispozitivul real, în câteva secunde.
+
+</div>
+
+<div v-click class="mt-6">
+
+<AdmonitionType type="tip" color="indigo-light">
+
+Telefonul și calculatorul trebuie să fie în aceeași rețea. Dacă rețeaua facultății
+blochează conexiunea, `npx expo start --tunnel` ocolește problema.
+
+</AdmonitionType>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Conține Proiectul
+
+:: content ::
+
+<div class="max-w-3xl mx-auto mt-8 text-left">
+
+```text
+prima-aplicatie/
+├── app/                 ecranele aplicației, câte un fișier pe ecran
+│   ├── _layout.tsx      ce le înconjoară pe toate
+│   └── index.tsx        primul ecran
+├── assets/              imagini și fonturi
+├── app.json             numele, iconița, permisiunile
+├── package.json         dependențele
+└── tsconfig.json        configurarea TypeScript
+```
+
+<div v-click class="mt-8 text-xl">
+
+Un fișier în `app/` înseamnă un ecran. Structura folderelor *este* navigarea, iar
+lecția 9 arată exact cum.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Primul Ecran
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-6 text-left">
+
+```tsx
+import { StyleSheet, Text, View } from 'react-native'
+
+export default function Index() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.titlu}>Bună ziua!</Text>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  titlu: { fontSize: 28, fontWeight: '600' },
+})
+```
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Trei Lucruri De Observat
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- **Nu există `<div>` și nu există `<p>`.** Există `<View>` și `<Text>`. Orice text
+  trebuie să stea într-un `<Text>`, altfel aplicația se oprește cu eroare.
+- **Stilurile sunt un obiect JavaScript**, nu un fișier CSS. Fără cascadă și fără
+  selectoare.
+- **`flex: 1` umple ecranul.** În React Native totul este flexbox, iar direcția
+  implicită este `column`, nu `row`.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Lecțiile 3 și 5 se ocupă de fiecare dintre ele pe rând.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Urmează
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+Astăzi am văzut *ce* face React Native. Lecția următoare arată *cum*: ce se întâmplă
+între `<View>`-ul scris de voi și pixelii de pe ecran, de ce există un bundler numit
+Metro și ce s-a schimbat în arhitectura nouă.
+
+<div class="mt-10">
+
+<AdmonitionType type="note" color="indigo-light">
+
+Până atunci: instalați **Expo Go** pe telefon și porniți proiectul de mai sus. Dacă
+vedeți "Bună ziua!" pe ecranul telefonului, sunteți pregătiți pentru lecția 2.
+
+</AdmonitionType>
+
+</div>
+
+</div>
 
 ---
 layout: center

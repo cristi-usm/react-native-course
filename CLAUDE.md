@@ -52,6 +52,20 @@ The exceptions are strings that are not prose: the generated headmatter (`info:`
 `lessons.json`, the `# == shared: … ==` marker that `sync-headmatter.mjs` searches for),
 code blocks, terminal output, and simulated UI.
 
+### Two audiences in one room
+
+Half the students took the React course and half did not. There is no recap lesson: every
+React notion is taught **from scratch, in React Native**, and what *changes* relative to
+the web goes in a `<DinReact>` aside. Newcomers read the slide and skip the box; returning
+students read the box and skip the slide.
+
+- ✅ The slide alone must teach the concept to somebody who has never seen React
+- ✅ The aside alone must be worth reading to somebody who knows React well
+- ❌ Load-bearing content inside a `<DinReact>` — it is optional by construction
+- ❌ "Ca în React, …" in slide prose; that sentence is the aside's job
+
+See the `course-components` skill for the component.
+
 ## 3. Slide titles — CRITICAL
 
 **A slide title contains only the title. Nothing else.**
@@ -277,6 +291,7 @@ In `common/components/`, auto-imported in every deck — **no import needed** in
 | `<GithubLink />` | Repository link icon (repo URL comes from `lessons.json`) |
 | `<SlideBottom />` | Page counter footer; rendered via each deck's `slide-bottom.vue` |
 | `<ExpoPreview :code platform height />` | A live Expo Snack running the example (§8) |
+| `<DinReact [label] />` | Aside for students who already took the React course (§2) |
 | `<Definition term="…" source="…" [emphasis] />` | A definition card — term, attribution, text |
 | `<Chip>React Native</Chip>` | A pill with an auto-resolved language/tool logo |
 | `<AxisMap :items :zones … />` | A 2D map: two axes crossing, four named zones |

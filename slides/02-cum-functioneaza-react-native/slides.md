@@ -19,13 +19,32 @@ draw:
 favicon: './react.svg'
 ---
 
-# Cum funcționează React Native
+# Cum Funcționează React Native
 
-New Architecture, JSI, Fabric, TurboModules, Metro și ecosistemul Expo.
+De la codul scris de voi până la pixelii de pe ecran.
 
 <div class="absolute top-2 right-2 w-8 h-8">
 
 <GithubLink />
+
+</div>
+
+---
+layout: center
+color: indigo-light
+---
+
+<div class="flex justify-center">
+
+<SpeechBubble position="b" color="indigo-light" shape="round" animation="float" maxWidth="820px" textAlign="center" borderWidth="2px">
+
+<div class="text-6xl font-bold py-4">
+
+Telefonul nu știe JavaScript. Cum ajunge codul vostru pe ecran?
+
+</div>
+
+</SpeechBubble>
 
 </div>
 
@@ -37,11 +56,536 @@ align: c
 
 :: title ::
 
-# Cuprins
+# Trei Lucruri Care Rulează În Același Timp
 
 :: content ::
 
-Deck-ul nu este încă scris.
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+O aplicație React Native nu este un singur program. Sunt trei fire de execuție, fiecare
+cu treaba lui.
+
+<v-clicks>
+
+- **JS thread**: rulează codul vostru. Componentele, state-ul, event handlers.
+- **UI thread**: desenează pe ecran și primește atingerile. Este singurul care are voie
+  să atingă interfața.
+- **Shadow thread**: calculează layout-ul, adică unde ajunge fiecare element.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Dacă JS thread se blochează cu un calcul lung, UI thread continuă să deseneze. De
+aceea aplicația rămâne fluidă chiar dacă codul vostru este ocupat, dar nu răspunde la
+atingeri.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Firele De Execuție
+
+:: content ::
+
+<img src="/allthreads.png" class="h-90 mx-auto mt-4 rounded-lg" alt="JS thread, shadow thread și UI thread rulând în paralel" />
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Unde Rulează JavaScript
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+Telefonul nu are un browser deschis. Aplicația conține un **JS engine** propriu, care
+execută codul vostru.
+
+<div class="mt-6">
+
+<FlowSteps color="indigo-light" :size="1.05" :steps="[
+  { label: 'index.tsx', sub: 'codul vostru', kind: 'file' },
+  { label: 'Metro', sub: 'bundler', via: 'transformă' },
+  { label: 'bundle.js', sub: 'un singur fișier', kind: 'file' },
+  { label: 'Hermes', sub: 'JS engine', emphasis: true, via: 'execută' },
+]" />
+
+</div>
+
+<div v-click class="mt-8">
+
+**Hermes** este motorul făcut de Meta special pentru mobil. Pornește mai repede decât
+alternativele pentru că pre-compilează codul la build, nu la deschiderea aplicației.
+
+</div>
+
+<DinReact>
+
+Rolul lui Metro este cel al lui Vite sau Webpack: adună modulele într-un bundle. Diferă
+ce iese la capăt, pentru că nu există un `index.html` care să încarce scriptul.
+
+</DinReact>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Face Metro
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- **Adună** toate fișierele importate într-un singur bundle.
+- **Transformă** JSX și TypeScript în JavaScript pe care motorul îl înțelege.
+- **Servește** bundle-ul aplicației, prin rețea, în timpul dezvoltării.
+- **Trimite modificările** când salvați un fișier, fără să repornească aplicația.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Ultimul punct este **Fast Refresh** și este motivul pentru care lucrul cu React Native
+nu doare. Salvați, iar ecranul telefonului se schimbă, păstrând state-ul.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Problema: Două Lumi Care Nu Se Înțeleg
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+Codul vostru rulează în JavaScript. Butonul pe care vrea să îl afișeze există în Swift
+sau în Kotlin. Cele două nu împart memoria și nu se pot apela direct.
+
+<div v-click class="mt-8">
+
+Toată istoria arhitecturii React Native este istoria acestei traduceri: cât de repede
+și cât de exact trece un mesaj dintr-o lume în cealaltă.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Arhitectura Veche: Bridge-ul
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+<img src="/bridge.png" class="h-58 mx-auto rounded-lg" alt="Bridge-ul dintre JavaScript și partea nativă" />
+
+<div class="mt-6 text-xl">
+
+Fiecare mesaj era **serializat în JSON**, trimis pe o coadă și deserializat de partea
+cealaltă. Complet asincron: JavaScript cerea ceva și nu putea afla răspunsul imediat.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# De Ce Era O Problemă
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- **Traficul era costisitor.** La o derulare rapidă, coada se umple cu mesaje de
+  poziție și rămâne în urmă.
+- **Nimic nu se putea măsura sincron.** Ca să afli lățimea unui element, trimiteai o
+  întrebare și așteptai răspunsul într-un callback.
+- **Interfața se putea desincroniza.** Elementul se mișca, dar eticheta lui ajungea un
+  cadru mai târziu.
+
+</v-clicks>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Se Vedea Cu Ochiul Liber
+
+:: content ::
+
+<div class="grid grid-cols-2 gap-10 max-w-4xl mx-auto mt-4">
+
+<div class="text-center">
+
+### Bridge
+
+<img src="/old-tooltip.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Eticheta rămâne în urma elementului" />
+
+Eticheta rămâne în urmă.
+
+</div>
+
+<div class="text-center">
+
+### JSI
+
+<img src="/new-tooltip.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Eticheta se mișcă odată cu elementul" />
+
+Se mișcă împreună.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Arhitectura Nouă: JSI
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<Definition term="JSI" source="JavaScript Interface" color="indigo-light" emphasis>
+
+Un strat în C++ care lasă JavaScript să <mark>apeleze direct</mark> funcții native,
+fără JSON și fără coadă de mesaje.
+
+</Definition>
+
+<div v-click class="mt-8">
+
+Un obiect nativ poate fi ținut în JavaScript ca orice alt obiect. Apelul este sincron
+când trebuie să fie sincron, iar mesajul nu mai trece prin serializare.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Stă Pe JSI
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-8 text-left">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="p-6 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Fabric
+
+Noul sistem de randare. Construiește arborele de elemente în C++, comun pentru ambele
+platforme, și îl poate actualiza sincron.
+
+</div>
+
+<div class="p-6 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### TurboModules
+
+Noile module native. Se încarcă **la prima folosire**, nu la pornirea aplicației, deci
+pornirea este mai rapidă.
+
+</div>
+
+</div>
+
+<div v-click class="mt-8 text-xl">
+
+Amândouă sunt implicite începând cu React Native 0.76. Nu trebuie activate, dar
+bibliotecile vechi care vorbeau direct cu bridge-ul trebuie actualizate.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Interfața Nu Se Mai Blochează
+
+:: content ::
+
+<div class="grid grid-cols-2 gap-10 max-w-4xl mx-auto mt-4">
+
+<div class="text-center">
+
+### Arhitectura veche
+
+<img src="/old-concurent.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Interfața se blochează în timpul unei actualizări mari" />
+
+O actualizare mare blochează tot.
+
+</div>
+
+<div class="text-center">
+
+### Arhitectura nouă
+
+<img src="/new-concurent.gif" class="mt-3 mx-auto rounded-lg w-44" alt="Interfața rămâne fluidă în timpul aceleiași actualizări" />
+
+Randarea poate fi întreruptă.
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 text-xl max-w-3xl mx-auto">
+
+Fabric aduce funcțiile concurente din React 18: o actualizare lungă poate fi
+întreruptă de una urgentă, cum este o atingere.
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Drumul Complet
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-10 text-left">
+
+<FlowSteps color="indigo-light" :size="1" :steps="[
+  { label: '<View>', sub: 'în componenta voastră', kind: 'file' },
+  { label: 'React', sub: 'ce s-a schimbat', via: 'reconciliere' },
+  { label: 'Shadow tree', sub: 'în C++', via: 'Fabric' },
+  { label: 'Yoga', sub: 'poziții și dimensiuni', via: 'layout' },
+  { label: 'UIView', sub: 'pe ecran', kind: 'file', highlight: true, via: 'montare' },
+]" />
+
+<div v-click class="mt-10 text-xl">
+
+**Yoga** este motorul de layout care implementează flexbox. Este scris în C++ și este
+același pe iOS și pe Android, de aceea aceleași stiluri dau același rezultat pe ambele
+platforme.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Expo Nu Este Un Framework Diferit
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+Expo nu înlocuiește React Native. Este React Native, plus uneltele din jur.
+
+<v-clicks>
+
+- **Expo SDK**: pachete pentru cameră, locație, notificări, fișiere. Toate versionate
+  împreună, deci compatibile între ele.
+- **Expo Go**: aplicația în care rulează proiectul vostru fără compilare proprie.
+- **EAS Build**: compilează pentru iOS și Android în cloud, deci fără Mac local.
+- **Expo Router**: navigarea pe bază de fișiere, din lecția 9.
+
+</v-clicks>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Expo Go Și Limitele Lui
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+<div class="grid grid-cols-2 gap-8 items-center">
+
+<div>
+
+<img src="/expo-go.png" class="rounded-lg w-full" alt="Aplicația Expo Go" />
+
+</div>
+
+<div class="text-xl">
+
+Expo Go conține deja compilate toate pachetele din SDK. De aceea proiectul pornește în
+câteva secunde.
+
+<div v-click class="mt-6">
+
+Limita apare când aveți nevoie de o bibliotecă nativă care **nu** este în SDK. Atunci
+construiți un *development build*, adică propriul vostru Expo Go, cu pachetele voastre
+înăuntru.
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Managed Sau Bare
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-8 text-left">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div class="p-6 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Managed
+
+Nu aveți folderele `ios/` și `android/`. Configurarea nativă se descrie în `app.json`,
+iar Expo o generează la build.
+
+**Cursul folosește varianta asta.**
+
+</div>
+
+<div class="p-6 rounded-xl border border-[var(--neversink-admon-border-color)]">
+
+### Bare
+
+Aveți folderele native în proiect și le editați direct. Control total, dar fiecare
+actualizare de versiune devine treaba voastră.
+
+</div>
+
+</div>
+
+<div v-click class="mt-8 text-xl">
+
+Trecerea de la managed la bare se face oricând cu `npx expo prebuild`. Invers nu, deci
+nu începeți cu bare "pentru orice eventualitate".
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Rămâne De Reținut
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-10 text-left text-xl">
+
+<v-clicks>
+
+- Codul vostru rulează în **Hermes**, un JS engine din aplicație, nu într-un browser.
+- **Metro** adună fișierele într-un bundle și trimite modificările la salvare.
+- **JSI** a înlocuit bridge-ul: apeluri directe, fără JSON, sincrone când trebuie.
+- **Fabric** randează, **Yoga** calculează layout-ul, **TurboModules** încarcă nativul
+  la cerere.
+- **Expo** este React Native plus unelte, nu o alternativă la el.
+
+</v-clicks>
+
+<div v-click class="mt-8">
+
+Lecția următoare intră în cod: componente, JSX și props.
+
+</div>
+
+</div>
 
 ---
 layout: center
