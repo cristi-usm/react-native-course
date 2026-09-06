@@ -16,8 +16,6 @@ export interface Lesson {
    * on the hub grid, but locked — the semester walks this flag forward.
    */
   published?: boolean
-  /** Moodle URL of the lab sheet (PDF). Absent while the sheet is not up yet. */
-  sheet?: string
 }
 
 export interface LessonModule {

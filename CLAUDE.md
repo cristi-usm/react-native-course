@@ -220,8 +220,8 @@ base. `common/lessons.ts` (`deckUrl`) is the only place that knows the differenc
 
 ### `common/lessons.json` is the single source of truth ⭐
 
-Lesson number, slug, port, module, icon, title, description, `published` and the
-lab `sheet` URL all live in this one file.
+Lesson number, slug, port, module, icon, title, description and `published` all live
+in this one file.
 `scripts/*.mjs` read it at build time; `common/lessons.ts` reads it at runtime. The hub
 grid, the prev/next `<DeckNav>` and the generated deck titles all derive from it.
 
@@ -283,7 +283,6 @@ In `common/components/`, auto-imported in every deck — **no import needed** in
 | `<LogoWall :names />` | A collage of logos from `common/public/icons/` |
 | `<FlowSteps :steps />` | A left-to-right pipeline of named stages |
 | `<Timeline :items />` | A dated sequence of events |
-| `<LabSheets />` | The list of lab sheets, one row per lesson |
 
 Props, the slide patterns each one belongs in, and how to write a new one: the
 **`course-components`** skill. Read it before using `<Definition>` or adding anything to
