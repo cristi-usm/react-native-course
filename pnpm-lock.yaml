@@ -31,11 +31,11 @@ importers:
 
   slides/03-componente-jsx-si-props: {}
 
-  slides/04-stilizare-si-layout: {}
+  slides/04-state-si-interactiune: {}
 
-  slides/05-liste-si-interactiune: {}
+  slides/05-stilizare-si-layout: {}
 
-  slides/06-state: {}
+  slides/06-liste-si-performanta: {}
 
   slides/07-formulare-si-tastatura: {}
 
