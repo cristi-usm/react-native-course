@@ -27,33 +27,33 @@ importers:
 
   slides/01-dezvoltarea-aplicatiilor-mobile: {}
 
-  slides/02-javascript-si-typescript: {}
+  slides/02-cum-functioneaza-react-native: {}
 
-  slides/03-cum-functioneaza-react-native: {}
+  slides/03-componente-jsx-si-props: {}
 
-  slides/04-componente-jsx-si-props: {}
+  slides/04-stilizare-si-layout: {}
 
-  slides/05-stilizare-si-layout: {}
+  slides/05-liste-si-interactiune: {}
 
-  slides/06-liste-si-interactiune: {}
+  slides/06-state: {}
 
-  slides/07-state: {}
+  slides/07-formulare-si-tastatura: {}
 
-  slides/08-formulare-si-tastatura: {}
+  slides/08-efecte-si-refs: {}
 
-  slides/09-efecte-si-refs: {}
+  slides/09-navigare: {}
 
-  slides/10-navigare: {}
+  slides/10-stare-globala-si-auth: {}
 
-  slides/11-stare-globala-si-auth: {}
+  slides/11-cereri-catre-server: {}
 
-  slides/12-cereri-catre-server: {}
+  slides/12-date-locale-si-offline: {}
 
-  slides/13-date-locale-si-offline: {}
+  slides/13-permisiuni-camera-si-fisiere: {}
 
-  slides/14-capabilitati-native: {}
+  slides/14-locatie-si-notificari: {}
 
-  slides/15-animatii-si-livrare: {}
+  slides/15-animatii-gesturi-si-livrare: {}
 
 packages:
 

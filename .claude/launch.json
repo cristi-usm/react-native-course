@@ -18,18 +18,18 @@
       "port": 3031
     },
     {
-      "name": "02-javascript-si-typescript",
+      "name": "02-cum-functioneaza-react-native",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
-        "dev:02-javascript-si-typescript"
+        "dev:02-cum-functioneaza-react-native"
       ],
       "port": 3032
     },
     {
-      "name": "03-cum-functioneaza-react-native",
+      "name": "03-componente-jsx-si-props",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
-        "dev:03-cum-functioneaza-react-native"
+        "dev:03-componente-jsx-si-props"
       ],
       "port": 3033
     },
