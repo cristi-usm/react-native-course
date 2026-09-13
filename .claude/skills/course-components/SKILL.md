@@ -23,6 +23,7 @@ components are in the `slide-components` skill.
 | `<DinReact [label] />` | Aside for students who already took the React course |
 | `<FlowSteps :steps [caption] [size] />` | Horizontal pipeline: labelled nodes + animated arrows |
 | `<LayerStack :layers [caption] [size] />` | Vertical stack: your code on top, the platform below |
+| `<ThreadRoles :threads [caption] [size] />` | One card per thread: its job, and what it is allowed to touch |
 | `<ThreadLanes :lanes [:boundaries] [caption] [size] />` | Threads as vertical lanes, and the seam between them |
 | `<ArchMap [variant] [focus-seam] [caption] [size] />` | The architecture map: bridge, or JSI + Fabric + TurboModules |
 | `<RuntimeMap title engine [:parts] [:panels] [emphasis] />` | A JS runtime: the engine, and what the host wraps it in |
@@ -292,10 +293,43 @@ follows from the question the slide answers:
 
 | The slide asks | Shape | Component |
 |---|---|---|
+| Who does what? | cards in a row | `<ThreadRoles>` |
 | Where does this thing live? | lanes, side by side | `<ThreadLanes>` |
 | How is the whole system wired? | boxes and seams | `<ArchMap>` |
 | What is inside the runtime? | nested containment | `<RuntimeMap>` |
 | What happens, in what order? | a trace down the page | `<CallTrace>` |
+
+---
+
+## `<ThreadRoles>`
+
+The cast list: one card per thread, saying what that thread's job is. The slide *before*
+`<ThreadLanes>`, answering the question a student has first — who does what — where the
+lanes answer where things live.
+
+```markdown
+<ThreadRoles :threads="[
+  { title: 'UI thread', note: 'iOS și Android', alias: 'main thread',
+    role: 'Desenează pe ecran și primește atingerile.', owns: ['pixeli', 'atingeri'] },
+  { title: 'JS thread', note: 'Hermes', emphasis: true,
+    role: 'Rulează codul vostru.', owns: ['componente', 'state', 'event handlers'] },
+]" />
+```
+
+- `title` and `note` mean exactly what they mean in `<ThreadLanes>` — the thread, and who
+  runs it. ✅ **Name the same threads the same way, in the same order, on both slides.**
+  The lanes picture is then recognisable as these cards, the way the second `<AppWall>`
+  is recognisable as the first
+- `owns` is why the component exists: a thread is defined by what it is allowed to touch.
+  Chips, because it is a set rather than a clause, and three short rows are compared at a
+  glance where three paragraphs are not
+- `role` is **one sentence**. Anything longer belongs in the paragraph under the row
+- `alias` carries a second name (`main thread`) without spending a line of the role on it
+- `emphasis` = the thread the slide is about, normally the JS thread
+- ✅ Two or three cards, side by side. They run *at the same time*, which is precisely
+  what a vertical bulleted list denies
+- ❌ Not for a sequence of steps, and not for threads' contents; that is `<CallTrace>`
+  and `<ThreadLanes>`
 
 ---
 

@@ -48,8 +48,8 @@
       "icon": "i-ph-cpu-duotone",
       "title": "Lecția 2: Cum funcționează React Native",
       "description": "New Architecture, JSI, Fabric, TurboModules, Metro și ecosistemul Expo.",
-      "published": false,
-      "status": "ready"
+      "status": "ready",
+      "published": true
     },
     {
       "num": 3,
@@ -59,7 +59,8 @@
       "icon": "i-ph-squares-four-duotone",
       "title": "Lecția 3: Componente, JSX și props",
       "description": "Declarativ vs imperativ, View, Text, Image, props, children și randare condiționată.",
-      "published": false
+      "status": "ready",
+      "published": true
     },
     {
       "num": 4,

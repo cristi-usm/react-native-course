@@ -17,6 +17,16 @@
  * the distinction without a legend. A `side` note is written to the right of a
  * layer, on its own line, joined by a short rule.
  *
+ * `beside` puts a second block on the same row, sharing the width:
+ *
+ *   { label: 'UIView', sub: 'pe iOS', kind: 'native', side: 'Swift',
+ *     beside: { label: 'android.view.View', sub: 'pe Android', kind: 'native' } }
+ *
+ * Use it where the two blocks are alternatives rather than a sequence — one
+ * `<View>` becomes *either* a `UIView` *or* an `android.view.View`, never one on
+ * top of the other, and a column of four would say the opposite. A split row has
+ * no room for a rule to the right, so each block's `side` note moves inside it.
+ *
  * The stack is a column of blocks rather than an SVG so a layer can hold a
  * `<code>` name at the deck's own type size and still wrap on a narrow slide.
  */
@@ -30,6 +40,8 @@ export interface Layer {
   kind?: 'js' | 'bridge' | 'native'
   /** The layer the slide is about: accent border, filled. */
   emphasis?: boolean
+  /** A second block sharing this row: the two are alternatives, not a sequence. */
+  beside?: Layer
 }
 
 withDefaults(
@@ -57,19 +69,24 @@ withDefaults(
       class="ns-stack__row"
       :style="{ animationDelay: `${i * 0.05}s` }"
     >
-      <div
-        :class="[
-          'ns-stack__block',
-          `ns-stack__block--${layer.kind ?? 'js'}`,
-          { 'ns-stack__block--on': layer.emphasis },
-        ]"
-      >
-        <div class="ns-stack__label">{{ layer.label }}</div>
-        <div v-if="layer.sub" class="ns-stack__sub">{{ layer.sub }}</div>
+      <div :class="['ns-stack__blocks', { 'ns-stack__blocks--split': layer.beside }]">
+        <div
+          v-for="(block, j) in layer.beside ? [layer, layer.beside] : [layer]"
+          :key="j"
+          :class="[
+            'ns-stack__block',
+            `ns-stack__block--${block.kind ?? 'js'}`,
+            { 'ns-stack__block--on': block.emphasis },
+          ]"
+        >
+          <div class="ns-stack__label">{{ block.label }}</div>
+          <div v-if="block.sub" class="ns-stack__sub">{{ block.sub }}</div>
+          <div v-if="layer.beside && block.side" class="ns-stack__side-in">{{ block.side }}</div>
+        </div>
       </div>
       <div class="ns-stack__side">
-        <span v-if="layer.side" class="ns-stack__rule" />
-        <span v-if="layer.side" class="ns-stack__side-text">{{ layer.side }}</span>
+        <span v-if="!layer.beside && layer.side" class="ns-stack__rule" />
+        <span v-if="!layer.beside && layer.side" class="ns-stack__side-text">{{ layer.side }}</span>
       </div>
     </div>
     <div v-if="caption" class="ns-stack__caption">{{ caption }}</div>
@@ -90,6 +107,17 @@ withDefaults(
   align-items: center;
   gap: 0.5rem;
   animation: ns-stack-in 0.4s ease-out both;
+}
+
+.ns-stack__blocks {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.5rem;
+}
+
+/* Two alternatives, side by side and equal: neither is the other's base. */
+.ns-stack__blocks--split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ns-stack__block {
@@ -139,6 +167,14 @@ withDefaults(
   font-size: calc(var(--ns-stack-size) * 0.72);
   line-height: 1.3;
   opacity: 0.7;
+}
+
+/* A split row has no right-hand column, so attribution sits inside the block. */
+.ns-stack__side-in {
+  margin-top: 0.25rem;
+  font-size: calc(var(--ns-stack-size) * 0.68);
+  line-height: 1.3;
+  opacity: 0.6;
 }
 
 .ns-stack__side {

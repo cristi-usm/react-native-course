@@ -11,27 +11,40 @@ import LessonCard from './LessonCard.vue'
  * name: the heading becomes a placeholder bar, same rule as the cards. The
  * module titles would otherwise announce the whole semester's subjects on the
  * first day, which is exactly what the locked cards avoid.
+ *
+ * There are more modules than columns, so the grid is `COLUMNS` groups rather
+ * than `MODULES.length` columns: the overflow stacks under the last group
+ * instead of wrapping to a second row, where a lone module would sit under the
+ * first column with three empty cells beside it.
  */
-const columns = computed(() =>
-  MODULES.map(module => {
+const COLUMNS = 4
+
+const groups = computed(() => {
+  const blocks = MODULES.map(module => {
     const lessons = lessonsOfModule(module.id)
     return { module, lessons, revealed: lessons.some(isPublished) }
   })
-)
+
+  const out: (typeof blocks)[] = Array.from({ length: COLUMNS }, () => [])
+  blocks.forEach((block, i) => out[Math.min(i, COLUMNS - 1)].push(block))
+  return out.filter(group => group.length > 0)
+})
 </script>
 
 <template>
-  <div class="lesson-grid">
-    <div v-for="column in columns" :key="column.module.id" class="lesson-column">
-      <div class="lesson-column-head" :class="{ unrevealed: !column.revealed }">
-        <span
-          class="lesson-column-icon"
-          :class="column.revealed ? column.module.icon : 'i-ph-circle-dashed-duotone'"
-        />
-        <span v-if="column.revealed" class="lesson-column-title">{{ column.module.title }}</span>
-        <span v-else class="lesson-column-title-skeleton" :aria-label="`Modulul ${column.module.id}`" />
+  <div class="lesson-grid" :style="{ gridTemplateColumns: `repeat(${groups.length}, minmax(0, 1fr))` }">
+    <div v-for="(group, i) in groups" :key="i" class="lesson-group">
+      <div v-for="column in group" :key="column.module.id" class="lesson-column">
+        <div class="lesson-column-head" :class="{ unrevealed: !column.revealed }">
+          <span
+            class="lesson-column-icon"
+            :class="column.revealed ? column.module.icon : 'i-ph-circle-dashed-duotone'"
+          />
+          <span v-if="column.revealed" class="lesson-column-title">{{ column.module.title }}</span>
+          <span v-else class="lesson-column-title-skeleton" :aria-label="`Modulul ${column.module.id}`" />
+        </div>
+        <LessonCard v-for="lesson in column.lessons" :key="lesson.slug" :slug="lesson.slug" />
       </div>
-      <LessonCard v-for="lesson in column.lessons" :key="lesson.slug" :slug="lesson.slug" />
     </div>
   </div>
 </template>
@@ -39,10 +52,19 @@ const columns = computed(() =>
 <style scoped>
 .lesson-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Column count is bound inline, from the group count: one source of truth. */
   gap: 0.6rem;
   align-items: start;
   text-align: left;
+}
+
+.lesson-group {
+  display: flex;
+  flex-direction: column;
+  /* Between two modules sharing a column: wide enough that the second heading
+     reads as a new module, not as another card. */
+  gap: 1.1rem;
+  min-width: 0;
 }
 
 .lesson-column {

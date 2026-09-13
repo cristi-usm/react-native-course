@@ -78,6 +78,7 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
           <span class="ns-arch__arrow-rail" />
           <span class="ns-arch__arrow-head" />
         </span>
+        <span class="ns-arch__arrow-name ns-arch__ghost" aria-hidden="true">Metro</span>
       </div>
 
       <div class="ns-arch__frame ns-arch__frame--js">
@@ -90,8 +91,11 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 
       <div class="ns-arch__seam">
         <span class="ns-arch__cross">
-          <span class="ns-arch__cross-label">{{ variant === 'bridge' ? 'JSON' : 'apel direct' }}</span>
+          <span class="ns-arch__cross-label">{{ variant === 'bridge' ? 'JSON' : 'direct' }}</span>
           <span class="ns-arch__cross-rail" />
+          <span class="ns-arch__cross-label ns-arch__ghost" aria-hidden="true">
+            {{ variant === 'bridge' ? 'JSON' : 'direct' }}
+          </span>
         </span>
 
         <div v-if="variant === 'bridge'" class="ns-arch__diamond">
@@ -106,8 +110,11 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
         </div>
 
         <span class="ns-arch__cross">
-          <span class="ns-arch__cross-label">{{ variant === 'bridge' ? 'JSON' : 'apel direct' }}</span>
+          <span class="ns-arch__cross-label">{{ variant === 'bridge' ? 'JSON' : 'direct' }}</span>
           <span class="ns-arch__cross-rail" />
+          <span class="ns-arch__cross-label ns-arch__ghost" aria-hidden="true">
+            {{ variant === 'bridge' ? 'JSON' : 'direct' }}
+          </span>
         </span>
       </div>
 
@@ -121,9 +128,11 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 
       <!-- Codegen: the one arrow that runs at build time, under the whole row. -->
       <div v-if="variant === 'jsi'" class="ns-arch__codegen">
-        <span class="ns-arch__codegen-rail" />
         <span class="ns-arch__codegen-label">codegen: tipurile devin interfețe native</span>
-        <span class="ns-arch__arrow-head" />
+        <span class="ns-arch__codegen-line">
+          <span class="ns-arch__codegen-rail" />
+          <span class="ns-arch__arrow-head" />
+        </span>
       </div>
     </div>
 
@@ -188,6 +197,9 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   grid-row: 2;
   grid-column: 5;
 }
+/* Through to the seam: codegen turns the types next to React into the native
+   interfaces TurboModules expose, so the arrow has to arrive somewhere. Stopping
+   it under the JS thread left it pointing at nothing. */
 .ns-arch__codegen {
   grid-row: 3;
   grid-column: 1 / 5;
@@ -199,7 +211,7 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   position: relative;
   border: 1.5px solid var(--neversink-border-color);
   border-radius: 0.7rem;
-  padding: 1.15rem 0.6rem 0.6rem;
+  padding: 1.7em 0.6em 0.6em;
   background: color-mix(in srgb, var(--neversink-admon-bg-color) 45%, transparent);
   display: flex;
   flex-direction: column;
@@ -208,13 +220,13 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 }
 
 .ns-arch__shadow {
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.5em;
 }
 
 .ns-arch__frame-name {
   position: absolute;
-  top: 0.3rem;
-  left: 0.6rem;
+  top: 0.45em;
+  left: 0.7em;
   font-size: 0.6em;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -229,13 +241,13 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   width: 100%;
   border: 1.5px dashed var(--neversink-admon-border-color);
   border-radius: 0.5rem;
-  padding: 1rem 0.45rem 0.45rem;
+  padding: 1.6em 0.45em 0.45em;
 }
 
 .ns-arch__engine-name {
   position: absolute;
-  top: 0.18rem;
-  left: 0.45rem;
+  top: 0.3em;
+  left: 0.6em;
   font-family: monospace;
   font-size: 0.6em;
   opacity: 0.7;
@@ -283,6 +295,15 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   opacity: 0.8;
 }
 
+/* A counterweight, not content: same box, no ink, hidden from screen readers.
+   A label stacked above a rail makes the column centre the pair rather than the
+   rail, so every labelled arrow lands below the midline of the boxes it joins
+   while the unlabelled ones stay on it. Repeating the label invisibly under the
+   rail puts the rail back on centre. */
+.ns-arch__ghost {
+  visibility: hidden;
+}
+
 /* Build-time arrows: Metro across the top, codegen along the bottom. */
 .ns-arch__metro {
   display: flex;
@@ -304,9 +325,11 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   align-items: center;
 }
 
+/* `em`, like every other length here: a rail fixed in `rem` keeps its length
+   while `size` scales the boxes around it, and the arrow slowly stops reaching. */
 .ns-arch__arrow-rail {
   display: block;
-  width: 1.9rem;
+  width: 1.6em;
   height: 3px;
   background: var(--neversink-fg-color);
   opacity: 0.85;
@@ -324,9 +347,15 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 
 .ns-arch__codegen {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
+  margin-top: 0.6em;
+}
+
+.ns-arch__codegen-line {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .ns-arch__codegen-rail {
@@ -346,15 +375,21 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   font-weight: 700;
   letter-spacing: 0.03em;
   opacity: 0.75;
-  white-space: nowrap;
+  margin-bottom: 0.15em;
+  text-align: center;
 }
 
 /* Yoga's answer coming down into the renderer. */
+/* The drop from the shadow thread to the row below. Its length is in `em`, so
+   it scales with the map's own `size`; in `rem` it stayed short while everything
+   around it grew, and the arrow ended in mid-air inside its own frame instead of
+   arriving at what it points to. The negative margin matches, so the arrow hangs
+   outside the frame without adding height to the row. */
 .ns-arch__drop {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: -0.9rem;
+  margin-bottom: -2.4em;
 }
 
 .ns-arch__drop-note {
@@ -366,7 +401,7 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 
 .ns-arch__drop-rail {
   width: 3px;
-  height: 0.9rem;
+  height: 2.4em;
   background: var(--neversink-border-color);
   opacity: 0.7;
 }
@@ -395,7 +430,7 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   flex-direction: column;
   align-items: center;
   flex: 0 0 auto;
-  width: 3.4rem;
+  width: 4.2em;
 }
 
 .ns-arch__cross-label {
@@ -412,6 +447,35 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   position: relative;
   width: 100%;
   height: 3px;
+}
+
+/* A head at each end, because the crossing runs both ways: JavaScript asks the
+   platform to do something, and the platform answers with touches and events.
+   Without them the seam is two lines stopping in mid-air. */
+.ns-arch__cross-rail::before,
+.ns-arch__cross-rail::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0.38em;
+  height: 0.38em;
+  border-top: 2.5px solid var(--neversink-border-color);
+  border-right: 2.5px solid var(--neversink-border-color);
+}
+
+.ns-arch__cross-rail::before {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.ns-arch__cross-rail::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.ns-arch--jsi .ns-arch__cross-rail::before,
+.ns-arch--jsi .ns-arch__cross-rail::after {
+  border-color: var(--neversink-fg-color);
 }
 
 /* Serialized and queued: dashes that drift, so the seam reads as a conveyor. */
@@ -451,12 +515,17 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   transform: translateY(-50%) rotate(45deg);
 }
 
+/* A square turned 45°. Flex lays it out by its *untransformed* box, so the
+   rotated tips stick out by (√2 − 1) / 2 of its side on each edge and sit on top
+   of the rails that are supposed to meet them. The margin buys that back, so the
+   seam ends exactly at the tip instead of running under the diamond. */
 .ns-arch__diamond {
   display: grid;
   place-items: center;
   flex: none;
   width: 4.4em;
   height: 4.4em;
+  margin: 0 0.92em;
   transform: rotate(45deg);
   border: 2px solid var(--neversink-fg-color);
   background: var(--neversink-admon-bg-color);
@@ -477,6 +546,18 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   width: 8.5em;
 }
 
+/* The two teeth close the block: top one rounds the top-right corner, bottom
+   one the bottom-right, and only the divider between them stays. */
+.ns-arch__tooth:first-child {
+  border-bottom-width: 1px;
+  border-radius: 0 0.4rem 0 0;
+}
+
+.ns-arch__tooth:last-child {
+  border-top-width: 1px;
+  border-radius: 0 0 0.4rem 0;
+}
+
 .ns-arch__spine-bar {
   display: grid;
   place-items: center;
@@ -492,11 +573,15 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
   letter-spacing: 0.08em;
 }
 
+/* No gap between the teeth: a slit between them showed the slide through the
+   middle of the hub, so JSI read as a bar with two loose boxes stuck to it
+   rather than as one piece the way the Bridge diamond does. They share an
+   internal rule instead. */
 .ns-arch__teeth {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.2rem;
+  gap: 0;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -504,9 +589,8 @@ const shadowOver = computed(() => (props.variant === 'bridge' ? 'ui' : 'seam'))
 .ns-arch__tooth {
   border: 2px solid var(--neversink-fg-color);
   border-left: none;
-  border-radius: 0 0.4rem 0.4rem 0;
   background: #fff;
-  padding: 0.3em 0.35em;
+  padding: 0.35em 0.35em;
   font-size: 0.62em;
   font-weight: 700;
   text-align: center;
