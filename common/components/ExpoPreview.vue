@@ -18,7 +18,7 @@
  *
  * `deviceFrame` draws a phone outline around the preview.
  */
-import { ref, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue';
 
 const props = defineProps({
     code: {
@@ -72,6 +72,13 @@ const props = defineProps({
         default: ""
     },
 });
+
+/**
+ * `embed.js` runs `decodeURIComponent` over `data-snack-code`, so a bare `%` in
+ * the example (`width: '100%'`) throws `URIError: malformed URI sequence` and the
+ * embed never boots. Call sites pass plain source, so the encoding happens here.
+ */
+const encodedCode = computed(() => encodeURIComponent(props.code));
 
 const containerRef = ref(null);
 const isVisible = ref(false);
@@ -211,7 +218,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div ref="containerRef" :data-snack-code="code" :data-snack-dependencies="dependencies" :data-snack-name="name"
+    <div ref="containerRef" :data-snack-code="encodedCode" :data-snack-dependencies="dependencies" :data-snack-name="name"
         :data-snack-description="description" :data-snack-preview="preview" :data-snack-platform="platform"
         :data-snack-supportedplatforms="supportedPlatforms" :data-snack-device-frame="deviceFrame"
         :data-snack-id="snackId || undefined" :style="{

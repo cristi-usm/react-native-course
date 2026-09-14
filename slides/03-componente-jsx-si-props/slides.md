@@ -21,7 +21,7 @@ favicon: './react.svg'
 
 # Componente, JSX și props
 
-Declarativ vs imperativ, View, Text, Image, props, children și randare condiționată.
+Vocabularul din care se construiește orice ecran.
 
 <div class="absolute top-2 right-2 w-8 h-8">
 
@@ -37,11 +37,2306 @@ align: c
 
 :: title ::
 
-# Cuprins
+# Două Feluri De A Cere Un Ecran
 
 :: content ::
 
-Deck-ul nu este încă scris.
+<div class="max-w-6xl mx-auto mt-4 text-left">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+**Imperativ**: dați instrucțiuni, pas cu pas.
+
+<div class="mt-2 mb-3">
+
+<Chip icon="kotlin">Kotlin, Android nativ</Chip>
+
+</div>
+
+```kotlin
+val titlu = findViewById<TextView>(R.id.titlu)
+titlu.text = "Bună ziua!"
+titlu.textSize = 28f
+titlu.visibility = View.VISIBLE
+
+val buton = findViewById<Button>(R.id.buton)
+buton.setOnClickListener { titlu.text = "Salut!" }
+```
+
+</div>
+
+<div v-click>
+
+**Declarativ**: descrieți rezultatul.
+
+<div class="mt-2 mb-3">
+
+<Chip icon="react" emphasis>React Native</Chip>
+
+</div>
+
+```jsx
+<View>
+  <Text style={{ fontSize: 28 }}>
+    {mesaj}
+  </Text>
+  <Button title="Salută" onPress={saluta} />
+</View>
+```
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 text-xl">
+
+În primul caz voi țineți minte în ce stare se află ecranul și îl corectați de fiecare
+dată. În al doilea caz spuneți cum trebuie să arate, iar React se ocupă de diferența
+dintre ce este pe ecran acum și ce ați descris.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Ce Este O Componentă
+
+:: content ::
+
+<div class="max-w-4xl mx-auto mt-8 text-left text-xl">
+
+<Definition term="Componentă" source="Pe scurt" color="indigo-light" emphasis>
+
+O funcție JavaScript care primește date și întoarce <mark>descrierea unei bucăți de
+interfață</mark>. O apelați scriind-o ca pe un tag.
+
+</Definition>
+
+<div v-click class="mt-8">
+
+Nu este o clasă, nu este un fișier de layout și nu este un template. Este o funcție
+obișnuită, cu o singură regulă în plus: numele ei începe cu literă mare.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Prima Componentă
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+// App.js
+import { View, Text } from 'react-native';
+
+// o componentă: funcție cu nume cu literă mare
+export default function App() {
+  return (
+    <View>
+      <Text>Bună ziua!</Text>
+    </View>
+  );
+}
+```
+
+<div v-click class="mt-6 text-xl">
+
+Trei lucruri, în ordine: importați componentele din `react-native`, scrieți funcția,
+exportați-o. Expo pornește aplicația de la componenta exportată cu `export default`.
+
+</div>
+
+<div v-click class="mt-6">
+
+<DinReact>
+
+Același `export default function App()` ca pe web, doar că nu mai există
+`ReactDOM.createRoot`. Expo montează componenta rădăcină singur.
+
+</DinReact>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Regulile JSX
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left text-xl">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+**Un singur element rădăcină.** Două elemente alăturate nu se pot întoarce. Le învelim
+într-un `<View>` sau într-un fragment `<>...</>`.
+
+**Acolade pentru expresii.** `{nume}`, `{2 + 2}`, `{lista.map(...)}`. Orice expresie
+JavaScript, nu instrucțiuni.
+
+</div>
+
+<div v-click>
+
+**Tag-uri închise.** `<Image />`, nu `<Image>`.
+
+**Nume scrise camelCase.** `onPress`, `keyboardType`, `resizeMode`.
+
+**Comentarii în acolade.** `{/* explicație */}`.
+
+</div>
+
+</div>
+
+<div v-click class="mt-6">
+
+```jsx
+return (
+  <View>
+    {/* expresie, nu instrucțiune */}
+    <Text>{'Bună, ' + nume}</Text>
+    <Image source={{ uri: adresa }} style={{ width: 80, height: 80 }} />
+  </View>
+);
+```
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# JSX Nu Este HTML
+
+:: content ::
+
+<div class="max-w-3xl mx-auto mt-4 text-left">
+
+<LayerStack color="indigo-light" :size="1.02" :layers="[
+  { label: '<View>', sub: 'JSX, ce scrieți voi', kind: 'js' },
+  { label: 'element React', sub: 'un obiect obișnuit: tip, props, children', kind: 'bridge', emphasis: true },
+  { label: 'UIView / ViewGroup', sub: 'obiectul nativ de pe ecran', kind: 'native' },
+]" />
+
+<div v-click class="mt-6 text-xl">
+
+Nu există `div`, `span`, `p`, `button` sau `ul`. Nu pentru că ar fi interzise, ci pentru
+că nu există nimic care să le traducă: telefonul nu are un motor de randare HTML.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Props
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+<Definition term="Props" source="Pe scurt" color="indigo-light" emphasis>
+
+Datele pe care o componentă le primește de la părintele ei. Le citește, dar
+<mark>nu le poate schimba</mark>.
+
+</Definition>
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+
+<div>
+
+```jsx
+// componenta primește props
+function Salut({ nume, varsta }) {
+  return (
+    <Text>
+      {nume}, {varsta} ani
+    </Text>
+  );
+}
+```
+
+</div>
+
+<div v-click>
+
+```jsx
+// părintele le trimite
+<Salut nume="Ana" varsta={21} />
+```
+
+Textul se trimite între ghilimele, orice altceva între acolade: număr, obiect, listă,
+`true`, funcție.
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Props Cu Valori Implicite
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+```jsx
+function Eticheta({ text, marime = 16, activ = false }) {
+  return (
+    <Text style={{ fontSize: marime, opacity: activ ? 1 : 0.5 }}>
+      {text}
+    </Text>
+  );
+}
+
+// activ fără valoare înseamnă true
+<Eticheta text="Titlu" marime={24} activ />
+// marime 16, activ false
+<Eticheta text="Subtitlu" />
+```
+
+<div v-click class="mt-6 text-xl">
+
+Valorile implicite se scriu direct în destructurare. Este locul în care se vede
+contractul componentei: ce trebuie dat și ce se poate omite.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Props Care Sunt Funcții
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+function ButonSters({ onSterge }) {
+  return (
+    <Pressable onPress={onSterge}>
+      <Text>Șterge</Text>
+    </Pressable>
+  );
+}
+
+<ButonSters onSterge={() => console.log('s-a apăsat')} />
+```
+
+<div v-click class="mt-6 text-xl">
+
+Copilul nu știe ce se întâmplă la apăsare, doar că trebuie să anunțe pe cineva. Datele
+coboară prin props, evenimentele urcă prin funcții. Este singurul drum de întoarcere
+dintr-o componentă spre părintele ei.
+
+</div>
+
+<div v-click class="mt-6">
+
+<DinReact>
+
+Aceeași convenție ca pe web, alt nume: `onClick` devine `onPress`, iar handler-ul nu
+primește un `event` cu `target` și `preventDefault`.
+
+</DinReact>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Children
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+<div class="grid grid-cols-2 gap-6">
+
+<div>
+
+```jsx
+function Card({ children }) {
+  return (
+    <View style={stiluri.card}>
+      {children}
+    </View>
+  );
+}
+```
+
+</div>
+
+<div v-click>
+
+```jsx
+<Card>
+  <Text>Ana Popescu</Text>
+  <Text>Grupa TI-231</Text>
+</Card>
+```
+
+</div>
+
+</div>
+
+<div v-click class="mt-6 text-xl">
+
+`children` este ce ați scris între tag-ul de deschidere și cel de închidere. Așa se
+scriu componentele-container: cardul decide rama, apelantul decide conținutul, iar cele
+două nu trebuie să știe nimic una despre cealaltă.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Randare Condiționată
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+function Profil({ utilizator, seIncarca }) {
+  if (seIncarca) return <ActivityIndicator />;      // ieșire devreme
+
+  return (
+    <View>
+      {/* afișează insigna sau nimic */}
+      {utilizator.premium && <Insigna />}
+      <Text>{utilizator.nume ? utilizator.nume : 'Anonim'}</Text>
+    </View>
+  );
+}
+```
+
+<div v-click class="mt-6">
+
+<Admonition title="Capcana lui 0" color="red-light" width="100%">
+
+`{mesaje.length && <Text>Ai mesaje</Text>}` întoarce `0` când lista este goală, iar `0`
+nu este `false`, este un număr. Aplicația se oprește cu eroarea "Text strings must be rendered within
+a &lt;Text&gt; component". Scrieți `{mesaje.length > 0 && ...}`.
+
+</Admonition>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Liste Din Date
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+const studenti = [
+  { id: 1, nume: 'Ana' },
+  { id: 2, nume: 'Mihai' },
+];
+
+<View>
+  {studenti.map((student) => (
+    <Text key={student.id}>{student.nume}</Text>
+  ))}
+</View>
+```
+
+<div v-click class="mt-6 text-xl">
+
+`key` este identitatea elementului între două randări. Fără ea, React nu poate ști dacă
+un element s-a mutat sau s-a schimbat. Indexul din listă nu este o identitate: se
+schimbă când ștergeți primul element.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Merge pentru zece rânduri. Pentru o mie există `FlatList`, peste câteva slide-uri.
+
+</div>
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# Containere Și Text
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `View`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left text-xl">
+
+Containerul. Dreptunghiul din care se construiește orice ecran: grupează, poziționează,
+primește fundal, margini și colțuri rotunjite.
+
+<div class="grid grid-cols-2 gap-6 mt-6">
+
+<div v-click>
+
+**Particularități**
+
+- nu poate conține text direct
+- nu are scroll
+- este `flex` implicit, pe verticală
+- nu are stiluri moștenite de la părinte
+
+</div>
+
+<div v-click>
+
+```jsx
+<View style={{ padding: 16, backgroundColor: '#eef' }}>
+  <Text>Primul rând</Text>
+  <Text>Al doilea rând</Text>
+</View>
+```
+
+</div>
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `View` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 12, paddingTop: 56 }}>
+      {/* container simplu: fundal, padding, colțuri rotunjite */}
+      <View style={{ padding: 16, backgroundColor: '#eef', borderRadius: 12 }}>
+        <Text>Primul rând</Text>
+        <Text>Al doilea rând</Text>
+      </View>
+
+      {/* același View, dar așezat pe orizontală */}
+      <View style={{ flexDirection: 'row', gap: 8 }}>
+        <View style={{ flex: 1, height: 64, backgroundColor: '#c7d2fe', borderRadius: 8 }} />
+        <View style={{ flex: 2, height: 64, backgroundColor: '#a5b4fc', borderRadius: 8 }} />
+      </View>
+
+      {/* schimbați flexDirection sau flex și priviți ce se întâmplă */}
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="View" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Text`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left text-xl">
+
+Singurul loc în care poate exista text. Se poate imbrica, iar stilul părintelui se
+transmite copiilor, ceea ce nu se întâmplă nicăieri altundeva în React Native.
+
+<div v-click class="mt-6">
+
+```jsx
+<Text style={{ fontSize: 18 }}>
+  Un student <Text style={{ fontWeight: 'bold' }}>important</Text> din grupă
+</Text>
+```
+
+</div>
+
+<div v-click class="mt-6">
+
+Props utile: `numberOfLines={2}` taie textul lung, `ellipsizeMode` alege unde apar
+punctele de suspensie, `selectable` permite copierea, iar `onPress` funcționează direct
+pe text.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Text` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 16, paddingTop: 56 }}>
+      {/* stilul părintelui se transmite copiilor: doar la Text */}
+      <Text style={{ fontSize: 18, color: '#3730a3' }}>
+        Un student <Text style={{ fontWeight: 'bold' }}>important</Text> din grupă
+      </Text>
+
+      {/* textul lung tăiat la două rânduri */}
+      <Text numberOfLines={2} style={{ fontSize: 16 }}>
+        Acesta este un text foarte lung care nu încape pe două rânduri și va fi tăiat
+        cu puncte de suspensie la sfârșit, exact așa cum cere numberOfLines.
+      </Text>
+
+      {/* textul poate fi apăsat direct */}
+      <Text
+        onPress={() => alert('ați apăsat textul')}
+        style={{ color: '#4f46e5', textDecorationLine: 'underline' }}
+      >
+        Apăsați-mă
+      </Text>
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Text" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Text În Afara Lui `Text`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-6 text-left">
+
+```jsx
+<View>
+  Bună ziua!
+</View>
+```
+
+<div v-click class="mt-6">
+
+<Admonition title="Eroare la rulare" color="red-light" width="100%">
+
+`Text strings must be rendered within a <Text> component.`
+
+</Admonition>
+
+</div>
+
+<div v-click class="mt-6 text-xl">
+
+Nu este o recomandare de stil, este o eroare care oprește aplicația. Pe Android un
+`ViewGroup` chiar nu are cum să afișeze un șir de caractere: are nevoie de un
+`TextView`. Aceeași greșeală apare și indirect, prin `{0}` sau `{undefined + ''}`.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Image`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+// imagine din proiect: dimensiunile se știu la bundling
+<Image source={require('./assets/logo.png')} />
+
+// imagine de pe internet: dimensiunile sunt obligatorii
+<Image
+  source={{ uri: 'https://example.com/poza.jpg' }}
+  style={{ width: 120, height: 120, borderRadius: 60 }}
+  resizeMode="cover"
+/>
+```
+
+<div v-click class="mt-6 text-xl">
+
+O imagine remote fără `width` și `height` ocupă zero pixeli și pare că nu s-a încărcat.
+Este cea mai frecventă greșeală a începătorilor.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`resizeMode`: `cover` umple și taie, `contain` încape întreagă, `stretch` deformează.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Image` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text, Image } from 'react-native';
+
+const poza = 'https://picsum.photos/id/1025/400/300';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 12, paddingTop: 56 }}>
+      {/* rotundă: lățime = înălțime, borderRadius jumătate */}
+      <Image
+        source={{ uri: poza }}
+        style={{ width: 120, height: 120, borderRadius: 60 }}
+      />
+
+      <Text>cover: umple și taie</Text>
+      <Image source={{ uri: poza }} resizeMode="cover"
+        style={{ width: '100%', height: 80, backgroundColor: '#eee' }} />
+
+      <Text>contain: încape întreagă</Text>
+      <Image source={{ uri: poza }} resizeMode="contain"
+        style={{ width: '100%', height: 80, backgroundColor: '#eee' }} />
+
+      {/* ștergeți width și height de mai jos: imaginea dispare */}
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Image" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `ScrollView`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+<ScrollView style={{ flex: 1 }} contentContainerStyle={{ padding: 16 }}>
+  <Text>Un text lung...</Text>
+  <Text>...care nu încape pe ecran</Text>
+</ScrollView>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Două stiluri, nu unul: `style` descrie fereastra prin care priviți, iar
+`contentContainerStyle` descrie conținutul care se mișcă pe sub ea. Centrarea și
+`padding` merg pe al doilea.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`ScrollView` are nevoie de o înălțime delimitată. Dacă uitați `flex: 1` pe un părinte,
+scroll-ul pur și simplu nu pornește. Și randează toți copiii deodată, deci nu îl folosiți
+pentru liste lungi.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `ScrollView` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { ScrollView, View, Text } from 'react-native';
+
+const randuri = Array.from({ length: 30 }, (_, i) => 'Rândul ' + (i + 1));
+
+export default function App() {
+  return (
+    // style = fereastra, contentContainerStyle = conținutul care se mișcă
+    <ScrollView
+      style={{ flex: 1, backgroundColor: '#f6f6fa' }}
+      contentContainerStyle={{ padding: 16, paddingTop: 56, gap: 8 }}
+    >
+      {randuri.map((text) => (
+        <View key={text} style={{ padding: 14, backgroundColor: 'white', borderRadius: 10 }}>
+          <Text>{text}</Text>
+        </View>
+      ))}
+    </ScrollView>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="ScrollView" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Marginile Ecranului
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left text-xl">
+
+Ecranul fizic este mai mare decât zona utilizabilă: decupajul camerei, bara de status,
+bara de gesturi de jos.
+
+<div v-click class="mt-6">
+
+```jsx
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+<SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+  <Text>Nu intru sub decupaj</Text>
+</SafeAreaView>
+```
+
+</div>
+
+<div v-click class="mt-6">
+
+Folosiți versiunea din `react-native-safe-area-context`, nu `SafeAreaView` din
+`react-native`: acela funcționează doar pe iOS. Pachetul vine deja instalat în proiectele
+Expo.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Zona Sigură În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text } from 'react-native';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      {/* fundalul roșu arată cât ocupă zona nesigură */}
+      <View style={{ flex: 1, backgroundColor: '#fecaca' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} edges={['top', 'bottom']}>
+          <Text style={{ padding: 16, fontSize: 18 }}>
+            Nu intru sub decupaj
+          </Text>
+        </SafeAreaView>
+      </View>
+    </SafeAreaProvider>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="SafeArea" />
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# Liste
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `FlatList`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+<FlatList
+  data={studenti}
+  keyExtractor={(item) => item.id.toString()}
+  renderItem={({ item }) => <Text>{item.nume}</Text>}
+  ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+  ListEmptyComponent={<Text>Nu există studenți</Text>}
+/>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Diferența față de `.map()` într-un `ScrollView`: `FlatList` ține montate doar elementele
+vizibile și câteva în jur. O listă de zece mii de rânduri consumă cât una de
+douăzeci.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`key` nu se pune pe element, ci se calculează cu `keyExtractor`. Vom intra mai târziu în
+detalii de performanță.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `FlatList` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { FlatList, View, Text } from 'react-native';
+
+const studenti = Array.from({ length: 200 }, (_, i) => ({
+  id: String(i + 1),
+  nume: 'Student ' + (i + 1),
+}));
+
+export default function App() {
+  return (
+    <FlatList
+      style={{ flex: 1, backgroundColor: '#f6f6fa' }}
+      contentContainerStyle={{ padding: 16, paddingTop: 56 }}
+      data={studenti}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <View style={{ padding: 14, backgroundColor: 'white', borderRadius: 10 }}>
+          <Text>{item.nume}</Text>
+        </View>
+      )}
+      ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+      ListEmptyComponent={<Text>Nu există studenți</Text>}
+    />
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="FlatList" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `SectionList`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+const sectiuni = [
+  { title: 'Anul I', data: ['Ana', 'Mihai'] },
+  { title: 'Anul II', data: ['Elena'] },
+];
+
+<SectionList
+  sections={sectiuni}
+  keyExtractor={(item, index) => item + index}
+  renderItem={({ item }) => <Text>{item}</Text>}
+  renderSectionHeader={({ section }) => <Text>{section.title}</Text>}
+/>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Aceeași virtualizare, altă formă a datelor: o listă de secțiuni, fiecare cu propriul
+`data`. Headerele pot rămâne lipite sus în timpul scroll-ului.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `SectionList` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { SectionList, View, Text } from 'react-native';
+
+const sectiuni = [
+  { title: 'Anul I', data: ['Ana', 'Mihai', 'Cristina'] },
+  { title: 'Anul II', data: ['Elena', 'Radu'] },
+  { title: 'Anul III', data: ['Ion'] },
+];
+
+export default function App() {
+  return (
+    <SectionList
+      style={{ flex: 1, backgroundColor: '#f6f6fa' }}
+      contentContainerStyle={{ padding: 16, paddingTop: 56 }}
+      sections={sectiuni}
+      keyExtractor={(item, index) => item + index}
+      renderItem={({ item }) => (
+        <View style={{ padding: 12, backgroundColor: 'white' }}>
+          <Text>{item}</Text>
+        </View>
+      )}
+      renderSectionHeader={({ section }) => (
+        <Text style={{ paddingVertical: 8, fontWeight: '600', backgroundColor: '#f6f6fa' }}>
+          {section.title}
+        </Text>
+      )}
+      stickySectionHeadersEnabled
+    />
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="SectionList" />
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# Interacțiune Și Input
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Pressable`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+<Pressable
+  onPress={() => console.log('apăsat')}
+  onLongPress={() => console.log('ținut apăsat')}
+  hitSlop={8}
+  style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}
+>
+  <Text>Salvează</Text>
+</Pressable>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Orice element devine apăsabil dacă îl înveliți într-un `Pressable`. `style` poate fi o
+funcție care primește starea apăsării, deci feedback-ul vizual nu are nevoie de state.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`hitSlop` mărește zona sensibilă fără a mări elementul. Un deget nu este un cursor de
+mouse: sub 44 de puncte, oamenii ratează ținta.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Pressable` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text, Pressable } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 16, paddingTop: 56 }}>
+      {/* style primește starea apăsării: feedback fără state */}
+      <Pressable
+        onPress={() => alert('apăsat')}
+        onLongPress={() => alert('ținut apăsat')}
+        hitSlop={8}
+        style={({ pressed }) => ({
+          padding: 14,
+          borderRadius: 10,
+          alignItems: 'center',
+          backgroundColor: pressed ? '#3730a3' : '#4f46e5',
+          opacity: pressed ? 0.9 : 1,
+        })}
+      >
+        <Text style={{ color: 'white', fontWeight: '600' }}>Salvează</Text>
+      </Pressable>
+
+      {/* orice devine apăsabil dacă îl înveliți */}
+      <Pressable onPress={() => alert('cardul a fost apăsat')}>
+        <View style={{ padding: 16, backgroundColor: '#eef', borderRadius: 10 }}>
+          <Text>Un card întreg, apăsabil</Text>
+        </View>
+      </Pressable>
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Pressable" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Button`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+<Button title="Trimite" onPress={trimite} color="#4f46e5" />
+```
+
+<div v-click class="mt-6 text-xl">
+
+Două props și gata. Nu primește `style`, nu primește copii, nu îi puteți schimba forma,
+iar pe iOS arată ca un text albastru, pe Android ca un dreptunghi plin.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Este util doar cât timp învățați sau testați ceva repede. În aplicații reale se folosește
+`Pressable`, pentru că butonul trebuie să arate ca restul aplicației, nu ca sistemul.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Button` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text, Button, Alert } from 'react-native';
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 16, paddingTop: 56 }}>
+      <Button title="Trimite" onPress={() => Alert.alert('Trimis')} color="#4f46e5" />
+      <Button title="Dezactivat" onPress={() => {}} disabled />
+
+      <Text style={{ fontSize: 13, opacity: 0.6 }}>
+        Comutați între tab-urile iOS și Android: același cod, două aspecte complet
+        diferite. Nu primește style și nu primește children.
+      </Text>
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Button" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `TextInput`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+<TextInput
+  value={email}
+  onChangeText={setEmail}
+  placeholder="email@usm.md"
+  keyboardType="email-address"
+  autoCapitalize="none"
+  secureTextEntry={false}
+/>
+```
+
+<div v-click class="mt-6 text-xl">
+
+`onChangeText` primește direct șirul de caractere, nu un eveniment. `keyboardType`
+schimbă tastatura pe care o vede utilizatorul, iar `autoCapitalize="none"` salvează orice
+câmp de email de la prima literă mare.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Pe Android câmpul are o linie dedesubt implicit, pe iOS nu are nimic. Un input care arată
+la fel pe ambele platforme trebuie stilizat de voi. Formularele vin mai târziu.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `TextInput` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { useState } from 'react';
+import { View, Text, TextInput } from 'react-native';
+
+export default function App() {
+  const [email, setEmail] = useState('');
+  const [parola, setParola] = useState('');
+
+  return (
+    <View style={{ flex: 1, padding: 16, gap: 12, paddingTop: 56 }}>
+      <TextInput
+        value={email}
+        onChangeText={setEmail}
+        placeholder="email@usm.md"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        style={{ borderWidth: 1, borderColor: '#c7d2fe', borderRadius: 10, padding: 12 }}
+      />
+      <TextInput
+        value={parola}
+        onChangeText={setParola}
+        placeholder="Parolă"
+        secureTextEntry
+        style={{ borderWidth: 1, borderColor: '#c7d2fe', borderRadius: 10, padding: 12 }}
+      />
+
+      {/* valoarea trăiește în componentă, nu în input */}
+      <Text>Ați scris: {email}</Text>
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="TextInput" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Switch` Și `RefreshControl`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+// un comutator: nu are stare proprie, o primește
+<Switch value={notificari} onValueChange={setNotificari} />
+
+// trage în jos ca să reîncarci
+<FlatList
+  data={date}
+  renderItem={randeazaRand}
+  refreshControl={
+    <RefreshControl refreshing={seIncarca} onRefresh={reincarca} />
+  }
+/>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Amândouă sunt componente controlate: nu rețin nimic, afișează valoarea pe care o primesc
+și anunță când utilizatorul cere o schimbare. Cine schimbă valoarea este treaba voastră,
+data viitoare.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Comutator Și Reîncărcare În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { useState } from 'react';
+import { View, Text, Switch, FlatList, RefreshControl } from 'react-native';
+
+export default function App() {
+  const [notificari, setNotificari] = useState(false);
+  const [seIncarca, setSeIncarca] = useState(false);
+  const [date, setDate] = useState(['Primul mesaj']);
+
+  function reincarca() {
+    setSeIncarca(true);
+    // simulăm o cerere de rețea
+    setTimeout(() => {
+      setDate((v) => ['Mesaj nou ' + (v.length + 1), ...v]);
+      setSeIncarca(false);
+    }, 1200);
+  }
+
+  return (
+    <View style={{ flex: 1, paddingTop: 56 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, padding: 16 }}>
+        <Text>Notificări</Text>
+        <Switch value={notificari} onValueChange={setNotificari} />
+        <Text>{notificari ? 'pornite' : 'oprite'}</Text>
+      </View>
+
+      {/* trageți lista în jos ca să reîncărcați */}
+      <FlatList
+        data={date}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => <Text style={{ padding: 16 }}>{item}</Text>}
+        refreshControl={
+          <RefreshControl refreshing={seIncarca} onRefresh={reincarca} />
+        }
+      />
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Switch" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `KeyboardAvoidingView`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+<KeyboardAvoidingView
+  style={{ flex: 1 }}
+  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+>
+  <TextInput placeholder="Mesaj" />
+</KeyboardAvoidingView>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Tastatura acoperă jumătate de ecran, inclusiv câmpul în care scrieți. Componenta ridică
+conținutul cu exact înălțimea tastaturii.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`behavior` diferă pe platforme pentru că tastatura este raportată diferit de fiecare
+sistem. Este una dintre puținele componente unde `Platform.OS` este scuzat și chiar
+recomandat în documentație.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `KeyboardAvoidingView` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { KeyboardAvoidingView, View, Text, TextInput, Platform } from 'react-native';
+
+export default function App() {
+  return (
+    <KeyboardAvoidingView
+      style={{ flex: 1, paddingTop: 56 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
+      <View style={{ flex: 1, padding: 16 }}>
+        <Text>Conținutul ecranului</Text>
+      </View>
+
+      {/* câmpul lipit de jos: fără componentă, tastatura l-ar acoperi */}
+      <TextInput
+        placeholder="Mesaj"
+        style={{ margin: 16, padding: 12, borderWidth: 1, borderColor: '#c7d2fe', borderRadius: 10 }}
+      />
+    </KeyboardAvoidingView>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="KeyboardAvoidingView" />
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# Feedback Și Suprapuneri
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Modal`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+<Modal
+  visible={deschis}
+  animationType="slide"
+  transparent
+  onRequestClose={() => setDeschis(false)}
+>
+  <View style={stiluri.fundal}>
+    <View style={stiluri.cutie}>
+      <Text>Ștergeți nota?</Text>
+    </View>
+  </View>
+</Modal>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Un ecran desenat peste tot restul. `onRequestClose` este obligatoriu pe Android: butonul
+fizic de întoarcere trece prin el, iar fără el modalul nu se închide.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Modal` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { useState } from 'react';
+import { Modal, View, Text, Button } from 'react-native';
+
+export default function App() {
+  const [deschis, setDeschis] = useState(false);
+
+  return (
+    <View style={{ flex: 1, padding: 16, paddingTop: 56 }}>
+      <Button title="Deschide" onPress={() => setDeschis(true)} />
+
+      <Modal
+        visible={deschis}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setDeschis(false)}
+      >
+        {/* fundalul întunecat face parte din conținutul modalului */}
+        <View style={{ flex: 1, justifyContent: 'center', padding: 24,
+                       backgroundColor: 'rgba(0,0,0,0.4)' }}>
+          <View style={{ padding: 20, borderRadius: 14, backgroundColor: 'white', gap: 12 }}>
+            <Text style={{ fontSize: 18 }}>Ștergeți nota?</Text>
+            <Button title="Închide" onPress={() => setDeschis(false)} />
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Modal" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Alert`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+import { Alert } from 'react-native';
+
+Alert.alert(
+  'Ștergere',
+  'Sigur ștergeți nota?',
+  [
+    { text: 'Anulează', style: 'cancel' },
+    { text: 'Șterge', style: 'destructive', onPress: sterge },
+  ],
+);
+```
+
+<div v-click class="mt-6 text-xl">
+
+`Alert` nu este o componentă, este o funcție pe care o chemați. Nu îl scrieți în JSX și
+nu îi controlați aspectul: dialogul este desenat de sistem, deci arată exact ca în restul
+telefonului.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Pe web ar fi echivalentul lui `window.confirm`, doar că nu blochează firul de execuție.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Alert` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { View, Button, Alert } from 'react-native';
+
+export default function App() {
+  function intreaba() {
+    // nu este JSX: este o funcție pe care o chemați
+    Alert.alert('Ștergere', 'Sigur ștergeți nota?', [
+      { text: 'Anulează', style: 'cancel' },
+      { text: 'Șterge', style: 'destructive', onPress: () => Alert.alert('Șters') },
+    ]);
+  }
+
+  return (
+    <View style={{ flex: 1, padding: 16, paddingTop: 56 }}>
+      <Button title="Șterge nota" onPress={intreaba} />
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="Alert" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `ActivityIndicator`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left">
+
+```jsx
+if (seIncarca) {
+  return <ActivityIndicator size="large" color="#4f46e5" />;
+}
+```
+
+<div v-click class="mt-6 text-xl">
+
+Rotița de încărcare a sistemului. `size` acceptă `small` și `large`, atât, pentru că pe
+Android dimensiunile sunt fixate de platformă.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Orice ecran care așteaptă date are trei stări, nu una: se încarcă, a eșuat, are conținut.
+Dacă le uitați pe primele două, utilizatorul vede un ecran alb și crede că aplicația s-a
+blocat.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `ActivityIndicator` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { useState } from 'react';
+import { View, Text, Button, ActivityIndicator } from 'react-native';
+
+export default function App() {
+  const [seIncarca, setSeIncarca] = useState(true);
+
+  // cele trei stări ale unui ecran care așteaptă date
+  if (seIncarca) {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+        <ActivityIndicator size="large" color="#4f46e5" />
+        <Text>Se încarcă...</Text>
+        <Button title="Gata" onPress={() => setSeIncarca(false)} />
+      </View>
+    );
+  }
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+      <Text style={{ fontSize: 18 }}>Conținutul ecranului</Text>
+      <Button title="Reîncarcă" onPress={() => setSeIncarca(true)} />
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="ActivityIndicator" />
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `StatusBar`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+import { StatusBar } from 'expo-status-bar';
+
+<StatusBar style="dark" />
+```
+
+<div v-click class="mt-6 text-xl">
+
+Bara de sus cu ora și bateria. Practic singurul lucru pe care îl controlați este culoarea
+textului din ea: `dark` pe fundal deschis, `light` pe fundal închis.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Începând cu Android 15 aplicațiile desenează de la margine la margine, iar fundalul barei
+de status nu mai poate fi setat. Exemplele mai vechi care încearcă asta nu sunt greșite,
+sunt doar depășite.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `StatusBar` În Execuție
+
+:: content ::
+
+<script setup>
+const code = `import { useState } from 'react';
+import { View, Text, Button } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+
+export default function App() {
+  const [intunecat, setIntunecat] = useState(false);
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: 16,
+                   backgroundColor: intunecat ? '#1e1b4b' : 'white' }}>
+      {/* dark = text negru in bara, light = text alb */}
+      <StatusBar style={intunecat ? 'light' : 'dark'} />
+
+      <Text style={{ color: intunecat ? 'white' : 'black' }}>
+        Priviți ora și bateria din vârful ecranului
+      </Text>
+      <Button title="Schimbă fundalul" onPress={() => setIntunecat((v) => !v)} />
+    </View>
+  );
+}
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="380px" name="StatusBar" />
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# API-uri Care Nu Sunt Componente
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `StyleSheet`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+const stiluri = StyleSheet.create({
+  card: { padding: 16, borderRadius: 12, backgroundColor: 'white' },
+  titlu: { fontSize: 18, fontWeight: '600' },
+});
+
+<View style={stiluri.card}>
+  <Text style={stiluri.titlu}>Titlu</Text>
+</View>
+```
+
+<div v-click class="mt-6 text-xl">
+
+Nu este CSS: sunt obiecte JavaScript, cu nume camelCase, fără unități de măsură și fără
+selectoare. `style` acceptă și o listă: `style={[stiluri.card, { marginTop: 8 }]}`, unde
+ce vine la urmă câștigă.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Layout-ul, flexbox-ul și tema aplicației vin la rând mai târziu.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Dimensiunile Ecranului
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+// greșit: se citește o singură dată, la pornire
+const { width } = Dimensions.get('window');
+
+// corect: se actualizează la rotire și la ecran împărțit
+function Card() {
+  const { width, height } = useWindowDimensions();
+  return <View style={{ width: width * 0.9 }} />;
+}
+```
+
+<div v-click class="mt-6 text-xl">
+
+`Dimensions.get` întoarce o valoare moartă. La rotirea telefonului componenta rămâne
+lată cât era în portret. `useWindowDimensions` este un hook și declanșează o randare
+nouă la fiecare schimbare.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+`PixelRatio` traduce între puncte și pixeli fizici, util doar când cereți o imagine de la
+server la rezoluția potrivită.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Linking`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+import { Linking } from 'react-native';
+
+Linking.openURL('https://usm.md');        // browser
+Linking.openURL('tel:+37322000000');      // apel
+Linking.openURL('mailto:info@usm.md');    // email
+Linking.openSettings();                   // setările aplicației
+```
+
+<div v-click class="mt-6 text-xl">
+
+Ieșirea din aplicație către restul telefonului. Schema din URL decide cine răspunde, iar
+răspunsul vine de la sistem, nu de la voi.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Aceeași componentă funcționează și invers, când altcineva deschide aplicația voastră
+printr-un link. Aceea este partea de deep linking, pe care o vom vedea mai târziu.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Animated`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+const opacitate = useRef(new Animated.Value(0)).current;
+
+Animated.timing(opacitate, {
+  toValue: 1,
+  duration: 400,
+  useNativeDriver: true,
+}).start();
+
+<Animated.View style={{ opacity: opacitate }}>
+  <Text>Apar încet</Text>
+</Animated.View>
+```
+
+<div v-click class="mt-6 text-xl">
+
+O valoare care se schimbă în timp, aplicată pe un `Animated.View`. `useNativeDriver: true`
+mută animația pe firul de UI, deci ea continuă fluent chiar dacă JavaScript-ul este ocupat.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Există atât. Animațiile serioase se scriu azi cu Reanimated, spre finalul cursului.
+
+</div>
+
+</div>
+
+---
+layout: section
+color: indigo-light
+---
+
+# Specific De Platformă
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# `Platform`
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+import { Platform } from 'react-native';
+
+// varianta scurtă
+const inaltime = Platform.OS === 'ios' ? 44 : 56;
+
+// varianta care se citește mai bine când sunt mai multe cazuri
+const umbra = Platform.select({
+  ios: { shadowOpacity: 0.2, shadowRadius: 4 },
+  android: { elevation: 4 },
+});
+```
+
+<div v-click class="mt-6 text-xl">
+
+Există și `Platform.Version`, pentru versiunea sistemului. Un fișier numit
+`Buton.ios.js` alături de `Buton.android.js` este a treia cale: Metro alege singur
+fișierul potrivit, iar în cod scrieți doar `import Buton from './Buton'`.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Doar Pe Android
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-4 text-left text-xl">
+
+| Componentă | Ce face |
+|---|---|
+| `BackHandler` | ascultă butonul fizic de întoarcere și îl poate opri |
+| `ToastAndroid` | un mesaj scurt care apare peste ecran și dispare singur |
+| `DrawerLayoutAndroid` | meniul lateral nativ, tras de la margine |
+| `PermissionsAndroid` | cererea de permisiuni la rulare |
+
+<div v-click class="mt-6">
+
+```jsx
+ToastAndroid.show('Salvat', ToastAndroid.SHORT);
+```
+
+Pe iOS codul acesta aruncă o eroare, deci fiecare apel trece printr-un `Platform.OS === 'android'`.
+În practică folosim echivalentele din Expo sau din biblioteci de navigare, care acoperă
+ambele platforme. Permisiunile vin mai târziu.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Doar Pe iOS
+
+:: content ::
+
+<div class="max-w-5xl mx-auto mt-2 text-left">
+
+```jsx
+ActionSheetIOS.showActionSheetWithOptions(
+  {
+    options: ['Anulează', 'Șterge', 'Partajează'],
+    destructiveButtonIndex: 1,
+    cancelButtonIndex: 0,
+  },
+  (index) => { /* ce a ales utilizatorul */ },
+);
+```
+
+<div v-click class="mt-6 text-xl">
+
+Meniul care urcă de jos, tipic pentru iOS. Android nu are echivalent în React Native: se
+folosește un `Modal` cu o listă de opțiuni sau o bibliotecă externă.
+
+</div>
+
+<div v-click class="mt-4 text-xl">
+
+Regula generală: dacă numele componentei conține `IOS` sau `Android`, trebuie să știți
+deja ce faceți pe cealaltă platformă.
+
+</div>
+
+</div>
+
+---
+layout: top-title
+color: indigo-light
+align: c
+---
+
+:: title ::
+
+# Un Ecran Complet
+
+:: content ::
+
+<script setup>
+const code = `import { View, Text, Image, Pressable, FlatList, StyleSheet } from 'react-native';
+
+const studenti = [
+  { id: '1', nume: 'Ana Popescu', grupa: 'TI-231' },
+  { id: '2', nume: 'Mihai Rusu', grupa: 'TI-231' },
+  { id: '3', nume: 'Elena Ciobanu', grupa: 'TI-232' },
+];
+
+// componentă care primește props și children
+function Card({ children }) {
+  return <View style={stiluri.card}>{children}</View>;
+}
+
+function Rand({ student, onApasa }) {
+  return (
+    <Pressable onPress={onApasa} style={({ pressed }) => ({ opacity: pressed ? 0.6 : 1 })}>
+      <Card>
+        <Image
+          source={{ uri: 'https://i.pravatar.cc/80?u=' + student.id }}
+          style={stiluri.poza}
+        />
+        <View>
+          <Text style={stiluri.nume}>{student.nume}</Text>
+          <Text style={stiluri.grupa}>{student.grupa}</Text>
+        </View>
+      </Card>
+    </Pressable>
+  );
+}
+
+export default function App() {
+  return (
+    <View style={stiluri.ecran}>
+      <Text style={stiluri.titlu}>Studenți</Text>
+      <FlatList
+        data={studenti}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <Rand student={item} onApasa={() => console.log(item.nume)} />
+        )}
+        ListEmptyComponent={<Text>Nu există studenți</Text>}
+      />
+    </View>
+  );
+}
+
+const stiluri = StyleSheet.create({
+  ecran: { flex: 1, paddingTop: 56, paddingHorizontal: 16, backgroundColor: '#f6f6fa' },
+  titlu: { fontSize: 26, fontWeight: '600', marginBottom: 12 },
+  card: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 12,
+          marginBottom: 8, borderRadius: 12, backgroundColor: 'white' },
+  poza: { width: 48, height: 48, borderRadius: 24 },
+  nume: { fontSize: 16, fontWeight: '500' },
+  grupa: { fontSize: 13, opacity: 0.6 },
+});
+`
+</script>
+
+<div class="w-full mt-1">
+
+<ExpoPreview :code="code" height="420px" name="Lista%20de%20studenti" />
+
+</div>
 
 ---
 layout: center
