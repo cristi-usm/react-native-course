@@ -79,7 +79,7 @@ align: c
   { label: '<View>', sub: 'ce scrieți în componentă', kind: 'js', side: 'îl scrieți voi' },
   { label: 'React Native', sub: 'traduce cererea', kind: 'bridge', emphasis: true },
   { label: 'UIView', sub: 'pe iOS', kind: 'native', side: 'Swift, Objective-C',
-    beside: { label: 'android.view.View', sub: 'pe Android', kind: 'native', side: 'Kotlin, Java' } },
+    beside: { label: 'ViewGroup', sub: 'pe Android', kind: 'native', side: 'Kotlin, Java' } },
 ]" />
 
 <div class="mt-6 text-xl">
@@ -112,11 +112,18 @@ chiar clasa pe care o folosește sistemul.
 
 | Ce scrieți | Ce se creează pe iOS | Ce se creează pe Android |
 |---|---|---|
-| `<Text>` | `UILabel` | `TextView` |
-| `<View>` | `UIView` | `android.view.View` |
+| `<View>` | `UIView` | `ViewGroup` |
+| `<Text>` | `UITextView` | `TextView` |
 | `<Image>` | `UIImageView` | `ImageView` |
+| `<TextInput>` | `UITextField` | `EditText` |
+| `<ScrollView>` | `UIScrollView` | `ScrollView` |
 | `<Switch>` | `UISwitch` | `SwitchCompat` |
-| `<ScrollView>` | `UIScrollView` | `android.widget.ScrollView` |
+
+</div>
+
+<div class="mt-3 text-sm opacity-70">
+
+Primele cinci rânduri sunt chiar tabelul din documentația React Native.
 
 </div>
 
@@ -287,7 +294,11 @@ devenit motorul implicit în React Native 0.70.
     { verdict: 'mixed', text: 'mai multă' },
     { verdict: 'good', text: 'mai puțină' },
   ] },
-]" caption="Cerc plin: varianta care câștigă pe criteriul acela." />
+  { label: 'Dimensiunea aplicației', cells: [
+    { verdict: 'mixed', text: 'mai mare' },
+    { verdict: 'good', text: 'mai mică' },
+  ] },
+]" caption="Cele trei câștiguri sunt chiar cele din documentație: pornire, memorie, dimensiune." />
 
 </div>
 
@@ -610,8 +621,8 @@ align: c
 
 <Definition term="JSI" source="JavaScript Interface" color="indigo-light" emphasis>
 
-Un strat în C++ care lasă JavaScript să <mark>apeleze direct</mark> funcții native,
-fără JSON și fără coadă de mesaje.
+O interfață care lasă JavaScript să <mark>țină o referință</mark> la un obiect C++, și
+invers. Apelul trece direct, fără JSON și fără coadă de mesaje.
 
 </Definition>
 
@@ -748,8 +759,8 @@ align: c
   fi abandonat dacă apare ceva mai urgent.
 - **Un singur core în C++.** Logica de randare nu mai este scrisă de două ori, o dată
   pentru iOS și o dată pentru Android, deci aceleași reguli dau aceleași rezultate.
-- **Mai multe versiuni de interfață în paralel.** React poate pregăti următorul ecran
-  fără să îl arate încă.
+- **Evenimente cu priorități.** O atingere este tratată înaintea unei actualizări care
+  poate aștepta, pentru că acum evenimentele au priorități diferite.
 
 <DinReact>
 
@@ -777,8 +788,8 @@ align: c
 
 - **Încărcare la cerere.** Modulul camerei intră în memorie când deschideți camera, nu
   când porniți aplicația.
-- **Tipizare verificată.** Interfața modulului se descrie în TypeScript, iar din acea
-  descriere se generează codul nativ.
+- **Tipizare verificată.** Interfața modulului se descrie în TypeScript sau în Flow, iar
+  o unealtă numită **Codegen** generează din ea codul nativ pentru ambele platforme.
 - **Apeluri sincrone.** Ce înainte cerea obligatoriu un `Promise` sau un callback poate
   acum returna direct o valoare.
 
