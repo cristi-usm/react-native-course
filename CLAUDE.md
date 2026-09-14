@@ -79,6 +79,24 @@ number already appears in the hub grid and in the navigation.
 The numbered form (`Lecția 6: Navigare`) belongs **only** in `common/lessons.json` and in
 the generated frontmatter `title` / `info`, which drive the browser tab and the hub card.
 
+### Cross-references are relative, never numbered
+
+The same ban covers slide prose pointing at another lesson. A number there is a promise
+about the order of the semester that the deck cannot keep: lessons get merged, split and
+reordered, and every `în lecția 12` then has to be found and corrected by hand in a deck
+nobody is currently editing.
+
+| instead of | write |
+|---|---|
+| `Detaliile sunt în lecția 15.` | `Detaliile vin la sfârșitul cursului.` |
+| `Permisiunile sunt lecția 13.` | `Permisiunile vin mai târziu.` |
+| `Lecția următoare intră în cod.` | `Data viitoare intrăm în cod.` |
+| `Am văzut în lecția 3 că …` | `Am văzut data trecută că …` |
+
+`mai târziu`, `data viitoare`, `data trecută`, `spre finalul cursului`, `mai devreme`.
+`lecția de azi` is fine, since it names no number. The ordering that *is* authoritative
+lives in `common/lessons.json`, and `<DeckNav>` already draws it at the end of the deck.
+
 ## 4. Slide conventions
 
 - ✅ `color: indigo-light` and `align: c` on every content slide
@@ -301,6 +319,7 @@ In `common/components/`, auto-imported in every deck — **no import needed** in
 | `<Discontinued :items />` | Things that existed and no longer do, struck through |
 | `<FlowSteps :steps />` | A left-to-right pipeline of named stages |
 | `<LayerStack :layers />` | A top-to-bottom stack: your code above, the platform below |
+| `<ThreadRoles :threads />` | One card per thread: its job, and what it may touch |
 | `<ThreadLanes :lanes :boundaries />` | Threads side by side, and the seam between them |
 | `<ArchMap variant="bridge\|jsi" />` | The React Native architecture map, old or new |
 | `<RuntimeMap title engine :parts :panels />` | A JS runtime: the engine, and what the host adds |

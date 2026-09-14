@@ -91,11 +91,25 @@ withDefaults(
           <div v-if="boundaries[i - 1]?.name" class="ns-lanes__seam-name">
             {{ boundaries[i - 1]?.name }}
           </div>
+          <div
+            v-else-if="boundaries[i - 1]?.label"
+            class="ns-lanes__seam-label ns-lanes__ghost"
+            aria-hidden="true"
+          >
+            {{ boundaries[i - 1]?.label }}
+          </div>
           <div class="ns-lanes__seam-line">
             <span class="ns-lanes__seam-rail" />
           </div>
           <div v-if="boundaries[i - 1]?.label" class="ns-lanes__seam-label">
             {{ boundaries[i - 1]?.label }}
+          </div>
+          <div
+            v-else-if="boundaries[i - 1]?.name"
+            class="ns-lanes__seam-name ns-lanes__ghost"
+            aria-hidden="true"
+          >
+            {{ boundaries[i - 1]?.name }}
           </div>
         </div>
 
@@ -314,7 +328,7 @@ withDefaults(
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  max-width: 9em;
+  max-width: 13em;
   padding: 0 0.3rem;
 }
 
@@ -382,7 +396,16 @@ withDefaults(
   background: var(--neversink-fg-color);
 }
 
-.ns-lanes__seam--direct .ns-lanes__seam-label {
+/* A counterweight, not content: same box, no ink, hidden from screen readers.
+   It keeps the rail on the lanes' midline whether the seam is named, labelled
+   or both, instead of letting the taller side push the rail off centre. */
+.ns-lanes__ghost {
+  visibility: hidden;
+}
+
+/* The message written on the seam. Both modes carry one, so this is the base
+   rule: scoping it to `--direct` left every bridge label unstyled. */
+.ns-lanes__seam-label {
   margin-top: 0.35rem;
   font-family: monospace;
   font-size: calc(var(--ns-lanes-size) * 0.66);

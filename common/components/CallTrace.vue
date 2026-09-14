@@ -51,15 +51,27 @@ const props = withDefaults(
   { caption: '', size: 1, color: 'blue-light' },
 )
 
-/** Grid placement: a crossing spans the lanes between its ends, inclusive. */
+/**
+ * Grid placement, in half-lane columns.
+ *
+ * Each lane owns two columns, so lane `i`'s centre falls exactly on grid line
+ * `2i + 2` — which is where its rail is drawn. A crossing therefore runs from
+ * one rail to the other, and the bar's ends mean something. Spanning whole
+ * lanes instead makes every crossing a full-width banner, and the zigzag that
+ * is the entire point of the diagram disappears.
+ */
 function span(step: TraceStep) {
+  if (step.from === step.to) {
+    // Work that does not cross: sit inside the lane, between its two halves.
+    return `${2 * step.from + 1} / ${2 * step.from + 3}`
+  }
   const lo = Math.min(step.from, step.to)
   const hi = Math.max(step.from, step.to)
-  return `${lo + 1} / ${hi + 2}`
+  return `${2 * lo + 2} / ${2 * hi + 2}`
 }
 
-/** One equal column per lane; computed, so a lane list built in a slide can change. */
-const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
+/** Two columns per lane, so lane centres land on grid lines. */
+const cols = computed(() => `repeat(${props.lanes.length * 2}, minmax(0, 1fr))`)
 </script>
 
 <template>
@@ -84,7 +96,10 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
             <span>{{ step.phase }}</span>
           </div>
 
-          <div class="ns-trace__row" :style="{ animationDelay: `${i * 0.06}s` }">
+          <div
+            class="ns-trace__row"
+            :style="{ animationDelay: `${i * 0.06}s`, '--ns-trace-i': i }"
+          >
             <div
               :class="[
                 'ns-trace__step',
@@ -120,12 +135,13 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
 .ns-trace__head {
   display: grid;
   grid-template-columns: var(--ns-trace-cols);
-  gap: 0.3rem;
+  gap: 0;
   padding-bottom: 0.3rem;
   border-bottom: 2px solid var(--neversink-border-color);
 }
 
 .ns-trace__lane-name {
+  grid-column: span 2;
   text-align: center;
   font-size: 0.8em;
   font-weight: 700;
@@ -142,11 +158,12 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
   inset: 0;
   display: grid;
   grid-template-columns: var(--ns-trace-cols);
-  gap: 0.3rem;
+  gap: 0;
   pointer-events: none;
 }
 
 .ns-trace__rail {
+  grid-column: span 2;
   justify-self: center;
   width: 2px;
   height: 100%;
@@ -165,7 +182,7 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
 .ns-trace__row {
   display: grid;
   grid-template-columns: var(--ns-trace-cols);
-  gap: 0.3rem;
+  gap: 0;
   animation: ns-trace-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -175,13 +192,52 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
   border: 1.5px solid var(--neversink-admon-border-color);
   border-radius: 0.4rem;
   background: #fff;
-  padding: 0.22em 1.1em;
+  padding: 0.2em 1.2em;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
   min-width: 0;
 }
 
-.ns-trace__step::after {
+/* A pulse that walks the trace, one step at a time, forever: a sheen crosses
+   each bar in the direction of its own arrow, a fifth of a second after the bar
+   above it. It replaces nothing — the diagram is complete and readable while it
+   is running, and identical to a screenshot of it — but the order of the steps
+   is the whole argument of the slide, and a still picture leaves that order to
+   be reconstructed from position alone.
+
+   Pure autoplay rather than click-driven: the deck carries no reveals, so there
+   is no presentation state to follow. */
+.ns-trace__step--right::before,
+.ns-trace__step--left::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--neversink-fg-color) 22%, transparent) 45%,
+    color-mix(in srgb, var(--neversink-fg-color) 22%, transparent) 55%,
+    transparent 100%
+  );
+  background-size: 45% 100%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: ns-trace-sweep 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--ns-trace-i, 0) * 0.2s);
+}
+
+.ns-trace__step--left::before {
+  animation-name: ns-trace-sweep-back;
+}
+
+/* The head belongs to a crossing, so only a crossing gets one. Declaring it on
+   every step and then positioning it only for `--left` / `--right` left local
+   work with an unpositioned head: an arrow-shaped fragment parked wherever the
+   label happened to end, inside a block that by definition goes nowhere. */
+.ns-trace__step--right::after,
+.ns-trace__step--left::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -203,7 +259,13 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
 
 /* Work that stays on one lane: no head, dashed, so it reads as a pause rather
    than a message. */
+/* Work that stays on one lane has no extent, so it shrinks to its label and
+   centres on that lane's rail instead of filling the lane edge to edge. Filled,
+   its ends landed on the boundaries with the neighbouring lanes and read as a
+   crossing that had lost its arrowhead. */
 .ns-trace__step--local {
+  justify-self: center;
+  max-width: 100%;
   border-style: dashed;
   background: var(--neversink-bg-color);
 }
@@ -218,7 +280,7 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
 .ns-trace__label {
   display: block;
   font-family: monospace;
-  font-size: 0.72em;
+  font-size: 0.68em;
   font-weight: 600;
   overflow-wrap: break-word;
 }
@@ -262,6 +324,47 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
   text-align: center;
 }
 
+/* Only the first fifth of the cycle carries the sweep; the rest is the pause
+   before the trace starts over, so the loop reads as a repetition rather than
+   as a permanent shimmer. */
+@keyframes ns-trace-sweep {
+  0% {
+    opacity: 0;
+    background-position: -50% 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  18% {
+    opacity: 1;
+    background-position: 150% 0;
+  }
+  22%,
+  100% {
+    opacity: 0;
+    background-position: 150% 0;
+  }
+}
+
+@keyframes ns-trace-sweep-back {
+  0% {
+    opacity: 0;
+    background-position: 150% 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  18% {
+    opacity: 1;
+    background-position: -50% 0;
+  }
+  22%,
+  100% {
+    opacity: 0;
+    background-position: -50% 0;
+  }
+}
+
 @keyframes ns-trace-in {
   from {
     opacity: 0;
@@ -274,7 +377,9 @@ const cols = computed(() => `repeat(${props.lanes.length}, minmax(0, 1fr))`)
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ns-trace__row {
+  .ns-trace__row,
+  .ns-trace__step--right::before,
+  .ns-trace__step--left::before {
     animation: none;
   }
 }

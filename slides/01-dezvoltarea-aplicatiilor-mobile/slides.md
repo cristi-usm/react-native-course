@@ -759,7 +759,7 @@ Un framework open-source, făcut de Meta, care construiește aplicații
 
 <div class="mt-8">
 
-Un `<View>` scris de voi devine un `UIView` pe iOS și un `android.view.View` pe Android.
+Un `<View>` scris de voi devine un `UIView` pe iOS și un `ViewGroup` pe Android.
 Aplicația nu *arată* nativ. Este nativă.
 
 </div>
@@ -784,7 +784,7 @@ align: c
   { label: 'Codul vostru', sub: 'componente, hooks, stiluri', side: 'îl scrieți în TypeScript/Javascript' },
   { label: 'React', sub: 'decide ce s-a schimbat pe ecran', side: 'aceeași bibliotecă ca pe web' },
   { label: 'React Native', sub: 'traduce deciziile în comenzi', kind: 'bridge', emphasis: true, side: 'stratul pe care îl studiem' },
-  { label: 'UIView · android.view.View', sub: 'componentele sistemului', kind: 'native', side: 'nu sunt în proiectul vostru' },
+  { label: 'UIView · ViewGroup', sub: 'componentele sistemului', kind: 'native', side: 'nu sunt în proiectul vostru' },
   { label: 'iOS · Android', sub: 'sistemul de operare', kind: 'native' },
 ]" />
 

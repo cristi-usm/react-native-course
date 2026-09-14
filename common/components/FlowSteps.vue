@@ -53,11 +53,21 @@ withDefaults(
       <template v-for="(step, i) in steps" :key="i">
         <div v-if="i > 0" class="ns-flow__arrow" :style="{ animationDelay: `${i * 0.12}s` }">
           <span v-if="step.via" class="ns-flow__via">{{ step.via }}</span>
+          <span
+            v-else-if="step.viaNote"
+            class="ns-flow__via-note ns-flow__ghost"
+            aria-hidden="true"
+          >{{ step.viaNote }}</span>
           <div class="ns-flow__arrow-line">
             <span class="ns-flow__dash" />
             <span class="ns-flow__head" />
           </div>
           <span v-if="step.viaNote" class="ns-flow__via-note">{{ step.viaNote }}</span>
+          <span
+            v-else-if="step.via"
+            class="ns-flow__via ns-flow__ghost"
+            aria-hidden="true"
+          >{{ step.via }}</span>
         </div>
         <div class="ns-flow__step" :style="{ animationDelay: `${i * 0.12}s` }">
           <div class="ns-flow__sub">{{ step.sub || ' ' }}</div>
@@ -161,7 +171,13 @@ withDefaults(
 }
 
 /* The arrow: a dashed line whose dashes drift toward the head. When it carries
-   a `via` label, the action sits in a pill riding on the line. */
+   a `via` label, the action sits in a pill riding on the line.
+
+   The pill and the `viaNote` are stacked above and below the line, so whichever
+   of the two is missing is rendered anyway, invisible, as a counterweight.
+   Without it the column centres the pill-plus-line group rather than the line,
+   and every arrow that carries a label drops a pill's height below the row of
+   boxes while the unlabelled ones stay on the boxes' midline. */
 .ns-flow__arrow {
   display: flex;
   flex-direction: column;
@@ -171,6 +187,11 @@ withDefaults(
   min-width: min-content;
   padding: 0 0.1rem;
   animation: ns-flow-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* A counterweight, not content: same box, no ink, hidden from screen readers. */
+.ns-flow__ghost {
+  visibility: hidden;
 }
 
 .ns-flow__arrow-line {

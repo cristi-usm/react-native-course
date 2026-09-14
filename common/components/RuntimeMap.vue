@@ -14,7 +14,7 @@
  *     engine="V8, JSC, SpiderMonkey"
  *     :parts="['call stack', 'heap', 'garbage collector']"
  *     :panels="[
- *       { title: 'API-uri de la gazdă', items: ['document', 'fetch', 'setTimeout'] },
+ *       { title: 'API-uri de la browser', items: ['document', 'fetch', 'setTimeout'] },
  *       { title: 'cozi de sarcini' },
  *       { title: 'event loop' },
  *     ]" />
