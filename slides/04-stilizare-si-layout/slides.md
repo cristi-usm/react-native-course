@@ -1,4 +1,3 @@
-
 ---
 title: 'RN · Lecția 4: Stilizare și layout'
 info: 'Lecția 4: Stilizare și layout — StyleSheet, flexbox, safe area, diferențe între platforme și teme. · Crudu Cristian'
