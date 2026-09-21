@@ -64,22 +64,23 @@
     },
     {
       "num": 4,
-      "slug": "04-state-si-interactiune",
+      "slug": "04-stilizare-si-layout",
       "port": 3034,
       "module": 2,
-      "icon": "i-ph-toggle-left-duotone",
-      "title": "Lecția 4: State și interacțiune",
-      "description": "useState, render și commit, snapshot, batching, Pressable și event handlers.",
-      "published": false
+      "icon": "i-ph-paint-brush-duotone",
+      "title": "Lecția 4: Stilizare și layout",
+      "description": "StyleSheet, flexbox, safe area, diferențe între platforme și teme.",
+      "status": "ready",
+      "published": true
     },
     {
       "num": 5,
-      "slug": "05-stilizare-si-layout",
+      "slug": "05-state-si-interactiune",
       "port": 3035,
       "module": 2,
-      "icon": "i-ph-paint-brush-duotone",
-      "title": "Lecția 5: Stilizare și layout",
-      "description": "StyleSheet, flexbox, safe area, diferențe între platforme și teme.",
+      "icon": "i-ph-toggle-left-duotone",
+      "title": "Lecția 5: State și interacțiune",
+      "description": "useState, render și commit, snapshot, batching, Pressable și event handlers.",
       "published": false
     },
     {

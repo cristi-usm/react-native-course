@@ -31,9 +31,9 @@ importers:
 
   slides/03-componente-jsx-si-props: {}
 
-  slides/04-state-si-interactiune: {}
+  slides/04-stilizare-si-layout: {}
 
-  slides/05-stilizare-si-layout: {}
+  slides/05-state-si-interactiune: {}
 
   slides/06-liste-si-performanta: {}
 

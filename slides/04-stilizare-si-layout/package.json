@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "slidev slides.md --port 3035",
+    "dev": "slidev slides.md --port 3034",
     "build": "slidev build slides.md"
   }
 }

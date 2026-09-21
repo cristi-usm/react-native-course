@@ -940,7 +940,7 @@ align: c
 
 <div class="max-w-5xl mx-auto mt-4 text-left text-xl">
 
-Ecranul fizic este mai mare decât zona utilizabilă: decupajul camerei, bara de status,
+Ecranul fizic este mai mare decât zona utilizabilă: notch-ul camerei, bara de status,
 bara de gesturi de jos.
 
 <div v-click class="mt-6">
@@ -949,7 +949,7 @@ bara de gesturi de jos.
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
-  <Text>Nu intru sub decupaj</Text>
+  <Text>Nu intru sub notch</Text>
 </SafeAreaView>
 ```
 
@@ -988,7 +988,7 @@ export default function App() {
       <View style={{ flex: 1, backgroundColor: '#fecaca' }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} edges={['top', 'bottom']}>
           <Text style={{ padding: 16, fontSize: 18 }}>
-            Nu intru sub decupaj
+            Nu intru sub notch
           </Text>
         </SafeAreaView>
       </View>
@@ -1529,6 +1529,7 @@ export default function App() {
 
       {/* trageți lista în jos ca să reîncărcați */}
       <FlatList
+        style={{ flex: 1 }}
         data={date}
         keyExtractor={(item) => item}
         renderItem={({ item }) => <Text style={{ padding: 16 }}>{item}</Text>}
@@ -1545,6 +1546,13 @@ export default function App() {
 <div class="w-full mt-1">
 
 <ExpoPreview :code="code" height="380px" name="Switch" />
+
+</div>
+
+<div class="mt-2 text-lg">
+
+`FlatList` primește `flex: 1`, altfel ocupă doar înălțimea rândurilor pe care le are și
+nu rămâne loc de tras în jos.
 
 </div>
 
