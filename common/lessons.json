@@ -69,7 +69,7 @@
       "module": 2,
       "icon": "i-ph-paint-brush-duotone",
       "title": "Lecția 4: Stilizare și layout",
-      "description": "StyleSheet, flexbox, safe area, diferențe între platforme și teme.",
+      "description": "StyleSheet, flexbox, design systems, Liquid Glass, safe area și biblioteci de componente.",
       "status": "ready",
       "published": true
     },
