@@ -80,8 +80,9 @@
       "module": 2,
       "icon": "i-ph-toggle-left-duotone",
       "title": "Lecția 5: State și interacțiune",
-      "description": "useState, render și commit, snapshot, batching, Pressable și event handlers.",
-      "published": false
+      "description": "Event handlers, useState, render și commit, snapshot, batching, obiecte și array-uri în state.",
+      "status": "ready",
+      "published": true
     },
     {
       "num": 6,
