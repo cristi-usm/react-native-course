@@ -35,11 +35,11 @@ importers:
 
   slides/05-state-si-interactiune: {}
 
-  slides/06-liste-si-performanta: {}
+  slides/06-efecte-si-refs: {}
 
-  slides/07-formulare-si-tastatura: {}
+  slides/07-liste-si-performanta: {}
 
-  slides/08-efecte-si-refs: {}
+  slides/08-formulare-si-tastatura: {}
 
   slides/09-navigare: {}
 

@@ -86,32 +86,33 @@
     },
     {
       "num": 6,
-      "slug": "06-liste-si-performanta",
+      "slug": "06-efecte-si-refs",
       "port": 3036,
       "module": 2,
+      "icon": "i-ph-plugs-connected-duotone",
+      "title": "Lecția 6: Efecte și refs",
+      "description": "useEffect și cleanup, useRef, refs pe componente native, AppState.",
+      "status": "ready",
+      "published": true
+    },
+    {
+      "num": 7,
+      "slug": "07-liste-si-performanta",
+      "port": 3037,
+      "module": 3,
       "icon": "i-ph-list-bullets-duotone",
-      "title": "Lecția 6: Liste și performanță",
+      "title": "Lecția 7: Liste și performanță",
       "description": "FlatList, keyExtractor, virtualizarea, memoizarea și re-render-urile.",
       "published": false
     },
     {
-      "num": 7,
-      "slug": "07-formulare-si-tastatura",
-      "port": 3037,
-      "module": 3,
-      "icon": "i-ph-textbox-duotone",
-      "title": "Lecția 7: Formulare și tastatură",
-      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
-      "published": false
-    },
-    {
       "num": 8,
-      "slug": "08-efecte-si-refs",
+      "slug": "08-formulare-si-tastatura",
       "port": 3038,
       "module": 3,
-      "icon": "i-ph-anchor-duotone",
-      "title": "Lecția 8: Efecte și refs",
-      "description": "useEffect și cleanup, useRef, refs pe componente native, AppState.",
+      "icon": "i-ph-textbox-duotone",
+      "title": "Lecția 8: Formulare și tastatură",
+      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
       "published": false
     },
     {
