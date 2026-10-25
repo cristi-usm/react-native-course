@@ -37,11 +37,11 @@ importers:
 
   slides/06-efecte-si-refs: {}
 
-  slides/07-liste-si-performanta: {}
+  slides/07-navigare: {}
 
-  slides/08-formulare-si-tastatura: {}
+  slides/08-liste-si-performanta: {}
 
-  slides/09-navigare: {}
+  slides/09-formulare-si-tastatura: {}
 
   slides/10-stare-globala-si-auth: {}
 

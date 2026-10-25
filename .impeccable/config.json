@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "slides/07-navigare/components/StackHistory.vue"
+        ],
+        "createdAt": "2026-10-25T11:39:14.185Z",
+        "reason": "Claude triage: L180 is a zero-size ::after CSS triangle (arrowhead on .ns-hist__shaft), border-left + transparent top/bottom; not a card side accent"
+      }
+    ]
+  }
+}

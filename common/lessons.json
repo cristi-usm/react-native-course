@@ -97,32 +97,33 @@
     },
     {
       "num": 7,
-      "slug": "07-liste-si-performanta",
+      "slug": "07-navigare",
       "port": 3037,
       "module": 3,
+      "icon": "i-ph-signpost-duotone",
+      "title": "Lecția 7: Navigare",
+      "description": "Expo Router, stack, tabs, modale, parametri și deep linking.",
+      "status": "ready",
+      "published": true
+    },
+    {
+      "num": 8,
+      "slug": "08-liste-si-performanta",
+      "port": 3038,
+      "module": 3,
       "icon": "i-ph-list-bullets-duotone",
-      "title": "Lecția 7: Liste și performanță",
+      "title": "Lecția 8: Liste și performanță",
       "description": "FlatList, keyExtractor, virtualizarea, memoizarea și re-render-urile.",
       "published": false
     },
     {
-      "num": 8,
-      "slug": "08-formulare-si-tastatura",
-      "port": 3038,
-      "module": 3,
-      "icon": "i-ph-textbox-duotone",
-      "title": "Lecția 8: Formulare și tastatură",
-      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
-      "published": false
-    },
-    {
       "num": 9,
-      "slug": "09-navigare",
+      "slug": "09-formulare-si-tastatura",
       "port": 3039,
       "module": 3,
-      "icon": "i-ph-signpost-duotone",
-      "title": "Lecția 9: Navigare",
-      "description": "Expo Router, stack, tabs, modale, parametri și deep linking.",
+      "icon": "i-ph-textbox-duotone",
+      "title": "Lecția 9: Formulare și tastatură",
+      "description": "TextInput, validare, gestionarea tastaturii și accesibilitate.",
       "published": false
     },
     {
