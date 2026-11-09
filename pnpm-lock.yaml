@@ -39,15 +39,15 @@ importers:
 
   slides/07-navigare: {}
 
-  slides/08-liste-si-performanta: {}
+  slides/08-date-locale-si-offline: {}
 
-  slides/09-formulare-si-tastatura: {}
+  slides/09-liste-si-performanta: {}
 
-  slides/10-stare-globala-si-auth: {}
+  slides/10-formulare-si-tastatura: {}
 
-  slides/11-cereri-catre-server: {}
+  slides/11-stare-globala-si-auth: {}
 
-  slides/12-date-locale-si-offline: {}
+  slides/12-cereri-catre-server: {}
 
   slides/13-permisiuni-camera-si-fisiere: {}
 
